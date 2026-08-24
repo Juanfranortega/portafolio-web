@@ -289,51 +289,152 @@
             </p>
           </div>
 
-          <div class="evidence-grid">
-            <article class="evidence-card current reveal">
-              <div class="evidence-meta">
-                <span class="badge">EN CURSO</span>
-                <span>Parcial 01</span>
-              </div>
-              <h3>Aquí empieza mi portafolio</h3>
-              <p>
-                Diseño, implementación y publicación de la estructura base del
-                portafolio digital.
-              </p>
-              <ul>
-                <li>Inicio e identidad académica</li>
-                <li>Portada técnica del portafolio</li>
-                <li>Publicación con HTTPS</li>
-              </ul>
-            </article>
+          <div class="partial-tabs reveal" role="tablist" aria-label="Parciales del curso">
+            <button
+              class="partial-tab active"
+              id="tab-partial-1"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-partial-1"
+              data-partial="1"
+            >
+              <span>01</span>
+              <strong>Primer parcial</strong>
+              <small>3 actividades</small>
+            </button>
+            <button
+              class="partial-tab"
+              id="tab-partial-2"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-partial-2"
+              data-partial="2"
+              tabindex="-1"
+            >
+              <span>02</span>
+              <strong>Segundo parcial</strong>
+              <small>Próximamente</small>
+            </button>
+            <button
+              class="partial-tab"
+              id="tab-partial-3"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-partial-3"
+              data-partial="3"
+              tabindex="-1"
+            >
+              <span>03</span>
+              <strong>Tercer parcial</strong>
+              <small>Próximamente</small>
+            </button>
+          </div>
 
-            <article class="evidence-card reveal">
-              <div class="evidence-meta">
-                <span class="badge badge-muted">PRÓXIMAMENTE</span>
-                <span>Parcial 02</span>
+          <div class="partial-panels">
+            <div
+              class="partial-panel active"
+              id="panel-partial-1"
+              role="tabpanel"
+              aria-labelledby="tab-partial-1"
+              tabindex="0"
+            >
+              <div class="partial-summary">
+                <p><strong>Parcial 01</strong> · Fundamentos y estructura inicial</p>
+                <span>3 actividades registradas</span>
               </div>
-              <h3>Nuevas evidencias</h3>
-              <p>
-                Espacio preparado para documentar las prácticas y proyectos del
-                segundo parcial.
-              </p>
-              <div class="placeholder-line" aria-hidden="true"></div>
-              <div class="placeholder-line short" aria-hidden="true"></div>
-            </article>
 
-            <article class="evidence-card reveal">
-              <div class="evidence-meta">
-                <span class="badge badge-muted">PRÓXIMAMENTE</span>
-                <span>Parcial 03</span>
+              <div class="activity-grid">
+                <article class="activity-card complete reveal">
+                  <div class="activity-number" aria-hidden="true">A01</div>
+                  <div class="activity-status"><span></span> Documentada</div>
+                  <p class="activity-type">Actividad 01</p>
+                  <h3>Aquí comienza mi portafolio</h3>
+                  <p>
+                    Diseño, implementación y publicación de la portada técnica
+                    que concentrará las evidencias del curso.
+                  </p>
+                  <ul class="activity-tags" aria-label="Temas de la actividad">
+                    <li>HTML</li><li>CSS</li><li>JavaScript</li><li>HTTPS</li>
+                  </ul>
+                  <a class="activity-link" href="evidencias/parcial-1/actividad-01.html">
+                    Ver evidencia completa <span aria-hidden="true">↗</span>
+                  </a>
+                </article>
+
+                <article class="activity-card pending reveal">
+                  <div class="activity-number" aria-hidden="true">A02</div>
+                  <div class="activity-status"><span></span> Pendiente de datos</div>
+                  <p class="activity-type">Actividad 02</p>
+                  <h3>Ficha preparada para completar</h3>
+                  <p>
+                    Espacio listo para agregar título, objetivo, procedimiento,
+                    resultados, reflexión, capturas y archivo entregable.
+                  </p>
+                  <ul class="activity-tags" aria-label="Contenido disponible">
+                    <li>Plantilla</li><li>Capturas</li><li>PDF</li><li>Reflexión</li>
+                  </ul>
+                  <a class="activity-link" href="evidencias/parcial-1/actividad-02.html">
+                    Abrir plantilla <span aria-hidden="true">↗</span>
+                  </a>
+                </article>
+
+                <article class="activity-card pending reveal">
+                  <div class="activity-number" aria-hidden="true">A03</div>
+                  <div class="activity-status"><span></span> Pendiente de datos</div>
+                  <p class="activity-type">Actividad 03</p>
+                  <h3>Ficha preparada para completar</h3>
+                  <p>
+                    Espacio listo para documentar claramente la tercera actividad
+                    y permitir que el profesor consulte todas sus evidencias.
+                  </p>
+                  <ul class="activity-tags" aria-label="Contenido disponible">
+                    <li>Plantilla</li><li>Capturas</li><li>Enlaces</li><li>Archivos</li>
+                  </ul>
+                  <a class="activity-link" href="evidencias/parcial-1/actividad-03.html">
+                    Abrir plantilla <span aria-hidden="true">↗</span>
+                  </a>
+                </article>
               </div>
-              <h3>Proyecto integrador</h3>
-              <p>
-                Espacio preparado para el cierre del curso, conclusiones y
-                producto final.
-              </p>
-              <div class="placeholder-line" aria-hidden="true"></div>
-              <div class="placeholder-line short" aria-hidden="true"></div>
-            </article>
+            </div>
+
+            <div
+              class="partial-panel"
+              id="panel-partial-2"
+              role="tabpanel"
+              aria-labelledby="tab-partial-2"
+              tabindex="0"
+              hidden
+            >
+              <div class="empty-partial">
+                <span aria-hidden="true">02</span>
+                <div>
+                  <p class="section-number">SEGUNDO PARCIAL</p>
+                  <h3>Estructura lista para nuevas evidencias</h3>
+                  <p>Las actividades se añadirán cuando sean asignadas, conservando el mismo formato profesional.</p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="partial-panel"
+              id="panel-partial-3"
+              role="tabpanel"
+              aria-labelledby="tab-partial-3"
+              tabindex="0"
+              hidden
+            >
+              <div class="empty-partial">
+                <span aria-hidden="true">03</span>
+                <div>
+                  <p class="section-number">TERCER PARCIAL</p>
+                  <h3>Espacio reservado para el cierre del curso</h3>
+                  <p>Aquí se integrarán las actividades finales, conclusiones y evidencias del proyecto integrador.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -363,7 +464,7 @@
               <span class="tech-label">02</span>
               <div>
                 <h3>CSS3</h3>
-                <p>Define la identidad visual, temas claro/oscuro, Grid, Flexbox, adaptación móvil y estados de enfoque.</p>
+                <p>Define la identidad visual, temas claro/oscuro, Grid, Flexbox, adaptación móvil, animaciones y estados de enfoque.</p>
               </div>
               <span class="tech-level">Presentación</span>
             </article>
@@ -371,7 +472,7 @@
               <span class="tech-label">03</span>
               <div>
                 <h3>JavaScript ES6+</h3>
-                <p>Controla el menú móvil, tema, navegación activa, progreso de lectura y validación previa del formulario.</p>
+                <p>Controla el menú, tema, pestañas por parcial, navegación activa, progreso de lectura y validación del formulario.</p>
               </div>
               <span class="tech-level">Interacción</span>
             </article>
@@ -398,6 +499,14 @@
                 <p>Procesa el formulario desde el sitio estático y permite enviar una respuesta automática al visitante.</p>
               </div>
               <span class="tech-level">Formulario</span>
+            </article>
+            <article>
+              <span class="tech-label">07</span>
+              <div>
+                <h3>Animación accesible</h3>
+                <p>CSS e IntersectionObserver activan transiciones progresivas; la preferencia <code>prefers-reduced-motion</code> reduce el movimiento.</p>
+              </div>
+              <span class="tech-level">Accesibilidad</span>
             </article>
           </div>
 
@@ -430,7 +539,7 @@
               <li>
                 <span>04</span>
                 <strong>Interacción</strong>
-                <p><code>main.js</code> añade funciones sin impedir el acceso al contenido principal.</p>
+                <p><code>main.js</code> controla pestañas, tema y animación progresiva sin ocultar contenido esencial.</p>
               </li>
               <li>
                 <span>05</span>
@@ -443,7 +552,7 @@
               <li>HTML semántico</li>
               <li>Navegación por teclado</li>
               <li>Diseño responsivo</li>
-              <li>Movimiento reducido</li>
+              <li>Animación accesible</li>
               <li>Política de contenido</li>
               <li>HTTPS</li>
             </ul>
@@ -472,7 +581,7 @@
           <form
             class="contact-form reveal"
             id="contact-form"
-            action="https://formsubmit.co/TU_CORREO@EJEMPLO.COM"
+            action="https://formsubmit.co/twitchjfortnez@gmail.com"
             method="POST"
           >
             <input type="hidden" name="_subject" value="Nuevo mensaje desde el portafolio de Seguridad Informática">
@@ -482,6 +591,11 @@
               value="Gracias por visitar mi portafolio de CNO IV – Seguridad Informática. Recibí tu mensaje y lo revisaré próximamente."
             >
             <input type="hidden" name="_template" value="table">
+            <input
+              type="hidden"
+              name="_next"
+              value="https://juanfranortega.github.io/portafolio-web/gracias.html"
+            >
             <input class="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off">
 
             <div class="form-row">

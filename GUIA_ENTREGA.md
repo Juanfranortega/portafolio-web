@@ -13,17 +13,20 @@ Antes de publicar, revisar `index.html` y confirmar:
 
 ## 2. Activación del formulario
 
-1. Reemplazar `TU_CORREO@EJEMPLO.COM` por el correo que recibirá los mensajes.
-2. Publicar primero el portafolio.
-3. Enviar un mensaje desde el formulario.
-4. Confirmar la activación desde el correo recibido.
-5. Enviar una segunda prueba.
-6. Verificar que:
+El destinatario ya está configurado como **twitchjfortnez@gmail.com**. No se requiere ni se debe compartir contraseña, token o código de acceso.
+
+1. Publicar esta versión del portafolio.
+2. Enviar un primer mensaje desde el formulario.
+3. Abrir `twitchjfortnez@gmail.com` y confirmar la activación enviada por FormSubmit.
+4. Enviar una segunda prueba.
+5. Verificar que:
    - llega el mensaje al dueño del portafolio;
    - el visitante recibe el correo automático;
    - los campos obligatorios impiden envíos incompletos.
 
 Nota: la dirección usada en la propiedad `action` será visible en el código fuente público. Conviene usar un correo académico o uno destinado al portafolio.
+
+La autorespuesta utiliza el campo `email` escrito por el visitante. Debe conservarse el envío HTML normal y reCAPTCHA; no debe transformarse el formulario en AJAX.
 
 ## 3. Prueba en la computadora
 
@@ -83,19 +86,21 @@ La URL tendrá esta forma:
 https://juanfranortega.github.io/portafolio-web/
 ```
 
-## 7. Configurar la pantalla de agradecimiento
+## 7. Pantalla de agradecimiento
 
-Cuando la URL ya exista, agregar dentro del formulario de `index.html`:
+La redirección ya se encuentra configurada dentro del formulario de `index.html`:
 
 ```html
 <input type="hidden" name="_next" value="https://juanfranortega.github.io/portafolio-web/gracias.html">
 ```
 
-Después guardar el cambio y ejecutar:
+Solo hay que conservarla al actualizar el repositorio. La página destino es `gracias.html`.
+
+Después de guardar el cambio, ejecutar:
 
 ```bash
 git add index.html
-git commit -m "fix: configurar redirección del formulario"
+git commit -m "feat: activar formulario de contacto"
 git push
 ```
 
@@ -110,6 +115,9 @@ git push
 - [ ] El perfil incluye semblanza e intereses.
 - [ ] La sección técnica menciona HTML, CSS, JavaScript, Git y GitHub Pages.
 - [ ] Los apartados de los siguientes parciales están preparados.
+- [ ] Cada actividad del primer parcial abre su página individual.
+- [ ] Los archivos de evidencia se abren sin errores 404.
+- [ ] Las animaciones se observan sin afectar la lectura ni la navegación.
 - [ ] El formulario envía el mensaje y la autorespuesta.
 - [ ] El pie de página aparece correctamente.
 - [ ] No hay faltas de ortografía.

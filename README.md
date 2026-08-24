@@ -9,8 +9,8 @@ El portafolio reúne actividades, análisis, prácticas y conclusiones relaciona
 ## Información técnica del portafolio
 
 - **HTML5:** estructura semántica del encabezado, navegación, secciones, formulario y pie de página.
-- **CSS3:** identidad visual, variables, Grid, Flexbox, temas claro/oscuro, diseño responsivo y estados de enfoque.
-- **JavaScript ES6+:** menú móvil, tema, navegación activa, progreso de lectura y validación de la configuración del formulario.
+- **CSS3:** identidad visual, variables, Grid, Flexbox, temas claro/oscuro, diseño responsivo, animaciones y estados de enfoque.
+- **JavaScript ES6+:** menú móvil, tema, pestañas accesibles por parcial, navegación activa, progreso de lectura, animación progresiva y validación del formulario.
 - **Git y GitHub:** control de versiones, historial de cambios y repositorio público.
 - **GitHub Pages:** plataforma de publicación estática con URL pública y HTTPS.
 - **FormSubmit:** procesamiento del formulario y envío de respuesta automática al visitante.
@@ -25,10 +25,20 @@ portafolio-web/
 ├── gracias.html
 ├── 404.html
 ├── README.md
+├── GUIA_EVIDENCIAS.md
 ├── RUBRICA.md
+├── evidencias/
+│   └── parcial-1/
+│       ├── actividad-01.html
+│       ├── actividad-02.html
+│       └── actividad-03.html
 ├── site.webmanifest
 └── assets/
     ├── css/styles.css
+    ├── evidencias/parcial-1/
+    │   ├── actividad-01/
+    │   ├── actividad-02/
+    │   └── actividad-03/
     ├── img/favicon.svg
     └── js/main.js
 ```
@@ -38,32 +48,41 @@ portafolio-web/
 1. GitHub Pages toma los archivos de la rama `main` y los publica mediante HTTPS.
 2. `index.html` define la estructura, el contenido académico y los enlaces a los recursos.
 3. `styles.css` controla la identidad visual, el contraste y la adaptación a distintos tamaños de pantalla.
-4. `main.js` añade interacción progresiva sin impedir el acceso al contenido principal.
+4. `main.js` añade pestañas por parcial, interacción y animación progresiva sin impedir el acceso al contenido principal.
 5. El formulario valida sus campos y envía la información a FormSubmit mediante una conexión segura.
 
 La separación entre contenido, presentación y comportamiento facilita el mantenimiento y permite agregar nuevas evidencias durante los siguientes parciales.
+
+Las animaciones se implementan con transiciones y `@keyframes` de CSS, junto con `IntersectionObserver`. La regla `prefers-reduced-motion` reduce el movimiento cuando el sistema del visitante así lo solicita.
+
+## Organización de evidencias
+
+- **Primer parcial:** tres actividades registradas. La Actividad 01 está documentada y las Actividades 02 y 03 tienen plantillas listas para completar con información real.
+- **Segundo parcial:** apartado reservado para futuras actividades.
+- **Tercer parcial:** apartado reservado para actividades finales y conclusiones.
+
+Consultar `GUIA_EVIDENCIAS.md` para conocer la ubicación de archivos, el formato recomendado y los pasos de actualización.
 
 ## Configuración obligatoria del formulario
 
 GitHub Pages publica archivos estáticos y no procesa formularios por sí solo. El proyecto usa FormSubmit como intermediario:
 
-1. En `index.html`, localizar:
+1. El formulario ya está dirigido al correo del portafolio:
 
    ```html
-   action="https://formsubmit.co/TU_CORREO@EJEMPLO.COM"
+   action="https://formsubmit.co/twitchjfortnez@gmail.com"
    ```
 
-2. Reemplazar `TU_CORREO@EJEMPLO.COM` por el correo real que recibirá los mensajes.
-3. Publicar el sitio.
-4. Enviar una prueba desde el formulario.
-5. Abrir el mensaje de activación recibido y confirmar la dirección.
-6. Enviar una segunda prueba y verificar:
+2. Publicar esta versión del sitio.
+3. Enviar una primera prueba desde el formulario.
+4. Abrir el mensaje de activación recibido en `twitchjfortnez@gmail.com` y confirmar la dirección.
+5. Enviar una segunda prueba y verificar:
    - que el dueño recibe los datos;
    - que el visitante recibe la respuesta automática.
-7. Cuando se conozca la URL definitiva, agregar dentro del formulario:
+6. La redirección final ya está configurada como:
 
    ```html
-   <input type="hidden" name="_next" value="https://USUARIO.github.io/REPOSITORIO/gracias.html">
+   <input type="hidden" name="_next" value="https://juanfranortega.github.io/portafolio-web/gracias.html">
    ```
 
 No desactivar reCAPTCHA ni enviar el formulario por AJAX, porque la respuesta automática depende del envío HTML normal.

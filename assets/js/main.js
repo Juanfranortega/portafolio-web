@@ -8,6 +8,8 @@ const themeButton = document.querySelector("#theme-toggle");
 const progressBar = document.querySelector("#scroll-progress-bar");
 const contactForm = document.querySelector("#contact-form");
 const formStatus = document.querySelector("#form-status");
+const partialTabs = [...document.querySelectorAll('[role="tab"][data-partial]')];
+const partialPanels = [...document.querySelectorAll('[role="tabpanel"]')];
 
 function setTheme(theme) {
   documentRoot.dataset.theme = theme;
@@ -77,6 +79,10 @@ function initializeRevealAnimation() {
   const elements = [...document.querySelectorAll(".reveal")];
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  elements.forEach((element, index) => {
+    element.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 70}ms`);
+  });
+
   if (reduceMotion || !("IntersectionObserver" in window)) {
     elements.forEach((element) => element.classList.add("visible"));
     return;
@@ -94,6 +100,45 @@ function initializeRevealAnimation() {
   );
 
   elements.forEach((element) => observer.observe(element));
+}
+
+function activatePartial(selectedTab, moveFocus = false) {
+  const targetId = selectedTab.getAttribute("aria-controls");
+
+  partialTabs.forEach((tab) => {
+    const isSelected = tab === selectedTab;
+    tab.classList.toggle("active", isSelected);
+    tab.setAttribute("aria-selected", String(isSelected));
+    tab.tabIndex = isSelected ? 0 : -1;
+  });
+
+  partialPanels.forEach((panel) => {
+    const isSelected = panel.id === targetId;
+    panel.hidden = !isSelected;
+    panel.classList.toggle("active", isSelected);
+  });
+
+  if (moveFocus) selectedTab.focus();
+}
+
+function initializePartialTabs() {
+  if (!partialTabs.length) return;
+
+  partialTabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => activatePartial(tab));
+    tab.addEventListener("keydown", (event) => {
+      let nextIndex = index;
+
+      if (event.key === "ArrowRight") nextIndex = (index + 1) % partialTabs.length;
+      else if (event.key === "ArrowLeft") nextIndex = (index - 1 + partialTabs.length) % partialTabs.length;
+      else if (event.key === "Home") nextIndex = 0;
+      else if (event.key === "End") nextIndex = partialTabs.length - 1;
+      else return;
+
+      event.preventDefault();
+      activatePartial(partialTabs[nextIndex], true);
+    });
+  });
 }
 
 function validateContactConfiguration(event) {
@@ -128,8 +173,10 @@ window.addEventListener("resize", () => {
   if (window.innerWidth > 1000) closeMenu();
 });
 
-document.querySelector("#current-year").textContent = new Date().getFullYear();
+const currentYearElement = document.querySelector("#current-year");
+if (currentYearElement) currentYearElement.textContent = new Date().getFullYear();
 loadTheme();
 updateScrollProgress();
 initializeSectionObserver();
 initializeRevealAnimation();
+initializePartialTabs();
