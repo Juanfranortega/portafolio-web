@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="es-MX" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Portafolio académico de Juan Francisco Ortega Jiménez para la asignatura CNO IV – Seguridad Informática."
+    >
+    <meta name="author" content="Juan Francisco Ortega Jiménez">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="color-scheme" content="dark light">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; form-action https://formsubmit.co; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:title" content="Portafolio de Seguridad Informática | JFOJ">
+    <meta
+      property="og:description"
+      content="Evidencias y proceso de aprendizaje de CNO IV – Seguridad Informática."
+    >
+    <title>Portafolio de Seguridad Informática | JFOJ</title>
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/main.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true">
+      <span id="scroll-progress-bar"></span>
+    </div>
+
+    <header class="site-header" id="inicio">
+      <div class="container nav-shell">
+        <a class="brand" href="#inicio" aria-label="Ir al inicio">
+          <span class="brand-mark" aria-hidden="true">JF</span>
+          <span class="brand-copy">
+            <strong>Juan F. Ortega</strong>
+            <small>Portafolio CNO IV</small>
+          </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Navegación principal">
+          <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="nav-list"
+            aria-label="Abrir menú de navegación"
+          >
+            <span></span><span></span><span></span>
+          </button>
+
+          <ul class="nav-list" id="nav-list">
+            <li><a class="nav-link active" href="#inicio">Inicio</a></li>
+            <li><a class="nav-link" href="#perfil">Perfil</a></li>
+            <li><a class="nav-link" href="#evidencias">Evidencias</a></li>
+            <li><a class="nav-link" href="#tecnologia">Tecnología</a></li>
+            <li><a class="nav-link" href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Cambiar tema de color"
+          aria-pressed="true"
+        >
+          <span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true">☀</span>
+        </button>
+      </div>
+      <div class="security-ribbon" aria-label="Estado técnico del sitio">
+        <div class="container">
+          <span><i aria-hidden="true"></i> Sitio público</span>
+          <span>Expediente académico // JFOJ-SEC-001</span>
+          <span>HTTPS activo</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <section class="hero section" aria-labelledby="hero-title">
+        <div class="hero-grid container">
+          <div class="hero-copy reveal">
+            <div class="classification" aria-hidden="true">
+              <span>PORTAFOLIO</span><strong>SEGURIDAD / 07</strong>
+            </div>
+            <p class="eyebrow"><span></span> 7mo Semestre · CNO IV</p>
+            <h1 id="hero-title">
+              Aquí comienza mi
+              <span class="gradient-text">portafolio digital.</span>
+            </h1>
+            <p class="hero-description">
+              Un espacio académico para documentar de manera clara, técnica y
+              progresiva las evidencias, análisis y prácticas desarrolladas en
+              la asignatura de Seguridad Informática.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="#evidencias">
+                Explorar evidencias <span aria-hidden="true">→</span>
+              </a>
+              <a class="button button-secondary" href="#contacto">Contactarme</a>
+            </div>
+
+            <dl class="identity-strip" aria-label="Información académica">
+              <div>
+                <dt>Estudiante</dt>
+                <dd>Juan Francisco Ortega Jiménez</dd>
+              </div>
+              <div>
+                <dt>Alias</dt>
+                <dd>JFOJ</dd>
+              </div>
+              <div>
+                <dt>Institución</dt>
+                <dd>Universidad Politécnica de San Luis Potosí</dd>
+              </div>
+              <div>
+                <dt>Asignatura</dt>
+                <dd>CNO IV – Seguridad Informática</dd>
+              </div>
+              <div>
+                <dt>Semestre</dt>
+                <dd>7mo Semestre</dd>
+              </div>
+            </dl>
+          </div>
+
+          <aside class="hero-panel reveal" aria-label="Ficha técnica del portafolio">
+            <div class="window-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <small>portfolio.config.js</small>
+            </div>
+            <pre><code><span class="code-muted">const</span> portafolio = {
+  <span class="code-key">alias</span>: <span class="code-value">"JFOJ"</span>,
+  <span class="code-key">materia</span>: <span class="code-value">"CNO IV"</span>,
+  <span class="code-key">enfoque</span>: <span class="code-value">"Seguridad Informática"</span>,
+  <span class="code-key">semestre</span>: <span class="code-value">"7mo"</span>,
+  <span class="code-key">estado</span>: <span class="code-success">"en desarrollo"</span>,
+  <span class="code-key">publicación</span>: <span class="code-value">"GitHub Pages"</span>
+};</code></pre>
+            <div class="status-line">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span>Sitio estructurado para crecer durante el curso</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section presentation" id="presentacion" aria-labelledby="presentation-title">
+        <div class="container two-column">
+          <div class="section-heading reveal">
+            <p class="section-number">01 / PRESENTACIÓN</p>
+            <h2 id="presentation-title">Evidencia de mi proceso de aprendizaje</h2>
+          </div>
+
+          <div class="presentation-content reveal">
+            <p class="lead">
+              El propósito de este portafolio digital es documentar de manera
+              organizada, clara y verificable mi proceso de aprendizaje en CNO IV
+              – Seguridad Informática. Aquí reuniré las actividades, análisis,
+              prácticas y conclusiones desarrolladas durante el curso, mostrando
+              no solamente los resultados obtenidos, sino también los procedimientos,
+              las herramientas utilizadas y la reflexión generada en cada evidencia.
+            </p>
+            <div class="purpose-grid">
+              <article>
+                <span class="card-index" aria-hidden="true">01</span>
+                <h3>Propósito</h3>
+                <p>
+                  Reunir las evidencias académicas del curso en un sitio público,
+                  funcional y fácil de consultar, manteniendo un registro ordenado
+                  de las competencias que vaya desarrollando.
+                </p>
+              </article>
+              <article>
+                <span class="card-index" aria-hidden="true">02</span>
+                <h3>Enfoque</h3>
+                <p>
+                  Abordar la seguridad informática, el análisis de vulnerabilidades
+                  y las pruebas de penetración en entornos controlados y autorizados,
+                  relacionando la teoría con situaciones y riesgos reales.
+                </p>
+              </article>
+              <article>
+                <span class="card-index" aria-hidden="true">03</span>
+                <h3>Importancia</h3>
+                <p>
+                  Mostrar cómo evoluciona mi aprendizaje, desde la identificación
+                  de riesgos hasta el análisis de hallazgos y la propuesta de
+                  medidas para proteger aplicaciones, datos y sistemas.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section profile" id="perfil" aria-labelledby="profile-title">
+        <div class="container profile-grid">
+          <div class="profile-card reveal">
+            <div class="avatar" aria-hidden="true">
+              <span>JFOJ</span>
+            </div>
+            <p class="availability"><span></span> Estudiante de Ingeniería en TI</p>
+            <h2 id="profile-title">Juan Francisco<br>Ortega Jiménez</h2>
+            <p>
+              Actualmente curso el 7mo semestre de Ingeniería en Tecnologías de
+              la Información. Durante el último año he fortalecido mis conocimientos
+              en desarrollo web, bases de datos, redes, sistemas operativos,
+              programación y documentación técnica. Desde abril de 2026 me desempeño
+              como desarrollador web en Guimea, donde mantengo aplicaciones con
+              Laravel, PHP, JavaScript, HTML, CSS y MySQL; corrijo funciones y
+              problemas técnicos, realizo pruebas y colaboro mediante Git y GitLab.
+            </p>
+          </div>
+
+          <div class="interests reveal">
+            <p class="section-number">02 / PERFIL DEL ESTUDIANTE</p>
+            <h3>Experiencia e intereses en ciberseguridad</h3>
+            <ul class="interest-list">
+              <li>
+                <span>01</span>
+                <div>
+                  <strong>Seguridad en aplicaciones web</strong>
+                  <p>
+                    Me interesa aplicar mi experiencia en desarrollo para detectar
+                    errores de validación, autenticación, permisos y manejo de datos
+                    antes de que se conviertan en vulnerabilidades.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span>02</span>
+                <div>
+                  <strong>Análisis de vulnerabilidades</strong>
+                  <p>
+                    Busco aprender a reconocer debilidades, valorar su impacto y
+                    documentar hallazgos con claridad para proponer correcciones.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span>03</span>
+                <div>
+                  <strong>Pruebas de penetración éticas</strong>
+                  <p>
+                    Quiero comprender las técnicas y herramientas utilizadas para
+                    evaluar sistemas únicamente dentro de entornos autorizados,
+                    controlados y con objetivos definidos.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span>04</span>
+                <div>
+                  <strong>Protección de redes, sistemas y datos</strong>
+                  <p>
+                    Mis conocimientos de redes, Linux, bases de datos y control de
+                    acceso me permiten relacionar la ciberseguridad con escenarios
+                    técnicos que ya he trabajado académica y profesionalmente.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section evidence" id="evidencias" aria-labelledby="evidence-title">
+        <div class="container">
+          <div class="evidence-heading reveal">
+            <div>
+              <p class="section-number">03 / EVIDENCIAS</p>
+              <h2 id="evidence-title">Estructura del curso</h2>
+            </div>
+            <p>
+              Estos apartados se completarán progresivamente con actividades,
+              capturas, código, resultados y reflexiones de cada parcial.
+            </p>
+          </div>
+
+          <div class="partial-tabs reveal" role="tablist" aria-label="Parciales del curso">
+            <button
+              class="partial-tab active"
+              id="tab-partial-1"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-partial-1"
+              data-partial="1"
+            >
+              <span>01</span>
+              <strong>Primer parcial</strong>
+              <small>3 actividades</small>
+            </button>
+            <button
+              class="partial-tab"
+              id="tab-partial-2"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-partial-2"
+              data-partial="2"
+              tabindex="-1"
+            >
+              <span>02</span>
+              <strong>Segundo parcial</strong>
+              <small>Próximamente</small>
+            </button>
+            <button
+              class="partial-tab"
+              id="tab-partial-3"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-partial-3"
+              data-partial="3"
+              tabindex="-1"
+            >
+              <span>03</span>
+              <strong>Tercer parcial</strong>
+              <small>Próximamente</small>
+            </button>
+          </div>
+
+          <div class="partial-panels">
+            <div
+              class="partial-panel active"
+              id="panel-partial-1"
+              role="tabpanel"
+              aria-labelledby="tab-partial-1"
+              tabindex="0"
+            >
+              <div class="partial-summary">
+                <p><strong>Parcial 01</strong> · Fundamentos y estructura inicial</p>
+                <span>3 actividades registradas</span>
+              </div>
+
+              <div class="activity-grid">
+                <article class="activity-card complete reveal">
+                  <div class="activity-number" aria-hidden="true">A01</div>
+                  <div class="activity-status"><span></span> Documentada</div>
+                  <p class="activity-type">Actividad 01</p>
+                  <h3>Aquí comienza mi portafolio</h3>
+                  <p>
+                    Diseño, implementación y publicación de la portada técnica
+                    que concentrará las evidencias del curso.
+                  </p>
+                  <ul class="activity-tags" aria-label="Temas de la actividad">
+                    <li>HTML</li><li>CSS</li><li>JavaScript</li><li>HTTPS</li>
+                  </ul>
+                  <a class="activity-link" href="evidencias/parcial-1/actividad-01.html">
+                    Ver evidencia completa <span aria-hidden="true">↗</span>
+                  </a>
+                </article>
+
+                <article class="activity-card pending reveal">
+                  <div class="activity-number" aria-hidden="true">A02</div>
+                  <div class="activity-status"><span></span> Pendiente de datos</div>
+                  <p class="activity-type">Actividad 02</p>
+                  <h3>Ficha preparada para completar</h3>
+                  <p>
+                    Espacio listo para agregar título, objetivo, procedimiento,
+                    resultados, reflexión, capturas y archivo entregable.
+                  </p>
+                  <ul class="activity-tags" aria-label="Contenido disponible">
+                    <li>Plantilla</li><li>Capturas</li><li>PDF</li><li>Reflexión</li>
+                  </ul>
+                  <a class="activity-link" href="evidencias/parcial-1/actividad-02.html">
+                    Abrir plantilla <span aria-hidden="true">↗</span>
+                  </a>
+                </article>
+
+                <article class="activity-card pending reveal">
+                  <div class="activity-number" aria-hidden="true">A03</div>
+                  <div class="activity-status"><span></span> Pendiente de datos</div>
+                  <p class="activity-type">Actividad 03</p>
+                  <h3>Ficha preparada para completar</h3>
+                  <p>
+                    Espacio listo para documentar claramente la tercera actividad
+                    y permitir que el profesor consulte todas sus evidencias.
+                  </p>
+                  <ul class="activity-tags" aria-label="Contenido disponible">
+                    <li>Plantilla</li><li>Capturas</li><li>Enlaces</li><li>Archivos</li>
+                  </ul>
+                  <a class="activity-link" href="evidencias/parcial-1/actividad-03.html">
+                    Abrir plantilla <span aria-hidden="true">↗</span>
+                  </a>
+                </article>
+              </div>
+            </div>
+
+            <div
+              class="partial-panel"
+              id="panel-partial-2"
+              role="tabpanel"
+              aria-labelledby="tab-partial-2"
+              tabindex="0"
+              hidden
+            >
+              <div class="empty-partial">
+                <span aria-hidden="true">02</span>
+                <div>
+                  <p class="section-number">SEGUNDO PARCIAL</p>
+                  <h3>Estructura lista para nuevas evidencias</h3>
+                  <p>Las actividades se añadirán cuando sean asignadas, conservando el mismo formato profesional.</p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="partial-panel"
+              id="panel-partial-3"
+              role="tabpanel"
+              aria-labelledby="tab-partial-3"
+              tabindex="0"
+              hidden
+            >
+              <div class="empty-partial">
+                <span aria-hidden="true">03</span>
+                <div>
+                  <p class="section-number">TERCER PARCIAL</p>
+                  <h3>Espacio reservado para el cierre del curso</h3>
+                  <p>Aquí se integrarán las actividades finales, conclusiones y evidencias del proyecto integrador.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section technology" id="tecnologia" aria-labelledby="technology-title">
+        <div class="container technology-grid">
+          <div class="section-heading reveal">
+            <p class="section-number">04 / INFORMACIÓN TÉCNICA</p>
+            <h2 id="technology-title">Arquitectura técnica del portafolio</h2>
+            <p>
+              Esta sección describe exclusivamente cómo está construida, organizada,
+              versionada y publicada esta página. El sitio funciona con tecnologías
+              web nativas, sin frameworks ni bibliotecas externas.
+            </p>
+          </div>
+
+          <div class="tech-stack reveal">
+            <article>
+              <span class="tech-label">01</span>
+              <div>
+                <h3>HTML5</h3>
+                <p>Organiza encabezado, navegación, secciones, formulario y pie de página mediante etiquetas semánticas.</p>
+              </div>
+              <span class="tech-level">Estructura</span>
+            </article>
+            <article>
+              <span class="tech-label">02</span>
+              <div>
+                <h3>CSS3</h3>
+                <p>Define la identidad visual, temas claro/oscuro, Grid, Flexbox, adaptación móvil, animaciones y estados de enfoque.</p>
+              </div>
+              <span class="tech-level">Presentación</span>
+            </article>
+            <article>
+              <span class="tech-label">03</span>
+              <div>
+                <h3>JavaScript ES6+</h3>
+                <p>Controla el menú, tema, pestañas por parcial, navegación activa, progreso de lectura y validación del formulario.</p>
+              </div>
+              <span class="tech-level">Interacción</span>
+            </article>
+            <article>
+              <span class="tech-label">04</span>
+              <div>
+                <h3>Git + GitHub</h3>
+                <p>Registra versiones, conserva el historial de cambios y mantiene el código fuente en un repositorio público.</p>
+              </div>
+              <span class="tech-level">Versionado</span>
+            </article>
+            <article>
+              <span class="tech-label">05</span>
+              <div>
+                <h3>GitHub Pages</h3>
+                <p>Publica automáticamente los archivos de la rama principal en una URL pública protegida mediante HTTPS.</p>
+              </div>
+              <span class="tech-level">Despliegue</span>
+            </article>
+            <article>
+              <span class="tech-label">06</span>
+              <div>
+                <h3>FormSubmit</h3>
+                <p>Procesa el formulario desde el sitio estático y permite enviar una respuesta automática al visitante.</p>
+              </div>
+              <span class="tech-level">Formulario</span>
+            </article>
+            <article>
+              <span class="tech-label">07</span>
+              <div>
+                <h3>Animación accesible</h3>
+                <p>CSS e IntersectionObserver activan transiciones progresivas; la preferencia <code>prefers-reduced-motion</code> reduce el movimiento.</p>
+              </div>
+              <span class="tech-level">Accesibilidad</span>
+            </article>
+          </div>
+
+          <div class="architecture-panel reveal" aria-labelledby="architecture-title">
+            <div class="architecture-heading">
+              <p class="section-number">LÓGICA GENERAL DEL SITIO</p>
+              <h3 id="architecture-title">Del repositorio al navegador</h3>
+              <p>
+                La estructura separa contenido, presentación y comportamiento para
+                facilitar su mantenimiento y la incorporación de nuevas evidencias.
+              </p>
+            </div>
+
+            <ol class="architecture-flow">
+              <li>
+                <span>01</span>
+                <strong>Publicación</strong>
+                <p>GitHub Pages toma los archivos de la rama <code>main</code> y los sirve mediante HTTPS.</p>
+              </li>
+              <li>
+                <span>02</span>
+                <strong>Estructura</strong>
+                <p><code>index.html</code> carga el contenido semántico y enlaza los recursos locales.</p>
+              </li>
+              <li>
+                <span>03</span>
+                <strong>Presentación</strong>
+                <p><code>styles.css</code> adapta la composición, contraste y jerarquía a cada pantalla.</p>
+              </li>
+              <li>
+                <span>04</span>
+                <strong>Interacción</strong>
+                <p><code>main.js</code> controla pestañas, tema y animación progresiva sin ocultar contenido esencial.</p>
+              </li>
+              <li>
+                <span>05</span>
+                <strong>Contacto</strong>
+                <p>El formulario valida los campos y envía la información a FormSubmit por conexión segura.</p>
+              </li>
+            </ol>
+
+            <ul class="quality-tags" aria-label="Características de calidad">
+              <li>HTML semántico</li>
+              <li>Navegación por teclado</li>
+              <li>Diseño responsivo</li>
+              <li>Animación accesible</li>
+              <li>Política de contenido</li>
+              <li>HTTPS</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contacto" aria-labelledby="contact-title">
+        <div class="container contact-grid">
+          <div class="contact-copy reveal">
+            <p class="section-number">05 / CONTACTO</p>
+            <h2 id="contact-title">¿Quieres dejarme un mensaje?</h2>
+            <p>
+              Completa el formulario. Al enviarlo recibirás una confirmación
+              automática en el correo proporcionado.
+            </p>
+            <div class="contact-note">
+              <span aria-hidden="true">↗</span>
+              <p>
+                Los campos marcados con <strong>*</strong> son obligatorios.
+                No compartas contraseñas ni información sensible.
+              </p>
+            </div>
+          </div>
+
+          <form
+            class="contact-form reveal"
+            id="contact-form"
+            action="https://formsubmit.co/twitchjfortnez@gmail.com"
+            method="POST"
+          >
+            <input type="hidden" name="_subject" value="Nuevo mensaje desde el portafolio de Seguridad Informática">
+            <input
+              type="hidden"
+              name="_autoresponse"
+              value="Hola. Tu mensaje fue enviado correctamente desde el portafolio de Juan Francisco Ortega Jiménez. Esta es una confirmación automática de recepción. Gracias por comunicarte; revisaré tu mensaje y responderé lo antes posible. No es necesario volver a enviarlo."
+            >
+            <input type="hidden" name="_template" value="table">
+            <input
+              type="hidden"
+              name="_url"
+              value="https://juanfranortega.github.io/portafolio-web/"
+            >
+            <input
+              type="hidden"
+              name="_next"
+              value="https://juanfranortega.github.io/portafolio-web/gracias.html"
+            >
+            <input class="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off">
+
+            <div class="form-row">
+              <div class="field">
+                <label for="name">Nombre <span aria-hidden="true">*</span></label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  minlength="2"
+                  maxlength="80"
+                  required
+                >
+              </div>
+              <div class="field">
+                <label for="email">Correo electrónico <span aria-hidden="true">*</span></label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  maxlength="120"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="subject">Asunto <span aria-hidden="true">*</span></label>
+              <input id="subject" name="subject" type="text" minlength="3" maxlength="100" required>
+            </div>
+
+            <div class="field">
+              <label for="message">Mensaje <span aria-hidden="true">*</span></label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                minlength="10"
+                maxlength="1000"
+                aria-describedby="message-help"
+                required
+              ></textarea>
+              <small id="message-help">Entre 10 y 1000 caracteres.</small>
+            </div>
+
+            <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+            <button class="button button-primary submit-button" type="submit">
+              <span>Enviar mensaje</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand footer-brand" href="#inicio">
+            <span class="brand-mark" aria-hidden="true">JF</span>
+            <span class="brand-copy">
+              <strong>Juan F. Ortega</strong>
+              <small>Portafolio académico</small>
+            </span>
+          </a>
+          <p>CNO IV – Seguridad Informática · 7mo Semestre</p>
+        </div>
+
+        <nav aria-label="Navegación secundaria">
+          <a href="#perfil">Perfil</a>
+          <a href="#evidencias">Evidencias</a>
+          <a href="#tecnologia">Tecnología</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+
+        <p class="copyright">
+          © <span id="current-year">2026</span> Juan Francisco Ortega Jiménez.<br>
+          Hecho con HTML, CSS y JavaScript.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
