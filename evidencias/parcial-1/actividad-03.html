@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Plantilla de evidencia para la Actividad 03 del primer parcial.">
+    <meta name="description" content="Actividad 03 - No presiones Esc... todavía: persistencia, asociación temporal y envío controlado de telemetría de teclado hacia Kali Linux.">
     <meta name="author" content="Juan Francisco Ortega Jiménez">
     <meta name="theme-color" content="#0b1020">
     <meta name="color-scheme" content="dark light">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
-    <title>Actividad 03 | Portafolio JFOJ</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <title>Actividad 03 - No presiones Esc... todavía | Portafolio JFOJ</title>
     <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <script src="../../assets/js/main.js" defer></script>
@@ -16,55 +16,137 @@
   <body class="evidence-detail-body">
     <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
     <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
     <header class="detail-header">
       <div class="container">
-        <a class="brand" href="../../index.html#inicio" aria-label="Volver al inicio"><span class="brand-mark" aria-hidden="true">JF</span><span class="brand-copy"><strong>Juan F. Ortega</strong><small>Evidencia académica</small></span></a>
+        <a class="brand" href="../../index.html#inicio" aria-label="Volver al inicio del portafolio">
+          <span class="brand-mark" aria-hidden="true">JF</span>
+          <span class="brand-copy"><strong>Juan F. Ortega</strong><small>Evidencia académica</small></span>
+        </a>
         <div class="detail-header-actions">
           <a class="button button-secondary" href="../../index.html#evidencias"><span aria-hidden="true">←</span> Volver a evidencias</a>
           <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema de color" aria-pressed="true"><span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span><span class="theme-icon theme-icon-light" aria-hidden="true">☀</span></button>
         </div>
       </div>
     </header>
+
     <main class="detail-main" id="contenido">
       <section class="detail-hero" data-activity="03" aria-labelledby="activity-title">
         <div class="container reveal">
           <nav class="detail-breadcrumb" aria-label="Ruta de navegación"><a href="../../index.html">Portafolio</a><span>/</span><a href="../../index.html#evidencias">Primer parcial</a><span>/</span><span aria-current="page">Actividad 03</span></nav>
           <p class="eyebrow"><span></span> Parcial 01 · Actividad 03</p>
-          <h1 id="activity-title">Evidencia pendiente de completar</h1>
-          <p class="detail-lead">Este apartado conservará la misma organización visual y técnica del portafolio cuando se incorporen la consigna y los resultados reales.</p>
-          <ul class="detail-metadata" aria-label="Estado de la actividad"><li>Estado: pendiente de datos</li><li>Plantilla: disponible</li><li>Parcial: primero</li></ul>
+          <h1 id="activity-title">No presiones Esc... todavía</h1>
+          <p class="detail-lead">Persistencia del registro, asociación temporal y transmisión controlada de eventos de teclado desde Windows hacia un receptor local en Kali Linux.</p>
+          <ul class="detail-metadata" aria-label="Datos de la actividad"><li>Estado: documentada</li><li>Fecha: 23/08/2026</li><li>Entorno: laboratorio controlado</li><li>Resultado: 3/3 criterios técnicos</li></ul>
         </div>
       </section>
+
       <div class="container detail-content">
         <div class="detail-layout">
           <div class="detail-sections">
-            <div class="template-notice reveal"><strong>Listo para completar:</strong> solo hacen falta la consigna, el nombre y los archivos de tu Actividad 03.</div>
-            <section class="detail-section reveal" aria-labelledby="pending-title">
-              <p class="section-number">PLANTILLA DE DOCUMENTACIÓN</p>
-              <h2 id="pending-title">Información que se integrará</h2>
-              <ol class="template-fields">
-                <li>Título oficial, fecha y objetivo de la actividad.</li>
-                <li>Descripción del procedimiento y herramientas utilizadas.</li>
-                <li>Resultados o hallazgos, explicados con claridad técnica.</li>
-                <li>Reflexión personal sobre el aprendizaje obtenido.</li>
-                <li>Capturas, PDF, código o enlaces que permitan verificar la evidencia.</li>
-              </ol>
+            <section class="detail-section reveal" aria-labelledby="objective-title">
+              <p class="section-number">01 / OBJETIVO</p>
+              <h2 id="objective-title">Objetivo de la actividad</h2>
+              <p>Implementar y documentar, en un entorno de laboratorio controlado, una versión ampliada del código estudiado en clase. El programa registra eventos <code>PRESS</code> y <code>RELEASE</code>, los conserva en un archivo local, agrega fecha, hora, orden e intervalo entre eventos y transmite una copia hacia una máquina Kali Linux.</p>
+              <div class="security-note"><strong>Alcance autorizado:</strong> la prueba se realizó únicamente con equipos propios, red privada y datos de demostración. El programa no se oculta ni se inicia automáticamente.</div>
             </section>
-            <section class="detail-section reveal" aria-labelledby="file-title">
-              <p class="section-number">ARCHIVOS</p>
-              <h2 id="file-title">Carpeta de la evidencia</h2>
-              <p>Los archivos se colocarán en <code>assets/evidencias/parcial-1/actividad-03/</code>. Cada enlace será revisado antes de publicar para asegurar que las evidencias abran correctamente.</p>
+
+            <section class="detail-section reveal" aria-labelledby="flow-title">
+              <p class="section-number">02 / FUNCIONAMIENTO</p>
+              <h2 id="flow-title">Flujo general de la implementación</h2>
+              <ol class="implementation-flow">
+                <li><strong>Captura visible:</strong> <code>pynput</code> ejecuta los callbacks cuando una tecla es presionada o liberada.</li>
+                <li><strong>Asociación temporal:</strong> cada acción recibe una marca ISO 8601, un identificador consecutivo y el valor <code>delta_ms</code>.</li>
+                <li><strong>Persistencia:</strong> el registro se añade a <code>Eventos.txt</code> sin borrar eventos anteriores.</li>
+                <li><strong>Telemetría:</strong> una conexión TCP envía la misma línea a <code>192.168.56.102:5050</code>.</li>
+                <li><strong>Recepción:</strong> Kali muestra la línea recibida y la guarda en <code>Eventos_Recibidos_Kali.txt</code>.</li>
+                <li><strong>Cierre:</strong> al liberar <kbd>Esc</kbd>, el listener termina y la conexión se cierra de forma controlada.</li>
+              </ol>
+              <p class="record-sample"><span>Ejemplo de registro</span><code>2026-08-23T22:31:14.096-06:00 | [PRESS] | evento_003 | tecla=Key.cmd | delta_ms=10</code></p>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="documentation-title">
+              <p class="section-number">03 / DOCUMENTACIÓN DEL CÓDIGO</p>
+              <h2 id="documentation-title">Para qué sirve cada parte</h2>
+              <div class="code-doc-grid">
+                <article><h3>Librerías</h3><p><code>datetime</code> genera fecha y zona horaria; <code>socket</code> administra TCP; <code>perf_counter</code> mide intervalos; <code>Key</code> y <code>Listener</code> detectan las teclas.</p></article>
+                <article><h3>Configuración</h3><p><code>IP_KALI</code>, <code>PUERTO</code> y <code>ARCHIVO_LOCAL</code> concentran la dirección del receptor, el puerto 5050 y el nombre de <code>Eventos.txt</code>.</p></article>
+                <article><h3>generar_evento()</h3><p>Aumenta el contador y crea identificadores como <code>evento_001</code>, necesarios para reconstruir el orden exacto.</p></article>
+                <article><h3>describir_tecla()</h3><p>Convierte cada tecla a texto legible: devuelve el carácter normal o el nombre de una tecla especial como <code>Key.shift</code>.</p></article>
+                <article><h3>conectar_con_kali()</h3><p>Abre la conexión TCP con un tiempo de espera. Si Kali no está disponible, informa el error sin impedir el registro local.</p></article>
+                <article><h3>enviar_a_kali()</h3><p>Codifica cada registro en UTF-8 y lo transmite como una línea completa. Ante una falla, restablece la conexión con seguridad.</p></article>
+                <article><h3>guardar_evento()</h3><p>Calcula <code>delta_ms</code>, genera la marca temporal, forma la línea, la añade al archivo y solicita su envío a Kali.</p></article>
+                <article><h3>Callbacks y main()</h3><p><code>on_press</code> y <code>on_release</code> registran ambas acciones. <code>main</code> pide confirmación, inicia el listener y garantiza el cierre de recursos.</p></article>
+                <article><h3>receptor_kali.py</h3><p>Escucha en todas las interfaces del puerto 5050, acepta una conexión, separa el flujo por líneas y conserva una segunda evidencia en Kali.</p></article>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="presentation-title">
+              <p class="section-number">04 / PRESENTACIÓN</p>
+              <h2 id="presentation-title">Reporte completo incrustado</h2>
+              <p>La siguiente vista previa contiene las 19 diapositivas del informe: objetivo, arquitectura, documentación del código, pruebas, evidencias, relación con la rúbrica, consideraciones éticas y conclusiones.</p>
+              <div class="presentation-frame"><iframe src="../../assets/evidencias/parcial-1/actividad-03/Actividad03_Reporte_Juan_Ortega.pdf#view=FitH&amp;toolbar=1" title="Vista previa de la presentación Actividad 03 - No presiones Esc... todavía" loading="lazy"></iframe></div>
+              <p class="embed-fallback">Si tu navegador no muestra el visor, <a href="../../assets/evidencias/parcial-1/actividad-03/Actividad03_Reporte_Juan_Ortega.pdf" target="_blank" rel="noopener">abre el reporte en una pestaña nueva</a>.</p>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="evidence-title">
+              <p class="section-number">05 / EVIDENCIAS</p>
+              <h2 id="evidence-title">Conexión, ejecución y persistencia</h2>
+              <p>Las capturas documentan la IP privada de Kali, la conectividad sin pérdida, el receptor activo antes del emisor, la conexión establecida desde Windows y la conservación de los registros hasta el evento final <code>evento_081</code>.</p>
+              <div class="evidence-gallery">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-03/01-ip-kali.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-03/01-ip-kali.png" alt="Terminal de Kali mostrando la interfaz eth1 con la dirección 192.168.56.102" loading="lazy"></a><figcaption>01 · Dirección IP de Kali en la red privada.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-03/02-ping-windows-kali.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-03/02-ping-windows-kali.png" alt="PowerShell mostrando cuatro respuestas del ping hacia Kali y cero por ciento de pérdida" loading="lazy"></a><figcaption>02 · Prueba de conectividad: 4 enviados, 4 recibidos.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-03/03-receptor-kali.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-03/03-receptor-kali.png" alt="Receptor de Kali esperando eventos TCP en el puerto 5050" loading="lazy"></a><figcaption>03 · Receptor de Kali activo en el puerto 5050.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-03/04-emisor-windows.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-03/04-emisor-windows.png" alt="VS Code en Windows mostrando la conexión establecida y eventos enviados" loading="lazy"></a><figcaption>04 · Emisor conectado y eventos marcados como ENVIADO.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-03/05-eventos-inicio.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-03/05-eventos-inicio.png" alt="Archivo Eventos.txt con marcas de tiempo, eventos PRESS y RELEASE y delta en milisegundos" loading="lazy"></a><figcaption>05 · Persistencia y asociación temporal en Eventos.txt.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-03/06-evento-esc-final.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-03/06-evento-esc-final.png" alt="Parte final de Eventos.txt mostrando evento 081 correspondiente a la liberación de Esc" loading="lazy"></a><figcaption>06 · Cierre registrado como evento_081, tecla Key.esc.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="downloads-title">
+              <p class="section-number">06 / ARCHIVOS ENTREGABLES</p>
+              <h2 id="downloads-title">Presentación, código y consigna</h2>
+              <div class="evidence-file-grid" aria-label="Archivos descargables de la actividad">
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/actividad-03/Actividad03_Reporte_Juan_Ortega.pdf" target="_blank" rel="noopener"><span>REPORTE PDF</span><strong>Abrir presentación ↗</strong></a>
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/actividad-03/Actividad03_Reporte_Juan_Ortega.pptx" download><span>POWERPOINT · 19 DIAPOSITIVAS</span><strong>Descargar presentación</strong></a>
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/actividad-03/Actividad03_Codigo_Adaptado.zip" download><span>CÓDIGO FUENTE COMPLETO</span><strong>Descargar proyecto ZIP</strong></a>
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/actividad-03/UPSLPspyware_Actividad03.py" download><span>EMISOR WINDOWS</span><strong>Descargar archivo Python</strong></a>
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/actividad-03/receptor_kali.py" download><span>RECEPTOR KALI</span><strong>Descargar archivo Python</strong></a>
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/actividad-03/Act3_Consigna.pdf" target="_blank" rel="noopener"><span>CONSIGNA Y RÚBRICA</span><strong>Consultar documento original ↗</strong></a>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="rubric-title">
+              <p class="section-number">07 / CUMPLIMIENTO</p>
+              <h2 id="rubric-title">Correspondencia con la rúbrica</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Implementación técnica</strong><p><code>Eventos.txt</code> mantiene los registros después de finalizar la ejecución.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Asociación temporal</strong><p>Cada registro contiene fecha, hora, consecutivo y <code>delta_ms</code>.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Envío de información</strong><p>La red, el receptor y el estado <code>ENVIADO</code> demuestran la recepción en Kali.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Informe y evidencias</strong><p>La presentación explica el código, el funcionamiento y las pruebas con capturas pertinentes.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Portafolio digital</strong><p>Esta página publica el HTML, el código fuente, la presentación y enlaces funcionales.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="reflection-title">
+              <p class="section-number">08 / REFLEXIÓN</p>
+              <h2 id="reflection-title">Aprendizaje y consideraciones de seguridad</h2>
+              <p>La actividad permitió comprender que un evento técnico solo resulta auditable cuando conserva contexto: momento, orden, intervalo y destino. También mostró que la captura de teclado puede exponer información sensible; por ello, fuera de un laboratorio serían indispensables autorización explícita, cifrado, autenticación, control de acceso y una política limitada de retención.</p>
             </section>
           </div>
-          <aside class="detail-aside reveal" aria-labelledby="next-title">
-            <p class="section-number">SIGUIENTE PASO</p>
-            <h2 id="next-title">Qué debes proporcionar</h2>
-            <ul><li>Nombre y consigna.</li><li>Fecha de entrega.</li><li>Breve explicación de lo realizado.</li><li>Capturas o archivo final.</li></ul>
-            <p>Con esos elementos se sustituirá esta plantilla por la evidencia terminada.</p>
+
+          <aside class="detail-aside reveal" aria-labelledby="technical-record-title">
+            <p class="section-number">FICHA TÉCNICA</p>
+            <h2 id="technical-record-title">Datos de control</h2>
+            <ul>
+              <li><strong>Alumno:</strong> Juan Francisco Ortega Jiménez.</li><li><strong>Matrícula:</strong> 184918.</li><li><strong>Materia:</strong> Fundamentos de Ciberseguridad.</li><li><strong>Programa:</strong> CNO IV - Seguridad Informática.</li><li><strong>Docente:</strong> Mtro. Servando López Contreras.</li><li><strong>Institución:</strong> Universidad Politécnica de San Luis Potosí.</li><li><strong>Emisor:</strong> Windows + Python.</li><li><strong>Receptor:</strong> Kali Linux.</li><li><strong>Red:</strong> 192.168.56.0/24.</li><li><strong>Protocolo:</strong> TCP, puerto 5050.</li>
+            </ul>
+            <a class="button button-primary detail-cta" href="#presentation-title">Ver presentación</a>
           </aside>
         </div>
       </div>
     </main>
-    <footer class="site-footer"><div class="container footer-grid"><div><strong>JFOJ // P01-A03</strong><p>CNO IV – Seguridad Informática</p></div><nav aria-label="Navegación secundaria"><a href="../../index.html">Inicio</a><a href="../../index.html#evidencias">Evidencias</a></nav><p class="copyright">© <span id="current-year">2026</span> Juan Francisco Ortega Jiménez.</p></div></footer>
+
+    <footer class="site-footer"><div class="container footer-grid"><div><strong>JFOJ // P01-A03</strong><p>CNO IV - Seguridad Informática</p></div><nav aria-label="Navegación secundaria"><a href="../../index.html">Inicio</a><a href="../../index.html#evidencias">Evidencias</a></nav><p class="copyright">© <span id="current-year">2026</span> Juan Francisco Ortega Jiménez.</p></div></footer>
   </body>
 </html>

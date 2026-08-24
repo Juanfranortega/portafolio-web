@@ -21,6 +21,7 @@ El destinatario ya está configurado como **twitchjfortnez@gmail.com**. No se re
 4. Enviar una segunda prueba.
 5. Verificar que:
    - llega el mensaje al dueño del portafolio;
+   - aparece la pantalla visible de envío correcto;
    - el visitante recibe el correo automático;
    - los campos obligatorios impiden envíos incompletos.
 
@@ -118,7 +119,7 @@ git push
 - [ ] Cada actividad del primer parcial abre su página individual.
 - [ ] Los archivos de evidencia se abren sin errores 404.
 - [ ] Las animaciones se observan sin afectar la lectura ni la navegación.
-- [ ] El formulario envía el mensaje y la autorespuesta.
+- [ ] El formulario muestra la confirmación visible y envía la autorespuesta.
 - [ ] El pie de página aparece correctamente.
 - [ ] No hay faltas de ortografía.
 - [ ] El repositorio muestra el archivo `README.md`.

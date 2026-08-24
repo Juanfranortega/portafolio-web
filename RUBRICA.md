@@ -32,8 +32,10 @@
 - [x] Tres páginas individuales para las actividades del primer parcial.
 - [x] Animaciones accesibles documentadas.
 - [x] Formulario configurado con el correo real `twitchjfortnez@gmail.com`.
-- [ ] Activación confirmada desde el correo y prueba de autorespuesta realizada.
+- [x] Activación confirmada desde el correo.
+- [x] Pantalla visible de confirmación preparada en `gracias.html`.
+- [ ] Prueba de autorespuesta realizada con un correo distinto al destinatario.
 - [x] Pie de página.
 - [x] URL pública verificada con HTTPS.
 
-El único componente técnico pendiente es confirmar la activación que enviará FormSubmit y comprobar la respuesta automática con una segunda prueba.
+El único componente técnico pendiente es comprobar la respuesta automática usando en el formulario un correo distinto a `twitchjfortnez@gmail.com`.

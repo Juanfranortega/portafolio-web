@@ -13,7 +13,7 @@ El portafolio reúne actividades, análisis, prácticas y conclusiones relaciona
 - **JavaScript ES6+:** menú móvil, tema, pestañas accesibles por parcial, navegación activa, progreso de lectura, animación progresiva y validación del formulario.
 - **Git y GitHub:** control de versiones, historial de cambios y repositorio público.
 - **GitHub Pages:** plataforma de publicación estática con URL pública y HTTPS.
-- **FormSubmit:** procesamiento del formulario y envío de respuesta automática al visitante.
+- **FormSubmit:** procesamiento del formulario, confirmación visible en `gracias.html` y respuesta automática al visitante.
 
 El sitio no usa frameworks ni bibliotecas externas. Todos los recursos funcionales se encuentran dentro del repositorio.
 
@@ -78,7 +78,8 @@ GitHub Pages publica archivos estáticos y no procesa formularios por sí solo. 
 4. Abrir el mensaje de activación recibido en `twitchjfortnez@gmail.com` y confirmar la dirección.
 5. Enviar una segunda prueba y verificar:
    - que el dueño recibe los datos;
-   - que el visitante recibe la respuesta automática.
+   - que el visitante ve la pantalla “Tu mensaje fue enviado correctamente”;
+   - que el visitante recibe por correo la respuesta automática.
 6. La redirección final ya está configurada como:
 
    ```html

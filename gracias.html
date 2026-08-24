@@ -5,23 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
     <meta name="theme-color" content="#0b1020">
+    <meta name="color-scheme" content="dark light">
+    <meta
+      name="description"
+      content="Confirmación de envío del formulario del portafolio de Juan Francisco Ortega Jiménez."
+    >
     <title>Mensaje enviado | Portafolio de Seguridad Informática</title>
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/css/styles.css">
   </head>
-  <body>
-    <main class="section">
-      <div class="container">
-        <section class="profile-card" aria-labelledby="thanks-title">
-          <p class="section-number">MENSAJE ENVIADO</p>
-          <h1 id="thanks-title">¡Gracias por contactarme!</h1>
-          <p class="hero-description">
-            Tu mensaje fue enviado correctamente. También recibirás una
-            confirmación automática en tu correo electrónico.
-          </p>
-          <a class="button button-primary" href="index.html#contacto">Volver al portafolio</a>
-        </section>
-      </div>
+  <body class="thank-you-page">
+    <main class="thank-you-main">
+      <section class="thank-you-card" aria-labelledby="thanks-title">
+        <div class="success-seal" aria-hidden="true"><span>✓</span></div>
+        <p class="section-number">CONFIRMACIÓN // ENVÍO COMPLETADO</p>
+        <h1 id="thanks-title">Tu mensaje fue enviado correctamente.</h1>
+        <p class="thank-you-lead">
+          Los datos del formulario se entregaron al correo del responsable del
+          portafolio. No es necesario volver a enviarlos.
+        </p>
+
+        <div class="confirmation-panel" aria-labelledby="automatic-response-title">
+          <span class="confirmation-icon" aria-hidden="true">@</span>
+          <div>
+            <h2 id="automatic-response-title">Confirmación automática al visitante</h2>
+            <p>
+              FormSubmit enviará una respuesta automática a la dirección que
+              escribiste en el campo “Correo electrónico”. Puede tardar algunos
+              minutos; revisa también las carpetas de Spam y Promociones.
+            </p>
+          </div>
+        </div>
+
+        <ol class="delivery-status" aria-label="Estado del envío">
+          <li><span>01</span><strong>Formulario procesado</strong><small>Los campos fueron enviados.</small></li>
+          <li><span>02</span><strong>Mensaje entregado</strong><small>El responsable recibirá una copia.</small></li>
+          <li><span>03</span><strong>Respuesta solicitada</strong><small>Se enviará al correo del visitante.</small></li>
+        </ol>
+
+        <div class="thank-you-actions">
+          <a class="button button-primary" href="index.html#inicio">Volver al portafolio</a>
+          <a class="button button-secondary" href="index.html#contacto">Enviar otro mensaje</a>
+        </div>
+        <p class="confirmation-reference">REFERENCIA: JFOJ-CONTACT // ESTADO: RECIBIDO</p>
+      </section>
     </main>
   </body>
 </html>
