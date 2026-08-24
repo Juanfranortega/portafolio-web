@@ -6,16 +6,16 @@ Portafolio digital de **Juan Francisco Ortega Jiménez (JFOJ)**, estudiante de s
 
 El portafolio reúne actividades, análisis, prácticas y conclusiones relacionadas con seguridad informática, análisis de vulnerabilidades y pruebas de penetración realizadas en entornos controlados y autorizados. Cada evidencia deberá mostrar el resultado, el procedimiento, las herramientas utilizadas, los hallazgos y la reflexión obtenida.
 
-## Tecnologías
+## Información técnica del portafolio
 
-- HTML5 semántico.
-- CSS3: variables, Grid, Flexbox, diseño responsivo y modo claro/oscuro.
-- JavaScript ES6+: menú adaptable, navegación activa, tema y validación de configuración.
-- Git y GitHub para control de versiones.
-- GitHub Pages para publicación con HTTPS.
-- FormSubmit para recepción de mensajes y respuesta automática.
+- **HTML5:** estructura semántica del encabezado, navegación, secciones, formulario y pie de página.
+- **CSS3:** identidad visual, variables, Grid, Flexbox, temas claro/oscuro, diseño responsivo y estados de enfoque.
+- **JavaScript ES6+:** menú móvil, tema, navegación activa, progreso de lectura y validación de la configuración del formulario.
+- **Git y GitHub:** control de versiones, historial de cambios y repositorio público.
+- **GitHub Pages:** plataforma de publicación estática con URL pública y HTTPS.
+- **FormSubmit:** procesamiento del formulario y envío de respuesta automática al visitante.
 
-La semblanza técnica también documenta experiencia con Laravel, PHP, MySQL, SQL, GitLab, Linux, VirtualBox, redes, Packet Tracer, Java y Python.
+El sitio no usa frameworks ni bibliotecas externas. Todos los recursos funcionales se encuentran dentro del repositorio.
 
 ## Estructura
 
@@ -35,7 +35,13 @@ portafolio-web/
 
 ## Funcionamiento general
 
-`index.html` define la estructura y el contenido. `styles.css` controla la identidad visual y la adaptación a distintos tamaños de pantalla. `main.js` añade interacción progresiva sin impedir que el contenido funcione cuando JavaScript no está disponible. Las secciones de los parciales quedaron preparadas para incorporar nuevas evidencias durante el curso.
+1. GitHub Pages toma los archivos de la rama `main` y los publica mediante HTTPS.
+2. `index.html` define la estructura, el contenido académico y los enlaces a los recursos.
+3. `styles.css` controla la identidad visual, el contraste y la adaptación a distintos tamaños de pantalla.
+4. `main.js` añade interacción progresiva sin impedir el acceso al contenido principal.
+5. El formulario valida sus campos y envía la información a FormSubmit mediante una conexión segura.
+
+La separación entre contenido, presentación y comportamiento facilita el mantenimiento y permite agregar nuevas evidencias durante los siguientes parciales.
 
 ## Configuración obligatoria del formulario
 

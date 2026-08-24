@@ -38,7 +38,7 @@
     <header class="site-header" id="inicio">
       <div class="container nav-shell">
         <a class="brand" href="#inicio" aria-label="Ir al inicio">
-          <span class="brand-mark" aria-hidden="true">JO</span>
+          <span class="brand-mark" aria-hidden="true">JF</span>
           <span class="brand-copy">
             <strong>Juan F. Ortega</strong>
             <small>Portafolio CNO IV</small>
@@ -77,12 +77,22 @@
           <span class="theme-icon theme-icon-light" aria-hidden="true">☀</span>
         </button>
       </div>
+      <div class="security-ribbon" aria-label="Estado técnico del sitio">
+        <div class="container">
+          <span><i aria-hidden="true"></i> Sitio público</span>
+          <span>Expediente académico // JFOJ-SEC-001</span>
+          <span>HTTPS activo</span>
+        </div>
+      </div>
     </header>
 
     <main id="contenido">
       <section class="hero section" aria-labelledby="hero-title">
         <div class="hero-grid container">
           <div class="hero-copy reveal">
+            <div class="classification" aria-hidden="true">
+              <span>PORTAFOLIO</span><strong>SEGURIDAD / 07</strong>
+            </div>
             <p class="eyebrow"><span></span> 7mo Semestre · CNO IV</p>
             <h1 id="hero-title">
               Aquí comienza mi
@@ -332,11 +342,11 @@
         <div class="container technology-grid">
           <div class="section-heading reveal">
             <p class="section-number">04 / INFORMACIÓN TÉCNICA</p>
-            <h2 id="technology-title">Tecnologías, publicación y experiencia</h2>
+            <h2 id="technology-title">Arquitectura técnica del portafolio</h2>
             <p>
-              Este portafolio utiliza tecnologías web nativas y se publica desde
-              un repositorio con control de versiones. La sección también resume
-              las herramientas con las que he trabajado académica y laboralmente.
+              Esta sección describe exclusivamente cómo está construida, organizada,
+              versionada y publicada esta página. El sitio funciona con tecnologías
+              web nativas, sin frameworks ni bibliotecas externas.
             </p>
           </div>
 
@@ -345,7 +355,7 @@
               <span class="tech-label">01</span>
               <div>
                 <h3>HTML5</h3>
-                <p>Estructura semántica y contenido accesible.</p>
+                <p>Organiza encabezado, navegación, secciones, formulario y pie de página mediante etiquetas semánticas.</p>
               </div>
               <span class="tech-level">Estructura</span>
             </article>
@@ -353,7 +363,7 @@
               <span class="tech-label">02</span>
               <div>
                 <h3>CSS3</h3>
-                <p>Diseño responsivo, variables, Grid y Flexbox.</p>
+                <p>Define la identidad visual, temas claro/oscuro, Grid, Flexbox, adaptación móvil y estados de enfoque.</p>
               </div>
               <span class="tech-level">Presentación</span>
             </article>
@@ -361,15 +371,15 @@
               <span class="tech-label">03</span>
               <div>
                 <h3>JavaScript ES6+</h3>
-                <p>Navegación, tema y comportamiento interactivo.</p>
+                <p>Controla el menú móvil, tema, navegación activa, progreso de lectura y validación previa del formulario.</p>
               </div>
               <span class="tech-level">Interacción</span>
             </article>
             <article>
               <span class="tech-label">04</span>
               <div>
-                <h3>Git + GitHub + GitLab</h3>
-                <p>Control de versiones, historial de cambios y trabajo colaborativo.</p>
+                <h3>Git + GitHub</h3>
+                <p>Registra versiones, conserva el historial de cambios y mantiene el código fuente en un repositorio público.</p>
               </div>
               <span class="tech-level">Versionado</span>
             </article>
@@ -377,50 +387,66 @@
               <span class="tech-label">05</span>
               <div>
                 <h3>GitHub Pages</h3>
-                <p>Publicación estática con una URL pública y HTTPS.</p>
+                <p>Publica automáticamente los archivos de la rama principal en una URL pública protegida mediante HTTPS.</p>
               </div>
               <span class="tech-level">Despliegue</span>
             </article>
             <article>
               <span class="tech-label">06</span>
               <div>
-                <h3>PHP + Laravel</h3>
-                <p>Desarrollo y mantenimiento de aplicaciones, módulos, validaciones y control de acceso.</p>
+                <h3>FormSubmit</h3>
+                <p>Procesa el formulario desde el sitio estático y permite enviar una respuesta automática al visitante.</p>
               </div>
-              <span class="tech-level">Backend</span>
+              <span class="tech-level">Formulario</span>
             </article>
-            <article>
-              <span class="tech-label">07</span>
-              <div>
-                <h3>MySQL + SQL</h3>
-                <p>Diseño de bases de datos, consultas, depuración, reportes e inventarios.</p>
-              </div>
-              <span class="tech-level">Datos</span>
-            </article>
-            <article>
-              <span class="tech-label">08</span>
-              <div>
-                <h3>Linux + VirtualBox</h3>
-                <p>Instalación y administración básica de Ubuntu Server, Alpine y entornos virtualizados.</p>
-              </div>
-              <span class="tech-level">Sistemas</span>
-            </article>
-            <article>
-              <span class="tech-label">09</span>
-              <div>
-                <h3>Redes + Packet Tracer</h3>
-                <p>Direccionamiento, topologías, dispositivos y fundamentos trabajados en CCNA.</p>
-              </div>
-              <span class="tech-level">Redes</span>
-            </article>
-            <article>
-              <span class="tech-label">10</span>
-              <div>
-                <h3>Java + Python</h3>
-                <p>Lógica de programación, algoritmos, programación orientada a objetos y automatización básica.</p>
-              </div>
-              <span class="tech-level">Programación</span>
-            </article>
+          </div>
+
+          <div class="architecture-panel reveal" aria-labelledby="architecture-title">
+            <div class="architecture-heading">
+              <p class="section-number">LÓGICA GENERAL DEL SITIO</p>
+              <h3 id="architecture-title">Del repositorio al navegador</h3>
+              <p>
+                La estructura separa contenido, presentación y comportamiento para
+                facilitar su mantenimiento y la incorporación de nuevas evidencias.
+              </p>
+            </div>
+
+            <ol class="architecture-flow">
+              <li>
+                <span>01</span>
+                <strong>Publicación</strong>
+                <p>GitHub Pages toma los archivos de la rama <code>main</code> y los sirve mediante HTTPS.</p>
+              </li>
+              <li>
+                <span>02</span>
+                <strong>Estructura</strong>
+                <p><code>index.html</code> carga el contenido semántico y enlaza los recursos locales.</p>
+              </li>
+              <li>
+                <span>03</span>
+                <strong>Presentación</strong>
+                <p><code>styles.css</code> adapta la composición, contraste y jerarquía a cada pantalla.</p>
+              </li>
+              <li>
+                <span>04</span>
+                <strong>Interacción</strong>
+                <p><code>main.js</code> añade funciones sin impedir el acceso al contenido principal.</p>
+              </li>
+              <li>
+                <span>05</span>
+                <strong>Contacto</strong>
+                <p>El formulario valida los campos y envía la información a FormSubmit por conexión segura.</p>
+              </li>
+            </ol>
+
+            <ul class="quality-tags" aria-label="Características de calidad">
+              <li>HTML semántico</li>
+              <li>Navegación por teclado</li>
+              <li>Diseño responsivo</li>
+              <li>Movimiento reducido</li>
+              <li>Política de contenido</li>
+              <li>HTTPS</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -517,7 +543,7 @@
       <div class="container footer-grid">
         <div>
           <a class="brand footer-brand" href="#inicio">
-            <span class="brand-mark" aria-hidden="true">JO</span>
+            <span class="brand-mark" aria-hidden="true">JF</span>
             <span class="brand-copy">
               <strong>Juan F. Ortega</strong>
               <small>Portafolio académico</small>
