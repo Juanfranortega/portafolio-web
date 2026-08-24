@@ -5,13 +5,11 @@
 Antes de publicar, revisar `index.html` y confirmar:
 
 - Nombre: **Juan Francisco Ortega Jiménez**.
-- Alias: **Juan Ortega**.
-- Asignatura: **Programación WAP**.
+- Alias: **JFOJ**.
+- Asignatura: **CNO IV – Seguridad Informática**.
 - Institución: **Universidad Politécnica de San Luis Potosí**.
-- Periodo: **Otoño 2026**.
+- Semestre: **7mo Semestre**.
 - Perfil e intereses académicos.
-
-Si el profesor solicita número de semestre en lugar del periodo, agregarlo junto a `Otoño 2026`.
 
 ## 2. Activación del formulario
 
@@ -47,8 +45,8 @@ Abrir `http://localhost:8000` y comprobar:
 
 1. Iniciar sesión en GitHub.
 2. Seleccionar **New repository**.
-3. Nombre recomendado: `portafolio-wap`.
-4. Descripción recomendada: `Portafolio académico de Programación WAP desarrollado con HTML, CSS y JavaScript.`
+3. Nombre del repositorio: `portafolio-web`.
+4. Descripción recomendada: `Portafolio académico de CNO IV – Seguridad Informática desarrollado con HTML, CSS y JavaScript.`
 5. Seleccionar **Public**.
 6. No agregar README, `.gitignore` ni licencia desde GitHub, porque el proyecto ya contiene esos archivos.
 7. Crear el repositorio.
@@ -60,9 +58,9 @@ Abrir PowerShell o Git Bash dentro de la carpeta y ejecutar, cambiando `USUARIO`
 ```bash
 git init
 git add .
-git commit -m "feat: crear portafolio académico de Programación WAP"
+git commit -m "feat: crear portafolio de Seguridad Informática"
 git branch -M main
-git remote add origin https://github.com/USUARIO/portafolio-wap.git
+git remote add origin https://github.com/Juanfranortega/portafolio-web.git
 git push -u origin main
 ```
 
@@ -82,7 +80,7 @@ Si Git solicita autenticación, iniciar sesión mediante el navegador o usar un 
 La URL tendrá esta forma:
 
 ```text
-https://USUARIO.github.io/portafolio-wap/
+https://juanfranortega.github.io/portafolio-web/
 ```
 
 ## 7. Configurar la pantalla de agradecimiento
@@ -90,7 +88,7 @@ https://USUARIO.github.io/portafolio-wap/
 Cuando la URL ya exista, agregar dentro del formulario de `index.html`:
 
 ```html
-<input type="hidden" name="_next" value="https://USUARIO.github.io/portafolio-wap/gracias.html">
+<input type="hidden" name="_next" value="https://juanfranortega.github.io/portafolio-web/gracias.html">
 ```
 
 Después guardar el cambio y ejecutar:
@@ -134,7 +132,7 @@ Guardar estas capturas por si el profesor las solicita:
 
 Entregar principalmente:
 
-1. **URL pública del portafolio:** `https://USUARIO.github.io/portafolio-wap/`
-2. **URL del repositorio:** `https://github.com/USUARIO/portafolio-wap`
+1. **URL pública del portafolio:** `https://juanfranortega.github.io/portafolio-web/`
+2. **URL del repositorio:** `https://github.com/Juanfranortega/portafolio-web`
 
 Si la plataforma permite anexos, incluir también una captura del Inicio y otra donde se observe el formulario probado.

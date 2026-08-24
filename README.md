@@ -1,6 +1,10 @@
-# Portafolio académico — Programación WAP
+# Portafolio académico — CNO IV – Seguridad Informática
 
-Portafolio digital de **Juan Francisco Ortega Jiménez**, desarrollado con tecnologías web nativas para documentar las evidencias de la asignatura **Programación WAP** durante el periodo **Otoño 2026**.
+Portafolio digital de **Juan Francisco Ortega Jiménez (JFOJ)**, estudiante de séptimo semestre de Ingeniería en Tecnologías de la Información en la Universidad Politécnica de San Luis Potosí. El sitio documenta las evidencias y el proceso de aprendizaje de la asignatura **CNO IV – Seguridad Informática**.
+
+## Propósito y enfoque
+
+El portafolio reúne actividades, análisis, prácticas y conclusiones relacionadas con seguridad informática, análisis de vulnerabilidades y pruebas de penetración realizadas en entornos controlados y autorizados. Cada evidencia deberá mostrar el resultado, el procedimiento, las herramientas utilizadas, los hallazgos y la reflexión obtenida.
 
 ## Tecnologías
 
@@ -11,10 +15,12 @@ Portafolio digital de **Juan Francisco Ortega Jiménez**, desarrollado con tecno
 - GitHub Pages para publicación con HTTPS.
 - FormSubmit para recepción de mensajes y respuesta automática.
 
+La semblanza técnica también documenta experiencia con Laravel, PHP, MySQL, SQL, GitLab, Linux, VirtualBox, redes, Packet Tracer, Java y Python.
+
 ## Estructura
 
 ```text
-portafolio-wap/
+portafolio-web/
 ├── index.html
 ├── gracias.html
 ├── 404.html
@@ -73,9 +79,9 @@ Crear un repositorio público, colocar estos archivos en la raíz y ejecutar:
 ```bash
 git init
 git add .
-git commit -m "feat: crear estructura inicial del portafolio WAP"
+git commit -m "feat: crear portafolio de Seguridad Informática"
 git branch -M main
-git remote add origin https://github.com/USUARIO/portafolio-wap.git
+git remote add origin https://github.com/Juanfranortega/portafolio-web.git
 git push -u origin main
 ```
 
@@ -84,7 +90,7 @@ En GitHub: **Settings → Pages → Deploy from a branch → main → /(root) �
 La dirección resultante tendrá este formato:
 
 ```text
-https://USUARIO.github.io/portafolio-wap/
+https://juanfranortega.github.io/portafolio-web/
 ```
 
 ## Pruebas antes de entregar

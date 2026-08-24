@@ -16,10 +16,10 @@
 ## Componentes obligatorios de Inicio
 
 - [x] Nombre del estudiante: Juan Francisco Ortega Jiménez.
-- [x] Alias: Juan Ortega.
-- [x] Asignatura: Programación WAP.
+- [x] Alias: JFOJ.
+- [x] Asignatura: CNO IV – Seguridad Informática.
 - [x] Institución: Universidad Politécnica de San Luis Potosí.
-- [x] Periodo: Otoño 2026.
+- [x] Semestre: 7mo Semestre.
 - [x] Menú de navegación.
 - [x] Presentación del portafolio.
 - [x] Propósito, enfoque e importancia.
@@ -29,6 +29,6 @@
 - [x] Control de versiones.
 - [ ] Formulario activado con correo real y prueba de autorespuesta.
 - [x] Pie de página.
-- [ ] URL pública verificada con HTTPS.
+- [x] URL pública verificada con HTTPS.
 
-Los dos últimos puntos se completan después de colocar el correo del autor y publicar el repositorio.
+El único componente pendiente es colocar el correo real, activar FormSubmit y comprobar la respuesta automática.
