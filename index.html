@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="es-MX" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Portafolio académico de Juan Francisco Ortega Jiménez para la asignatura Programación WAP."
+    >
+    <meta name="author" content="Juan Francisco Ortega Jiménez">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="color-scheme" content="dark light">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; form-action https://formsubmit.co; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:title" content="Portafolio WAP | Juan Ortega">
+    <meta
+      property="og:description"
+      content="Evidencias, proyectos y aprendizaje de Programación WAP."
+    >
+    <title>Portafolio WAP | Juan Ortega</title>
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/main.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true">
+      <span id="scroll-progress-bar"></span>
+    </div>
+
+    <header class="site-header" id="inicio">
+      <div class="container nav-shell">
+        <a class="brand" href="#inicio" aria-label="Ir al inicio">
+          <span class="brand-mark" aria-hidden="true">JO</span>
+          <span class="brand-copy">
+            <strong>Juan Ortega</strong>
+            <small>Portafolio WAP</small>
+          </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Navegación principal">
+          <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="nav-list"
+            aria-label="Abrir menú de navegación"
+          >
+            <span></span><span></span><span></span>
+          </button>
+
+          <ul class="nav-list" id="nav-list">
+            <li><a class="nav-link active" href="#inicio">Inicio</a></li>
+            <li><a class="nav-link" href="#perfil">Perfil</a></li>
+            <li><a class="nav-link" href="#evidencias">Evidencias</a></li>
+            <li><a class="nav-link" href="#tecnologia">Tecnología</a></li>
+            <li><a class="nav-link" href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Cambiar tema de color"
+          aria-pressed="true"
+        >
+          <span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span>
+          <span class="theme-icon theme-icon-light" aria-hidden="true">☀</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <section class="hero section" aria-labelledby="hero-title">
+        <div class="hero-grid container">
+          <div class="hero-copy reveal">
+            <p class="eyebrow"><span></span> Otoño 2026 · Programación WAP</p>
+            <h1 id="hero-title">
+              Aquí comienza mi
+              <span class="gradient-text">portafolio digital.</span>
+            </h1>
+            <p class="hero-description">
+              Un espacio para documentar de manera clara, técnica y progresiva
+              las evidencias, prácticas y proyectos desarrollados durante la
+              asignatura.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="#evidencias">
+                Explorar evidencias <span aria-hidden="true">→</span>
+              </a>
+              <a class="button button-secondary" href="#contacto">Contactarme</a>
+            </div>
+
+            <dl class="identity-strip" aria-label="Información académica">
+              <div>
+                <dt>Estudiante</dt>
+                <dd>Juan Francisco Ortega Jiménez</dd>
+              </div>
+              <div>
+                <dt>Alias</dt>
+                <dd>Juan Ortega</dd>
+              </div>
+              <div>
+                <dt>Institución</dt>
+                <dd>Universidad Politécnica de San Luis Potosí</dd>
+              </div>
+            </dl>
+          </div>
+
+          <aside class="hero-panel reveal" aria-label="Ficha técnica del portafolio">
+            <div class="window-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <small>portfolio.config.js</small>
+            </div>
+            <pre><code><span class="code-muted">const</span> portafolio = {
+  <span class="code-key">autor</span>: <span class="code-value">"Juan Ortega"</span>,
+  <span class="code-key">materia</span>: <span class="code-value">"Programación WAP"</span>,
+  <span class="code-key">periodo</span>: <span class="code-value">"Otoño 2026"</span>,
+  <span class="code-key">estado</span>: <span class="code-success">"en desarrollo"</span>,
+  <span class="code-key">publicación</span>: <span class="code-value">"GitHub Pages"</span>
+};</code></pre>
+            <div class="status-line">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span>Sitio estructurado para crecer durante el curso</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section presentation" id="presentacion" aria-labelledby="presentation-title">
+        <div class="container two-column">
+          <div class="section-heading reveal">
+            <p class="section-number">01 / PRESENTACIÓN</p>
+            <h2 id="presentation-title">Un registro vivo de mi aprendizaje</h2>
+          </div>
+
+          <div class="presentation-content reveal">
+            <p class="lead">
+              El propósito de este portafolio es reunir y presentar las
+              actividades más importantes de Programación WAP, mostrando tanto
+              el resultado final como el proceso técnico utilizado para construirlo.
+            </p>
+            <div class="purpose-grid">
+              <article>
+                <span class="card-index" aria-hidden="true">01</span>
+                <h3>Propósito</h3>
+                <p>
+                  Organizar las evidencias del curso en un sitio público,
+                  funcional y fácil de consultar.
+                </p>
+              </article>
+              <article>
+                <span class="card-index" aria-hidden="true">02</span>
+                <h3>Enfoque</h3>
+                <p>
+                  Aplicar HTML semántico, CSS responsivo, JavaScript, accesibilidad
+                  y buenas prácticas de desarrollo web.
+                </p>
+              </article>
+              <article>
+                <span class="card-index" aria-hidden="true">03</span>
+                <h3>Importancia</h3>
+                <p>
+                  Conservar una evidencia verificable del avance, las decisiones
+                  técnicas y las competencias adquiridas.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section profile" id="perfil" aria-labelledby="profile-title">
+        <div class="container profile-grid">
+          <div class="profile-card reveal">
+            <div class="avatar" aria-hidden="true">
+              <span>JO</span>
+            </div>
+            <p class="availability"><span></span> Estudiante de Ingeniería en TI</p>
+            <h2 id="profile-title">Juan Francisco<br>Ortega Jiménez</h2>
+            <p>
+              Estudiante de Ingeniería en Tecnologías de la Información con
+              interés en desarrollo web, bases de datos, automatización y
+              ciberseguridad. Me interesa construir soluciones funcionales,
+              comprensibles y seguras.
+            </p>
+          </div>
+
+          <div class="interests reveal">
+            <p class="section-number">02 / PERFIL DEL ESTUDIANTE</p>
+            <h3>Áreas que conectan con mi formación</h3>
+            <ul class="interest-list">
+              <li>
+                <span>01</span>
+                <div>
+                  <strong>Desarrollo web</strong>
+                  <p>Interfaces, lógica de aplicación y experiencias responsivas.</p>
+                </div>
+              </li>
+              <li>
+                <span>02</span>
+                <div>
+                  <strong>Bases de datos</strong>
+                  <p>Modelado, consultas y administración de información.</p>
+                </div>
+              </li>
+              <li>
+                <span>03</span>
+                <div>
+                  <strong>Ciberseguridad</strong>
+                  <p>Protección de aplicaciones, datos y entornos digitales.</p>
+                </div>
+              </li>
+              <li>
+                <span>04</span>
+                <div>
+                  <strong>Investigación tecnológica</strong>
+                  <p>Aprendizaje continuo y evaluación de nuevas herramientas.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section evidence" id="evidencias" aria-labelledby="evidence-title">
+        <div class="container">
+          <div class="evidence-heading reveal">
+            <div>
+              <p class="section-number">03 / EVIDENCIAS</p>
+              <h2 id="evidence-title">Estructura del curso</h2>
+            </div>
+            <p>
+              Estos apartados se completarán progresivamente con actividades,
+              capturas, código, resultados y reflexiones de cada parcial.
+            </p>
+          </div>
+
+          <div class="evidence-grid">
+            <article class="evidence-card current reveal">
+              <div class="evidence-meta">
+                <span class="badge">EN CURSO</span>
+                <span>Parcial 01</span>
+              </div>
+              <h3>Aquí empieza mi portafolio</h3>
+              <p>
+                Diseño, implementación y publicación de la estructura base del
+                portafolio digital.
+              </p>
+              <ul>
+                <li>Inicio e identidad académica</li>
+                <li>Diseño web nativo</li>
+                <li>Publicación con HTTPS</li>
+              </ul>
+            </article>
+
+            <article class="evidence-card reveal">
+              <div class="evidence-meta">
+                <span class="badge badge-muted">PRÓXIMAMENTE</span>
+                <span>Parcial 02</span>
+              </div>
+              <h3>Nuevas evidencias</h3>
+              <p>
+                Espacio preparado para documentar las prácticas y proyectos del
+                segundo parcial.
+              </p>
+              <div class="placeholder-line" aria-hidden="true"></div>
+              <div class="placeholder-line short" aria-hidden="true"></div>
+            </article>
+
+            <article class="evidence-card reveal">
+              <div class="evidence-meta">
+                <span class="badge badge-muted">PRÓXIMAMENTE</span>
+                <span>Parcial 03</span>
+              </div>
+              <h3>Proyecto integrador</h3>
+              <p>
+                Espacio preparado para el cierre del curso, conclusiones y
+                producto final.
+              </p>
+              <div class="placeholder-line" aria-hidden="true"></div>
+              <div class="placeholder-line short" aria-hidden="true"></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section technology" id="tecnologia" aria-labelledby="technology-title">
+        <div class="container technology-grid">
+          <div class="section-heading reveal">
+            <p class="section-number">04 / INFORMACIÓN TÉCNICA</p>
+            <h2 id="technology-title">Construido desde la base</h2>
+            <p>
+              El sitio utiliza únicamente tecnologías web nativas. No depende
+              de frameworks ni bibliotecas externas para funcionar.
+            </p>
+          </div>
+
+          <div class="tech-stack reveal">
+            <article>
+              <span class="tech-label">01</span>
+              <div>
+                <h3>HTML5</h3>
+                <p>Estructura semántica y contenido accesible.</p>
+              </div>
+              <span class="tech-level">Estructura</span>
+            </article>
+            <article>
+              <span class="tech-label">02</span>
+              <div>
+                <h3>CSS3</h3>
+                <p>Diseño responsivo, variables, Grid y Flexbox.</p>
+              </div>
+              <span class="tech-level">Presentación</span>
+            </article>
+            <article>
+              <span class="tech-label">03</span>
+              <div>
+                <h3>JavaScript ES6+</h3>
+                <p>Navegación, tema y comportamiento interactivo.</p>
+              </div>
+              <span class="tech-level">Interacción</span>
+            </article>
+            <article>
+              <span class="tech-label">04</span>
+              <div>
+                <h3>Git + GitHub</h3>
+                <p>Control de versiones y documentación de cambios.</p>
+              </div>
+              <span class="tech-level">Versionado</span>
+            </article>
+            <article>
+              <span class="tech-label">05</span>
+              <div>
+                <h3>GitHub Pages</h3>
+                <p>Publicación estática con una URL pública y HTTPS.</p>
+              </div>
+              <span class="tech-level">Despliegue</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contacto" aria-labelledby="contact-title">
+        <div class="container contact-grid">
+          <div class="contact-copy reveal">
+            <p class="section-number">05 / CONTACTO</p>
+            <h2 id="contact-title">¿Quieres dejarme un mensaje?</h2>
+            <p>
+              Completa el formulario. Al enviarlo recibirás una confirmación
+              automática en el correo proporcionado.
+            </p>
+            <div class="contact-note">
+              <span aria-hidden="true">↗</span>
+              <p>
+                Los campos marcados con <strong>*</strong> son obligatorios.
+                No compartas contraseñas ni información sensible.
+              </p>
+            </div>
+          </div>
+
+          <form
+            class="contact-form reveal"
+            id="contact-form"
+            action="https://formsubmit.co/TU_CORREO@EJEMPLO.COM"
+            method="POST"
+          >
+            <input type="hidden" name="_subject" value="Nuevo mensaje desde el portafolio WAP">
+            <input
+              type="hidden"
+              name="_autoresponse"
+              value="Gracias por visitar mi portafolio de Programación WAP. Recibí tu mensaje y lo revisaré próximamente."
+            >
+            <input type="hidden" name="_template" value="table">
+            <input class="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off">
+
+            <div class="form-row">
+              <div class="field">
+                <label for="name">Nombre <span aria-hidden="true">*</span></label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  minlength="2"
+                  maxlength="80"
+                  required
+                >
+              </div>
+              <div class="field">
+                <label for="email">Correo electrónico <span aria-hidden="true">*</span></label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  maxlength="120"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="subject">Asunto <span aria-hidden="true">*</span></label>
+              <input id="subject" name="subject" type="text" minlength="3" maxlength="100" required>
+            </div>
+
+            <div class="field">
+              <label for="message">Mensaje <span aria-hidden="true">*</span></label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                minlength="10"
+                maxlength="1000"
+                aria-describedby="message-help"
+                required
+              ></textarea>
+              <small id="message-help">Entre 10 y 1000 caracteres.</small>
+            </div>
+
+            <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+            <button class="button button-primary submit-button" type="submit">
+              <span>Enviar mensaje</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand footer-brand" href="#inicio">
+            <span class="brand-mark" aria-hidden="true">JO</span>
+            <span class="brand-copy">
+              <strong>Juan Ortega</strong>
+              <small>Portafolio académico</small>
+            </span>
+          </a>
+          <p>Programación WAP · Otoño 2026</p>
+        </div>
+
+        <nav aria-label="Navegación secundaria">
+          <a href="#perfil">Perfil</a>
+          <a href="#evidencias">Evidencias</a>
+          <a href="#tecnologia">Tecnología</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+
+        <p class="copyright">
+          © <span id="current-year">2026</span> Juan Francisco Ortega Jiménez.<br>
+          Hecho con HTML, CSS y JavaScript.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
