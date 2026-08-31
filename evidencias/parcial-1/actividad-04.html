@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es-MX" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Actividad 04 - Una página demasiado convincente: simulación local y controlada de Credential Harvester con SET, análisis del flujo HTTP POST y controles contra phishing.">
+    <meta name="author" content="Juan Francisco Ortega Jiménez">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="color-scheme" content="dark light">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <title>Actividad 04 - Una página demasiado convincente | Portafolio JFOJ</title>
+    <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <script src="../../assets/js/main.js" defer></script>
+  </head>
+  <body class="evidence-detail-body">
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+    <header class="detail-header">
+      <div class="container">
+        <a class="brand" href="../../index.html#inicio" aria-label="Volver al inicio del portafolio">
+          <span class="brand-mark" aria-hidden="true">JF</span>
+          <span class="brand-copy"><strong>Juan F. Ortega</strong><small>Evidencia académica</small></span>
+        </a>
+        <div class="detail-header-actions">
+          <a class="button button-secondary" href="../../index.html#evidencias"><span aria-hidden="true">←</span> Volver a evidencias</a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema de color" aria-pressed="true"><span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span><span class="theme-icon theme-icon-light" aria-hidden="true">☀</span></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="detail-main" id="contenido">
+      <section class="detail-hero" data-activity="04" aria-labelledby="activity-title">
+        <div class="container reveal">
+          <nav class="detail-breadcrumb" aria-label="Ruta de navegación"><a href="../../index.html">Portafolio</a><span>/</span><a href="../../index.html#evidencias">Primer parcial</a><span>/</span><span aria-current="page">Actividad 04</span></nav>
+          <p class="eyebrow"><span></span> Parcial 01 · Actividad 04</p>
+          <h1 id="activity-title">Una página demasiado convincente</h1>
+          <p class="detail-lead">Simulación local y autorizada de ingeniería social con Social-Engineer Toolkit, una página institucional ficticia y el módulo Credential Harvester Attack Method.</p>
+          <ul class="detail-metadata" aria-label="Datos de la actividad"><li>Estado: documentada</li><li>Fecha: 30/08/2026</li><li>Entorno: 127.0.0.1</li><li>Evidencias: 30 capturas</li></ul>
+        </div>
+      </section>
+
+      <div class="container detail-content">
+        <div class="detail-layout">
+          <div class="detail-sections">
+            <section class="detail-section reveal" aria-labelledby="objective-title">
+              <p class="section-number">01 / OBJETIVO</p>
+              <h2 id="objective-title">Objetivo y alcance autorizado</h2>
+              <p>Implementar y analizar, dentro de una máquina virtual de laboratorio, el recorrido de la información enviada por un formulario web hacia SET. La práctica permitió reconocer cómo una interfaz visual convincente puede influir en el usuario, comprobar la petición HTTP y proponer medidas técnicas y humanas contra el phishing.</p>
+              <div class="security-note"><strong>Entorno seguro:</strong> la página “Nexo Campus”, el sistema, el usuario y la contraseña son completamente ficticios. La prueba se limitó a <code>127.0.0.1</code>; no utilizó dominios externos, portales reales, datos personales, suplantación DNS, payloads ni código malicioso.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="concept-title">
+              <p class="section-number">02 / CONCEPTO</p>
+              <h2 id="concept-title">¿Qué hace Credential Harvester?</h2>
+              <p>Credential Harvester es un método de SET que hospeda o importa una página con formulario y registra, en el servidor local, los parámetros enviados por el navegador. En una campaña de phishing simula el punto en el que una persona entrega información a un portal falso.</p>
+              <div class="code-doc-grid">
+                <article><h3>Captura</h3><p>Recibe y registra los valores que el navegador envía mediante una solicitud HTTP. En esta práctica se observaron <code>scenario</code>, <code>username</code> y <code>password</code>.</p></article>
+                <article><h3>No es cracking</h3><p>No adivina, descifra ni rompe una contraseña. La información fue escrita directamente en el formulario ficticio y enviada al servidor de laboratorio.</p></article>
+                <article><h3>Servidor</h3><p>SET atendió la página en el puerto 80 de la interfaz de bucle local y mostró el evento <em>WE GOT A HIT</em> al recibir la petición.</p></article>
+                <article><h3>Persistencia</h3><p>Los resultados se conservaron en <code>harvester.log</code> y en un informe XML aun después de terminar SET.</p></article>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="configuration-title">
+              <p class="section-number">03 / CONFIGURACIÓN</p>
+              <h2 id="configuration-title">Laboratorio y parámetros comprobados</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Kali Linux + SET 8.1.3</strong><p>Máquina virtual aislada y módulo Website Attack Vectors → Credential Harvester → Custom Import.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Servidor exclusivamente local</strong><p>Dirección <code>127.0.0.1</code>, puerto <code>80</code>, <code>APACHE_SERVER=OFF</code> y <code>WEBATTACK_SSL=OFF</code>.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Portal ficticio</strong><p>“Nexo Campus” incluyó nombre de sistema, usuario, contraseña, botón de ingreso y aviso de sesión expirada.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Datos de demostración</strong><p>Usuario <code>alumno_prueba04</code>, contraseña ficticia <code>Solo-Lab-2026!</code> y escenario <code>ACT04_LOCAL</code>.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Cierre seguro</strong><p>Se detuvo el servidor, se verificó que el puerto 80 quedara sin escucha y se restauró <code>HARVESTER_LOG_PASSWORDS=OFF</code>.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="flow-title">
+              <p class="section-number">04 / FLUJO DE INFORMACIÓN</p>
+              <h2 id="flow-title">Del formulario al registro local</h2>
+              <ol class="implementation-flow">
+                <li><strong>Interacción:</strong> el usuario de prueba completa el formulario ficticio y selecciona “Ingresar al portal”.</li>
+                <li><strong>Solicitud:</strong> Firefox codifica los campos como <code>application/x-www-form-urlencoded</code> y genera un <code>POST /</code>.</li>
+                <li><strong>Transporte local:</strong> la solicitud viaja únicamente a <code>127.0.0.1:80</code>.</li>
+                <li><strong>Recepción:</strong> el servidor de SET interpreta los parámetros y los muestra en la consola como una captura.</li>
+                <li><strong>Registro:</strong> SET escribe la información en el archivo de eventos y genera un reporte XML.</li>
+                <li><strong>Conservación:</strong> las copias de evidencia permanecen disponibles después de cerrar el servicio.</li>
+              </ol>
+              <figure class="flow-figure"><a href="../../assets/evidencias/parcial-1/actividad-04/flujo-captura.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/flujo-captura.png" alt="Diagrama del flujo desde el formulario ficticio, la petición POST y el servidor local de SET hasta los archivos de evidencia" loading="lazy"></a><figcaption>Flujo técnico comprobado durante la simulación. La captura registra datos enviados; no realiza descifrado de contraseñas.</figcaption></figure>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="report-title">
+              <p class="section-number">05 / REPORTE</p>
+              <h2 id="report-title">Informe profesional completo</h2>
+              <p>El informe de 31 páginas contiene portada, índice, objetivos, escenario, configuración, explicación técnica, las 30 capturas en orden cronológico, diagrama de flujo, indicadores, controles, matriz de cumplimiento, conclusión y referencias en formato APA 7.</p>
+              <div class="presentation-frame report-frame"><iframe src="../../assets/evidencias/parcial-1/actividad-04/Actividad04_Reporte_Juan_Francisco_Ortega.pdf#view=FitH&amp;toolbar=1" title="Vista previa del reporte de la Actividad 04 - Una página demasiado convincente" loading="lazy"></iframe></div>
+              <p class="embed-fallback">Si el visor no aparece, <a href="../../assets/evidencias/parcial-1/actividad-04/Actividad04_Reporte_Juan_Francisco_Ortega.pdf" target="_blank" rel="noopener">abre el reporte PDF en una pestaña nueva</a>.</p>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="evidence-prep-title">
+              <p class="section-number">06 / EVIDENCIAS · PREPARACIÓN</p>
+              <h2 id="evidence-prep-title">Configuración, incidencias y correcciones</h2>
+              <p>Los primeros doce registros documentan la preparación del expediente, la versión de SET, la localización de la configuración, dos fallas de resolución de nombres y las correcciones de ruta y protocolo. Conservar los errores demuestra el proceso real de diagnóstico.</p>
+              <div class="evidence-gallery">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/01-preparacion-directorios.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/01-preparacion-directorios.png" alt="Terminal con la creación y validación de directorios para la actividad" loading="lazy"></a><figcaption>01 · Preparación de directorios de portal y evidencias.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/02-inicio-set.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/02-inicio-set.png" alt="Menú principal de Social-Engineer Toolkit versión 8.1.3" loading="lazy"></a><figcaption>02 · Inicio de SET 8.1.3.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/03-configuracion-localizada.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/03-configuracion-localizada.png" alt="Terminal mostrando las rutas de configuración de SET" loading="lazy"></a><figcaption>03 · Localización de <code>set.config</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/04-validacion-configuracion-puerto.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/04-validacion-configuracion-puerto.png" alt="Terminal validando configuración de SET, el archivo index y el estado del puerto 80" loading="lazy"></a><figcaption>04 · Parámetros y puerto 80 antes de iniciar.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/05-segunda-ejecucion-set.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/05-segunda-ejecucion-set.png" alt="Pantalla de presentación de Social-Engineer Toolkit" loading="lazy"></a><figcaption>05 · Segunda ejecución de SET.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/06-error-resolucion-nombres-1.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/06-error-resolucion-nombres-1.png" alt="Traza de error por falla temporal de resolución de nombres" loading="lazy"></a><figcaption>06 · Incidencia: resolución de nombres sin Internet.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/07-error-resolucion-nombres-2.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/07-error-resolucion-nombres-2.png" alt="Continuación de la traza de error por resolución de nombres" loading="lazy"></a><figcaption>07 · Diagnóstico del error de actualización.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/08-recuperacion-menu-set.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/08-recuperacion-menu-set.png" alt="SET recuperado y mostrando nuevamente el menú principal" loading="lazy"></a><figcaption>08 · Recuperación del menú sin afectar la práctica.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/09-correccion-ruta.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/09-correccion-ruta.png" alt="SET indicando error de ruta al recibir una dirección IP en lugar de una carpeta" loading="lazy"></a><figcaption>09 · Incidencia: dirección introducida como ruta.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/10-importacion-index.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/10-importacion-index.png" alt="SET encontrando index.html y solicitando la URL importada" loading="lazy"></a><figcaption>10 · Importación correcta del <code>index.html</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/11-harvester-puerto-80.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/11-harvester-puerto-80.png" alt="SET informando que Credential Harvester está activo en el puerto 80" loading="lazy"></a><figcaption>11 · Credential Harvester activo en puerto 80.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/12-correccion-http.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/12-correccion-http.png" alt="Terminal corrigiendo la URL importada de HTTPS a HTTP" loading="lazy"></a><figcaption>12 · Corrección de protocolo para el laboratorio local.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="evidence-capture-title">
+              <p class="section-number">07 / EVIDENCIAS · CAPTURA</p>
+              <h2 id="evidence-capture-title">Portal ficticio, petición HTTP y recepción</h2>
+              <p>Estas ocho capturas conectan la interfaz visual con la evidencia de red y la salida de SET. El <code>POST</code> recibió estado 200 y la pestaña <em>Request</em> mostró exactamente los parámetros registrados por el servidor.</p>
+              <div class="evidence-gallery">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/13-portal-nexo-campus.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/13-portal-nexo-campus.png" alt="Portal ficticio Nexo Campus alojado en 127.0.0.1" loading="lazy"></a><figcaption>13 · Portal institucional ficticio en <code>127.0.0.1</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/14-network-inicial.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/14-network-inicial.png" alt="Herramientas de desarrollo de Firefox con la pestaña Network vacía" loading="lazy"></a><figcaption>14 · Monitor de red preparado para la prueba.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/15-persist-logs-menu.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/15-persist-logs-menu.png" alt="Menú de Network con la opción Persist Logs" loading="lazy"></a><figcaption>15 · Selección de persistencia del historial.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/16-persist-logs-activo.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/16-persist-logs-activo.png" alt="Opción Persist Logs activada en Firefox" loading="lazy"></a><figcaption>16 · Registro persistente activado.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/17-post-200.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/17-post-200.png" alt="Firefox mostrando una petición POST con respuesta 200" loading="lazy"></a><figcaption>17 · Petición <code>POST /</code> con respuesta 200.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/18-headers-post.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/18-headers-post.png" alt="Encabezados de la petición POST hacia 127.0.0.1" loading="lazy"></a><figcaption>18 · Encabezados y destino local de la solicitud.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/19-parametros-post.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/19-parametros-post.png" alt="Parámetros ficticios scenario, username y password en la petición POST" loading="lazy"></a><figcaption>19 · Parámetros ficticios enviados por el formulario.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/20-set-hit.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/20-set-hit.png" alt="Terminal de SET mostrando WE GOT A HIT y los campos recibidos" loading="lazy"></a><figcaption>20 · SET recibe y muestra el evento <em>WE GOT A HIT</em>.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="evidence-close-title">
+              <p class="section-number">08 / EVIDENCIAS · PERSISTENCIA Y CIERRE</p>
+              <h2 id="evidence-close-title">Conservación de resultados y restauración</h2>
+              <p>La última fase comprueba que el registro y el XML persisten fuera de la sesión de SET. También documenta la corrección del filtro de <code>ss</code>, el puerto cerrado y la restauración de la opción que registra contraseñas.</p>
+              <div class="evidence-gallery">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/21-reporte-xml.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/21-reporte-xml.png" alt="SET generando un archivo XML de reporte" loading="lazy"></a><figcaption>21 · Generación del reporte XML.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/22-salida-set.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/22-salida-set.png" alt="Salida de SET después de finalizar el servidor" loading="lazy"></a><figcaption>22 · Salida controlada de SET.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/23-copia-evidencias.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/23-copia-evidencias.png" alt="Terminal copiando harvester.log y los reportes de SET al directorio de evidencias" loading="lazy"></a><figcaption>23 · Copia de resultados al expediente local.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/24-persistencia-log-xml.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/24-persistencia-log-xml.png" alt="Contenido persistente de harvester.log y del reporte XML" loading="lazy"></a><figcaption>24 · Evidencia persistente en log y XML.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/25-error-filtro-puerto.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/25-error-filtro-puerto.png" alt="Terminal mostrando errores de sintaxis en un filtro de puerto con ss" loading="lazy"></a><figcaption>25 · Incidencia: sintaxis incorrecta del filtro.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/26-filtro-puerto-corregido.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/26-filtro-puerto-corregido.png" alt="Filtro sport igual a 80 corregido y sin resultados de escucha" loading="lazy"></a><figcaption>26 · Filtro corregido para el puerto 80.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/27-puerto-cerrado.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/27-puerto-cerrado.png" alt="Comando ss sin procesos escuchando en el puerto 80" loading="lazy"></a><figcaption>27 · Puerto 80 cerrado tras finalizar la práctica.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/28-configuracion-restaurada.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/28-configuracion-restaurada.png" alt="Terminal confirmando HARVESTER_LOG_PASSWORDS igual a OFF" loading="lazy"></a><figcaption>28 · Configuración sensible restaurada a <code>OFF</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/29-consigna.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/29-consigna.png" alt="Consigna oficial de la Actividad 04" loading="lazy"></a><figcaption>29 · Consigna oficial y restricciones del laboratorio.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-04/30-rubrica.png" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-04/30-rubrica.png" alt="Rúbrica oficial de la Actividad 04" loading="lazy"></a><figcaption>30 · Rúbrica utilizada para verificar el reporte.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="indicators-title">
+              <p class="section-number">09 / INDICADORES</p>
+              <h2 id="indicators-title">Señales para reconocer una página potencialmente fraudulenta</h2>
+              <div class="code-doc-grid">
+                <article><h3>1. Dominio o URL</h3><p>Variaciones, subdominios engañosos, IP directa o falta de coherencia con el servicio esperado.</p></article>
+                <article><h3>2. Urgencia</h3><p>Avisos de sesión expirada, bloqueo o pérdida de acceso que buscan reducir el análisis del usuario.</p></article>
+                <article><h3>3. Solicitud inesperada</h3><p>Petición de contraseña desde un mensaje o contexto que el usuario no inició.</p></article>
+                <article><h3>4. Inconsistencias visuales</h3><p>Errores de redacción, tipografía, alineación, iconos o colores que no coinciden con el portal habitual.</p></article>
+                <article><h3>5. Navegación limitada</h3><p>Enlaces secundarios, ayuda, privacidad o recuperación que no funcionan o llevan al mismo formulario.</p></article>
+                <article><h3>6. Comportamiento del formulario</h3><p>Destino, método o parámetros inusuales observables mediante herramientas de desarrollo.</p></article>
+                <article><h3>7. Contexto y canal</h3><p>Mensaje no solicitado, remitente inconsistente o enlace distinto al que se muestra.</p></article>
+                <article><h3>Limitación</h3><p>Ningún indicador aislado confirma fraude: los atacantes pueden usar HTTPS y copiar una interfaz con precisión. Deben evaluarse varias señales.</p></article>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="controls-title">
+              <p class="section-number">10 / CONTROLES</p>
+              <h2 id="controls-title">Medidas preventivas y de reducción de impacto</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">1</span><div><strong>MFA resistente al phishing</strong><p>Passkeys o FIDO2 reducen la utilidad de una contraseña robada. Su límite es que requiere compatibilidad, enrolamiento y recuperación segura.</p></div></li>
+                <li><span aria-hidden="true">2</span><div><strong>Gestor de contraseñas</strong><p>El autocompletado vinculado al dominio puede alertar ante una URL distinta. No protege si el usuario copia manualmente la clave.</p></div></li>
+                <li><span aria-hidden="true">3</span><div><strong>Filtrado de correo y navegación</strong><p>Bloquea remitentes, enlaces o dominios conocidos. Puede fallar frente a infraestructura nueva y generar falsos positivos.</p></div></li>
+                <li><span aria-hidden="true">4</span><div><strong>DMARC, DKIM y SPF</strong><p>Ayudan a autenticar el dominio remitente. No impiden mensajes enviados desde dominios parecidos o cuentas comprometidas.</p></div></li>
+                <li><span aria-hidden="true">5</span><div><strong>Capacitación y canal de reporte</strong><p>Mejora la detección y la respuesta temprana. Necesita ejercicios periódicos y una cultura sin castigos por reportar.</p></div></li>
+                <li><span aria-hidden="true">6</span><div><strong>Monitoreo y respuesta</strong><p>Detecta accesos anómalos, revoca sesiones y restablece credenciales. Actúa después del intento y requiere telemetría útil.</p></div></li>
+                <li><span aria-hidden="true">7</span><div><strong>Mínimo privilegio y segmentación</strong><p>Limita el alcance de una cuenta comprometida. No evita por sí sola la captura inicial y exige mantenimiento continuo.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="downloads-title">
+              <p class="section-number">11 / ARCHIVOS ENTREGABLES</p>
+              <h2 id="downloads-title">Reporte y documentos de consulta</h2>
+              <div class="evidence-file-grid" aria-label="Archivos descargables de la actividad">
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/actividad-04/Actividad04_Reporte_Juan_Francisco_Ortega.pdf" target="_blank" rel="noopener"><span>REPORTE PDF · 31 PÁGINAS</span><strong>Abrir informe final ↗</strong></a>
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/actividad-04/Actividad04_Reporte_Juan_Francisco_Ortega.docx" download><span>DOCUMENTO WORD</span><strong>Descargar versión editable</strong></a>
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/actividad-04/Actividad04_Consigna.pdf" target="_blank" rel="noopener"><span>CONSIGNA OFICIAL</span><strong>Consultar actividad y rúbrica ↗</strong></a>
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/actividad-04/flujo-captura.png" target="_blank" rel="noopener"><span>DIAGRAMA TÉCNICO</span><strong>Abrir flujo de captura ↗</strong></a>
+              </div>
+              <div class="security-note"><strong>Publicación responsable:</strong> el portafolio contiene únicamente documentación académica. No incluye el portal funcional, el servidor, archivos de configuración, logs ni reportes XML reutilizables.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="rubric-title">
+              <p class="section-number">12 / CUMPLIMIENTO</p>
+              <h2 id="rubric-title">Correspondencia con la rúbrica</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Configuración y ejecución de SET</strong><p>El informe demuestra ejecución completa, registro local, persistencia y restauración del laboratorio.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Evidencias de la práctica</strong><p>Treinta capturas claras y ordenadas comprueban cada etapa, incluidos errores y correcciones.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Análisis del funcionamiento</strong><p>Se explica formulario → HTTP POST → servidor SET → parámetros → archivos y se distingue captura de descifrado.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Indicadores y controles</strong><p>Se justifican siete indicadores y siete controles, con sus alcances y limitaciones.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Reporte, diagrama y conclusión</strong><p>El PDF incluye todas las secciones solicitadas, flujo técnico, conclusión personal y referencias.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="reflection-title">
+              <p class="section-number">13 / CONCLUSIÓN</p>
+              <h2 id="reflection-title">Aprendizaje obtenido</h2>
+              <p>La práctica mostró que la apariencia no demuestra legitimidad: una página puede parecer institucional y, aun así, enviar los datos a un servidor distinto. La evidencia de red fue decisiva para relacionar la acción visible con la petición HTTP y los archivos de SET. También reforzó la importancia de trabajar con autorización, datos ficticios, alcance local, cierre comprobable y controles preventivos que no dependan solamente de la atención del usuario.</p>
+            </section>
+          </div>
+
+          <aside class="detail-aside reveal" aria-labelledby="technical-record-title">
+            <p class="section-number">FICHA TÉCNICA</p>
+            <h2 id="technical-record-title">Datos de control</h2>
+            <ul>
+              <li><strong>Alumno:</strong> Juan Francisco Ortega Jiménez.</li><li><strong>Matrícula:</strong> 184918.</li><li><strong>Materia:</strong> CNO IV – Seguridad Informática.</li><li><strong>Docente:</strong> Mtro. Servando López Contreras.</li><li><strong>Institución:</strong> Universidad Politécnica de San Luis Potosí.</li><li><strong>Herramienta:</strong> SET 8.1.3.</li><li><strong>Módulo:</strong> Credential Harvester.</li><li><strong>Servidor:</strong> Kali Linux.</li><li><strong>Dirección:</strong> 127.0.0.1.</li><li><strong>Protocolo:</strong> HTTP, puerto 80.</li><li><strong>Datos:</strong> exclusivamente ficticios.</li><li><strong>Estado final:</strong> servicio detenido y configuración restaurada.</li>
+            </ul>
+            <a class="button button-primary detail-cta" href="#report-title">Ver reporte</a>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer"><div class="container footer-grid"><div><strong>JFOJ // P01-A04</strong><p>CNO IV – Seguridad Informática</p></div><nav aria-label="Navegación secundaria"><a href="../../index.html">Inicio</a><a href="../../index.html#evidencias">Evidencias</a></nav><p class="copyright">© <span id="current-year">2026</span> Juan Francisco Ortega Jiménez.</p></div></footer>
+  </body>
+</html>
