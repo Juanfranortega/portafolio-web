@@ -26,19 +26,22 @@ portafolio-web/
 ├── 404.html
 ├── README.md
 ├── GUIA_EVIDENCIAS.md
+├── INSTRUCCIONES_GITHUB_ACTIVIDAD04.md
 ├── RUBRICA.md
 ├── evidencias/
 │   └── parcial-1/
 │       ├── actividad-01.html
 │       ├── actividad-02.html
-│       └── actividad-03.html
+│       ├── actividad-03.html
+│       └── actividad-04.html
 ├── site.webmanifest
 └── assets/
     ├── css/styles.css
     ├── evidencias/parcial-1/
     │   ├── actividad-01/
     │   ├── actividad-02/
-    │   └── actividad-03/
+    │   ├── actividad-03/
+    │   └── actividad-04/
     ├── img/favicon.svg
     └── js/main.js
 ```
@@ -57,11 +60,13 @@ Las animaciones se implementan con transiciones y `@keyframes` de CSS, junto con
 
 ## Organización de evidencias
 
-- **Primer parcial:** tres actividades registradas. La Actividad 01 está documentada y las Actividades 02 y 03 tienen plantillas listas para completar con información real.
+- **Primer parcial:** cuatro actividades registradas. Las Actividades 01, 03 y 04 están documentadas; la Actividad 02 conserva su plantilla pendiente de datos.
 - **Segundo parcial:** apartado reservado para futuras actividades.
 - **Tercer parcial:** apartado reservado para actividades finales y conclusiones.
 
 Consultar `GUIA_EVIDENCIAS.md` para conocer la ubicación de archivos, el formato recomendado y los pasos de actualización.
+
+La Actividad 04 incluye un informe profesional de 31 páginas, su versión editable, la consigna original, un diagrama técnico y 30 capturas ordenadas. Por seguridad, el sitio publica documentación académica y no componentes funcionales del laboratorio.
 
 ## Configuración obligatoria del formulario
 

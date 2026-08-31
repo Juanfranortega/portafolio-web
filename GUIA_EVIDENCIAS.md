@@ -1,6 +1,6 @@
 # Guía para agregar evidencias por parcial
 
-El portafolio divide las evidencias en **tres parciales**. El primer parcial ya contiene páginas independientes para las Actividades 01, 02 y 03; los parciales 2 y 3 quedan reservados hasta que existan nuevas actividades.
+El portafolio divide las evidencias en **tres parciales**. El primer parcial ya contiene páginas independientes para las Actividades 01, 02, 03 y 04; los parciales 2 y 3 quedan reservados hasta que existan nuevas actividades.
 
 ## Contenido mínimo de cada actividad
 
@@ -24,7 +24,8 @@ assets/evidencias/
 └── parcial-1/
     ├── actividad-01/
     ├── actividad-02/
-    └── actividad-03/
+    ├── actividad-03/
+    └── actividad-04/
 ```
 
 Ejemplos de nombres recomendados:
@@ -57,6 +58,17 @@ En `evidencias/parcial-1/actividad-02.html`, por ejemplo:
 
 Después se sustituye el título genérico y el estado de la tarjeta correspondiente en `index.html`.
 
+## Evidencia disponible de la Actividad 04
+
+La página `evidencias/parcial-1/actividad-04.html` enlaza los siguientes recursos:
+
+- reporte final en PDF y DOCX;
+- consigna oficial en PDF;
+- diagrama del flujo de captura;
+- 30 capturas con nombres consecutivos y descriptivos.
+
+El repositorio conserva únicamente documentación. No deben publicarse el portal funcional, archivos de configuración de SET, logs de captura ni reportes XML reutilizables.
+
 ## Cómo actualizar GitHub desde el navegador
 
 1. Abrir el repositorio `Juanfranortega/portafolio-web`.
@@ -65,6 +77,8 @@ Después se sustituye el título genérico y el estado de la tarjeta correspondi
 4. Escribir un mensaje claro, por ejemplo: `docs: agregar evidencia de actividad 02`.
 5. Presionar **Commit changes**.
 6. Esperar la publicación y comprobar la actividad desde la URL pública.
+
+Para actualizar específicamente la Actividad 04 mediante Git, consultar `INSTRUCCIONES_GITHUB_ACTIVIDAD04.md`.
 
 ## Revisión después de publicar
 
