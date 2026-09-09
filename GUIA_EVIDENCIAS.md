@@ -1,6 +1,6 @@
 # Guía para agregar evidencias por parcial
 
-El portafolio divide las evidencias en **tres parciales**. El primer parcial ya contiene páginas independientes para las Actividades 01, 02, 03 y 04; los parciales 2 y 3 quedan reservados hasta que existan nuevas actividades.
+El portafolio divide las evidencias en **tres parciales**. El primer parcial ya contiene páginas independientes para las Actividades 01, 02, 03, 04 y 05; los parciales 2 y 3 quedan reservados hasta que existan nuevas actividades.
 
 ## Contenido mínimo de cada actividad
 
@@ -25,7 +25,8 @@ assets/evidencias/
     ├── actividad-01/
     ├── actividad-02/
     ├── actividad-03/
-    └── actividad-04/
+    ├── actividad-04/
+    └── actividad-05/
 ```
 
 Ejemplos de nombres recomendados:
@@ -68,6 +69,26 @@ La página `evidencias/parcial-1/actividad-04.html` enlaza los siguientes recurs
 - 30 capturas con nombres consecutivos y descriptivos.
 
 El repositorio conserva únicamente documentación. No deben publicarse el portal funcional, archivos de configuración de SET, logs de captura ni reportes XML reutilizables.
+
+## Evidencia disponible de la Actividad 02
+
+La página `evidencias/parcial-1/actividad-02.html` contiene el caso de estudio del ciberataque a PEMEX en 2019. Incluye:
+
+- reporte completo de 11 páginas;
+- línea de tiempo;
+- caracterización técnica del ataque;
+- evaluación mediante el modelo CIA;
+- ejercicio académico de estimación de costos;
+- reflexión y recomendaciones.
+
+## Evidencia disponible de la Actividad 05
+
+La página `evidencias/parcial-1/actividad-05.html` documenta el avance del walkthrough de Snakeoil e incorpora 15 capturas ordenadas. Solo quedan pendientes:
+
+1. adjuntar el reporte final en PDF;
+2. subir y enlazar el video walkthrough.
+
+Las instrucciones exactas para cerrar ambos puntos se encuentran en `PENDIENTES_ENTREGA.md`.
 
 ## Cómo actualizar GitHub desde el navegador
 

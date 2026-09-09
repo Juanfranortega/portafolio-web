@@ -111,10 +111,10 @@ git push
 - [ ] La URL comienza con `https://`.
 - [ ] El sitio carga en computadora y celular.
 - [ ] El encabezado muestra nombre, alias, materia, institución y periodo.
-- [ ] El menú lleva correctamente a cada sección.
+- [ ] El menú lleva a Inicio, Notas, Road to Hall of Fame, Proyectos, Herramientas y Certificados.
 - [ ] La presentación explica propósito, enfoque e importancia.
 - [ ] El perfil incluye semblanza e intereses.
-- [ ] La sección técnica menciona HTML, CSS, JavaScript, Git y GitHub Pages.
+- [ ] Herramientas describe el laboratorio y también HTML, CSS, JavaScript, Git y GitHub Pages.
 - [ ] Los apartados de los siguientes parciales están preparados.
 - [ ] Cada actividad del primer parcial abre su página individual.
 - [ ] Los archivos de evidencia se abren sin errores 404.
@@ -130,7 +130,7 @@ git push
 Guardar estas capturas por si el profesor las solicita:
 
 1. Inicio completo con la barra de dirección mostrando HTTPS.
-2. Secciones Perfil, Evidencias e Información técnica.
+2. Secciones Perfil, Road to Hall of Fame y Herramientas.
 3. Formulario de contacto.
 4. Correo recibido por el dueño.
 5. Respuesta automática recibida por el visitante.

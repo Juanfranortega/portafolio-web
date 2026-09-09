@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es-MX" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Actividad 05 - Walkthrough de Snakeoil en un laboratorio aislado: configuración, descubrimiento, escaneo de servicios y enumeración web documentada.">
+    <meta name="author" content="Juan Francisco Ortega Jiménez">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="color-scheme" content="dark light">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <title>Actividad 05 - Walkthrough Snakeoil | Portafolio JFOJ</title>
+    <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <script src="../../assets/js/main.js" defer></script>
+  </head>
+  <body class="evidence-detail-body">
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+    <header class="detail-header">
+      <div class="container">
+        <a class="brand" href="../../index.html#inicio" aria-label="Volver al inicio del portafolio">
+          <span class="brand-mark" aria-hidden="true">JF</span>
+          <span class="brand-copy"><strong>Juan F. Ortega</strong><small>Evidencia académica</small></span>
+        </a>
+        <div class="detail-header-actions">
+          <a class="button button-secondary" href="../../index.html#evidencias"><span aria-hidden="true">←</span> Volver a la ruta</a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema de color" aria-pressed="true"><span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span><span class="theme-icon theme-icon-light" aria-hidden="true">☀</span></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="detail-main" id="contenido">
+      <section class="detail-hero" data-activity="05" aria-labelledby="activity-title">
+        <div class="container reveal">
+          <nav class="detail-breadcrumb" aria-label="Ruta de navegación"><a href="../../index.html">Portafolio</a><span>/</span><a href="../../index.html#evidencias">Road to Hall of Fame</a><span>/</span><span aria-current="page">Actividad 05</span></nav>
+          <p class="eyebrow"><span></span> Parcial 01 · Actividad 05</p>
+          <h1 id="activity-title">Walkthrough en acción Snakeoil</h1>
+          <p class="detail-lead">Evaluación progresiva de la máquina virtual vulnerable <code>digitalworld.local</code>, desde el aislamiento del laboratorio hasta el reconocimiento de servicios y la enumeración inicial de la aplicación web.</p>
+          <ul class="detail-metadata" aria-label="Datos de la actividad"><li>Página: integrada</li><li>Fecha: 08/09/2026</li><li>Entorno: VirtualBox aislado</li><li>Reporte y video: pendientes</li></ul>
+        </div>
+      </section>
+
+      <div class="container detail-content">
+        <div class="detail-layout">
+          <div class="detail-sections">
+            <section class="detail-section reveal" aria-labelledby="objective-title">
+              <p class="section-number">01 / OBJETIVO</p>
+              <h2 id="objective-title">Documentar una evaluación reproducible y controlada</h2>
+              <p>El propósito es aplicar un flujo ordenado de reconocimiento sobre una máquina diseñada para prácticas educativas. La evidencia identifica el objetivo, registra los servicios expuestos, examina el contenido web y conserva los resultados necesarios para continuar el análisis sin salir del entorno autorizado.</p>
+              <div class="security-note"><strong>Alcance autorizado:</strong> Kali Linux y Snakeoil se ejecutaron en VirtualBox mediante una red privada solo-anfitrión. El objetivo pertenece al laboratorio local y no se expuso a Internet.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="method-title">
+              <p class="section-number">02 / METODOLOGÍA</p>
+              <h2 id="method-title">Secuencia de trabajo aplicada</h2>
+              <ol class="implementation-flow">
+                <li><strong>Preparación:</strong> importación de la máquina y verificación del adaptador de red aislado.</li>
+                <li><strong>Identificación:</strong> revisión de interfaces y descubrimiento del host dentro del segmento privado.</li>
+                <li><strong>Escaneo:</strong> enumeración completa de puertos TCP y reconocimiento de versiones y scripts básicos.</li>
+                <li><strong>Reconocimiento web:</strong> revisión de las aplicaciones publicadas en los puertos 80 y 8080.</li>
+                <li><strong>Enumeración:</strong> comprobación de rutas, respuestas HTTP y métodos permitidos sin alterar información.</li>
+                <li><strong>Registro:</strong> conservación de comandos, resultados e interpretación para el reporte y el video final.</li>
+              </ol>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="findings-title">
+              <p class="section-number">03 / HALLAZGOS ACTUALES</p>
+              <h2 id="findings-title">Superficie identificada</h2>
+              <div class="code-doc-grid">
+                <article><h3>Objetivo</h3><p><code>digitalworld.local</code> fue identificado en la dirección privada <code>192.168.56.103</code>.</p></article>
+                <article><h3>Puerto 22</h3><p>Servicio SSH disponible. La evidencia se limita a identificación de versión y exposición.</p></article>
+                <article><h3>Puerto 80</h3><p>Página de bienvenida que confirma la configuración básica de Snakeoil.</p></article>
+                <article><h3>Puerto 8080</h3><p>Aplicación web Good Tech Inc.'s Snake Oil Project con publicaciones y rutas adicionales.</p></article>
+                <article><h3>Tecnología</h3><p>Una publicación menciona Flask y JSON Web Tokens mediante Flask-JWT-Extended.</p></article>
+                <article><h3>Rutas revisadas</h3><p>Se documentaron respuestas de <code>/users</code>, <code>/create</code>, <code>/registration</code>, <code>/test</code>, <code>/secret</code>, <code>/login</code> y <code>/run</code>.</p></article>
+              </div>
+              <div class="security-note"><strong>Interpretación:</strong> una ruta visible o una respuesta HTTP no demuestra por sí sola una vulnerabilidad. Cada observación requiere validación controlada antes de convertirse en hallazgo.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="progress-title">
+              <p class="section-number">04 / AVANCE DOCUMENTADO</p>
+              <h2 id="progress-title">Estado del walkthrough</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Laboratorio configurado</strong><p>Máquinas importadas, red solo-anfitrión comprobada y objetivo aislado.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Host y servicios identificados</strong><p>Descubrimiento del objetivo y escaneo de los 65,535 puertos TCP.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Aplicaciones web reconocidas</strong><p>Contenido de los puertos 80 y 8080 revisado y documentado.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Enumeración inicial terminada</strong><p>Rutas, códigos de respuesta y métodos permitidos registrados sin modificar datos.</p></div></li>
+                <li><span aria-hidden="true">→</span><div><strong>Análisis en continuación</strong><p>Las siguientes pruebas deberán conservar el mismo alcance, evidencia y criterio de validación.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="evidence-title">
+              <p class="section-number">05 / EVIDENCIAS</p>
+              <h2 id="evidence-title">Configuración, descubrimiento y enumeración</h2>
+              <p>Las capturas conservan el recorrido realizado hasta el avance actual. Cada imagen se puede abrir en tamaño completo.</p>
+              <div class="evidence-gallery">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/01-inicio-maquina.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/01-inicio-maquina.webp" alt="Pantalla de inicio de la máquina Snakeoil en VirtualBox" loading="lazy"></a><figcaption>01 · Inicio correcto de la máquina virtual.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/02-identificacion-kali.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/02-identificacion-kali.webp" alt="Terminal de Kali mostrando sus interfaces de red" loading="lazy"></a><figcaption>02 · Identificación de la estación Kali.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/03-descubrimiento-host.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/03-descubrimiento-host.webp" alt="Terminal con el descubrimiento del host Snakeoil en la red privada" loading="lazy"></a><figcaption>03 · Descubrimiento de <code>192.168.56.103</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/04-escaneo-puertos.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/04-escaneo-puertos.webp" alt="Resultado del escaneo completo de puertos y servicios" loading="lazy"></a><figcaption>04 · Puertos 22, 80 y 8080 identificados.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/05-servicio-http-80.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/05-servicio-http-80.webp" alt="Página de bienvenida del servicio HTTP del puerto 80" loading="lazy"></a><figcaption>05 · Servicio HTTP del puerto 80.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/06-aplicacion-web-8080.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/06-aplicacion-web-8080.webp" alt="Aplicación Good Tech Inc.'s Snake Oil Project en el puerto 8080" loading="lazy"></a><figcaption>06 · Aplicación principal del puerto 8080.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/07-ruta-about.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/07-ruta-about.webp" alt="Contenido de la ruta About de la aplicación Snakeoil" loading="lazy"></a><figcaption>07 · Recurso informativo About.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/08-ruta-house-rules.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/08-ruta-house-rules.webp" alt="Publicación House Rules dentro de la aplicación Snakeoil" loading="lazy"></a><figcaption>08 · Publicación House Rules.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/09-ruta-useful-links.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/09-ruta-useful-links.webp" alt="Publicación Useful Links con referencias a Flask y JSON Web Tokens" loading="lazy"></a><figcaption>09 · Pista tecnológica sobre Flask y JWT.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/10-identificador-ausente.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/10-identificador-ausente.webp" alt="Terminal comprobando un identificador de recurso inexistente" loading="lazy"></a><figcaption>10 · Comportamiento ante un recurso ausente.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/11-enumeracion-automatica.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/11-enumeracion-automatica.webp" alt="Terminal mostrando resultados de enumeración automática de rutas" loading="lazy"></a><figcaption>11 · Enumeración automática de contenido.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/12-exposicion-users.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/12-exposicion-users.webp" alt="Terminal mostrando la respuesta observada en la ruta users" loading="lazy"></a><figcaption>12 · Respuesta observada en <code>/users</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/13-rutas-create-registration.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/13-rutas-create-registration.webp" alt="Terminal revisando las rutas create y registration" loading="lazy"></a><figcaption>13 · Revisión de <code>/create</code> y <code>/registration</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/14-respuestas-test-secret.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/14-respuestas-test-secret.webp" alt="Terminal comparando las respuestas de las rutas test y secret" loading="lazy"></a><figcaption>14 · Respuestas de <code>/test</code> y <code>/secret</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-05/15-metodos-login-run.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-05/15-metodos-login-run.webp" alt="Terminal consultando los métodos HTTP permitidos en login y run" loading="lazy"></a><figcaption>15 · Métodos permitidos en <code>/login</code> y <code>/run</code>.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="pending-title">
+              <p class="section-number">06 / PENDIENTES DE ENTREGA</p>
+              <h2 id="pending-title">Dos archivos por integrar</h2>
+              <p>La página y las capturas ya están incorporadas. Estos bloques permanecerán desactivados hasta contar con las versiones definitivas, evitando enlaces vacíos o errores 404.</p>
+              <div class="evidence-file-grid" aria-label="Archivos pendientes de la actividad">
+                <div class="evidence-file pending-file" aria-disabled="true"><span>REPORTE FINAL PDF</span><strong>Pendiente de adjuntar</strong><small>Se habilitará al terminar el walkthrough.</small></div>
+                <div class="evidence-file pending-file" aria-disabled="true"><span>VIDEO WALKTHROUGH</span><strong>Pendiente de subir y enlazar</strong><small>Se agregará la liga de reproducción final.</small></div>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="reflection-title">
+              <p class="section-number">07 / REFLEXIÓN</p>
+              <h2 id="reflection-title">Aprendizaje del avance</h2>
+              <p>El recorrido mostró la importancia de avanzar por etapas y separar observación de comprobación. Descubrir una ruta, una tecnología o una respuesta distinta sirve para orientar la investigación, pero no autoriza conclusiones sin evidencia adicional. Registrar cada comando y conservar el laboratorio aislado permite continuar de manera ordenada y reproducible.</p>
+            </section>
+          </div>
+
+          <aside class="detail-aside reveal" aria-labelledby="technical-record-title">
+            <p class="section-number">FICHA TÉCNICA</p>
+            <h2 id="technical-record-title">Datos de control</h2>
+            <ul>
+              <li><strong>Alumno:</strong> Juan Francisco Ortega Jiménez.</li>
+              <li><strong>Matrícula:</strong> 184918.</li>
+              <li><strong>Materia:</strong> CNO IV - Seguridad Informática.</li>
+              <li><strong>Docente:</strong> Mtro. Servando López Contreras.</li>
+              <li><strong>Institución:</strong> Universidad Politécnica de San Luis Potosí.</li>
+              <li><strong>Estación de análisis:</strong> Kali Linux.</li>
+              <li><strong>Objetivo:</strong> digitalworld.local.</li>
+              <li><strong>Dirección:</strong> 192.168.56.103.</li>
+              <li><strong>Virtualización:</strong> VirtualBox.</li>
+              <li><strong>Red:</strong> solo-anfitrión.</li>
+              <li><strong>Puertos:</strong> 22, 80 y 8080.</li>
+              <li><strong>Alcance:</strong> laboratorio autorizado.</li>
+            </ul>
+            <a class="button button-primary detail-cta" href="#evidence-title">Ver evidencias</a>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer"><div class="container footer-grid"><div><strong>JFOJ // P01-A05</strong><p>CNO IV - Seguridad Informática</p></div><nav aria-label="Navegación secundaria"><a href="../../index.html">Inicio</a><a href="../../index.html#evidencias">Road to Hall of Fame</a></nav><p class="copyright">© <span id="current-year">2026</span> Juan Francisco Ortega Jiménez.</p></div></footer>
+  </body>
+</html>

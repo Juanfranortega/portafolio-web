@@ -6,6 +6,8 @@ Portafolio digital de **Juan Francisco Ortega Jiménez (JFOJ)**, estudiante de s
 
 El portafolio reúne actividades, análisis, prácticas y conclusiones relacionadas con seguridad informática, análisis de vulnerabilidades y pruebas de penetración realizadas en entornos controlados y autorizados. Cada evidencia deberá mostrar el resultado, el procedimiento, las herramientas utilizadas, los hallazgos y la reflexión obtenida.
 
+La navegación principal incluye **Inicio, Notas, Road to Hall of Fame, Proyectos, Herramientas y Certificados**. El perfil académico y el formulario de contacto complementan la página de inicio.
+
 ## Información técnica del portafolio
 
 - **HTML5:** estructura semántica del encabezado, navegación, secciones, formulario y pie de página.
@@ -26,6 +28,7 @@ portafolio-web/
 ├── 404.html
 ├── README.md
 ├── GUIA_EVIDENCIAS.md
+├── PENDIENTES_ENTREGA.md
 ├── INSTRUCCIONES_GITHUB_ACTIVIDAD04.md
 ├── RUBRICA.md
 ├── evidencias/
@@ -33,7 +36,8 @@ portafolio-web/
 │       ├── actividad-01.html
 │       ├── actividad-02.html
 │       ├── actividad-03.html
-│       └── actividad-04.html
+│       ├── actividad-04.html
+│       └── actividad-05.html
 ├── site.webmanifest
 └── assets/
     ├── css/styles.css
@@ -41,7 +45,8 @@ portafolio-web/
     │   ├── actividad-01/
     │   ├── actividad-02/
     │   ├── actividad-03/
-    │   └── actividad-04/
+    │   ├── actividad-04/
+    │   └── actividad-05/
     ├── img/favicon.svg
     └── js/main.js
 ```
@@ -60,13 +65,15 @@ Las animaciones se implementan con transiciones y `@keyframes` de CSS, junto con
 
 ## Organización de evidencias
 
-- **Primer parcial:** cuatro actividades registradas. Las Actividades 01, 03 y 04 están documentadas; la Actividad 02 conserva su plantilla pendiente de datos.
+- **Primer parcial:** cinco actividades registradas. Las Actividades 01 a 04 están documentadas y la Actividad 05 publica el avance completo disponible de Snakeoil.
 - **Segundo parcial:** apartado reservado para futuras actividades.
 - **Tercer parcial:** apartado reservado para actividades finales y conclusiones.
 
 Consultar `GUIA_EVIDENCIAS.md` para conocer la ubicación de archivos, el formato recomendado y los pasos de actualización.
 
 La Actividad 04 incluye un informe profesional de 31 páginas, su versión editable, la consigna original, un diagrama técnico y 30 capturas ordenadas. Por seguridad, el sitio publica documentación académica y no componentes funcionales del laboratorio.
+
+La Actividad 02 integra el caso de estudio del ciberataque a PEMEX en 2019, con reporte, línea de tiempo, análisis técnico, modelo CIA y estimación del impacto. La Actividad 05 incorpora 15 capturas del laboratorio Snakeoil; únicamente quedan pendientes su reporte final en PDF y el enlace del video walkthrough, detallados en `PENDIENTES_ENTREGA.md`.
 
 ## Configuración obligatoria del formulario
 
