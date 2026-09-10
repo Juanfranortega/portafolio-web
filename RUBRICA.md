@@ -3,7 +3,7 @@
 | No. | Criterio | Implementación | Evidencia antes de entregar |
 |---:|---|---|---|
 | 1 | Publicación y accesibilidad | Preparado para GitHub Pages, recursos relativos y HTTPS. | Abrir la URL pública en incógnito y confirmar el candado. |
-| 2 | Estructura general | Encabezado, navegación, contenido principal por secciones, tres parciales, fichas individuales y pie de página. | Recorrer Inicio, Notas, Road to Hall of Fame, Proyectos, Herramientas, Certificados y las cinco actividades. |
+| 2 | Estructura general | Encabezado, navegación, contenido principal por secciones, tres parciales, fichas individuales y pie de página. | Recorrer Inicio, Notas, Road to Hall of Fame, Proyectos, Herramientas, Certificados, las cuatro actividades y PR01. |
 | 3 | Contenido de Inicio | Presentación, perfil, identidad, estructura por parciales e información técnica completa. | Comparar visualmente contra la consigna. |
 | 4 | Claridad y redacción | Texto académico breve, técnico y organizado mediante títulos semánticos. | Revisión ortográfica final. |
 | 5 | Identidad académica | Nombre, alias, asignatura, institución, periodo y propósito visibles. | Confirmar que los datos personales sean correctos. |
@@ -11,7 +11,7 @@
 | 7 | Documentación técnica | Herramientas diferencia el entorno de laboratorio de HTML, CSS, JavaScript, Git y GitHub Pages; el README explica el flujo general. | Mostrar Herramientas, `README.md` y `GUIA_EVIDENCIAS.md`. |
 | 8 | Diseño e innovación | Identidad tipo expediente digital de ciberseguridad, tema dual, composición editorial y animaciones accesibles. | Revisar contraste, legibilidad, originalidad y preferencia de movimiento reducido. |
 | 9 | Orden profesional | Componentes consistentes, jerarquía tipográfica, retícula, espaciado y diseño adaptable. | Revisar 360 px, tableta y escritorio. |
-| 10 | Cumplimiento | Tres parciales estructurados, cinco fichas del primer parcial y formulario configurado con correo y autorespuesta. | Confirmar la activación, hacer dos pruebas y entregar en fecha y formato. |
+| 10 | Cumplimiento | Tres parciales estructurados, cuatro fichas de actividades, una ficha independiente de PR01 y formulario configurado con correo y autorespuesta. | Confirmar la activación, hacer dos pruebas y entregar en fecha y formato. |
 
 ## Componentes obligatorios de Inicio
 
@@ -40,4 +40,4 @@
 - [x] Pie de página.
 - [x] URL pública verificada con HTTPS.
 
-Los únicos archivos pendientes de la Actividad 05 son el reporte final de Snakeoil y el enlace del video walkthrough. Ambos están señalados sin enlaces rotos en la página correspondiente.
+Los únicos archivos pendientes del proyecto PR01 son el reporte final de SNAKEOIL y el enlace del video walkthrough. Ambos están señalados sin enlaces rotos en la página correspondiente.

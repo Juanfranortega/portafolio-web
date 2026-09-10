@@ -37,7 +37,9 @@ portafolio-web/
 │       ├── actividad-02.html
 │       ├── actividad-03.html
 │       ├── actividad-04.html
-│       └── actividad-05.html
+│       └── actividad-05.html  # URL estable del proyecto PR01
+├── proyectos/
+│   └── pr01.html             # acceso alterno que dirige al proyecto
 ├── site.webmanifest
 └── assets/
     ├── css/styles.css
@@ -65,15 +67,16 @@ Las animaciones se implementan con transiciones y `@keyframes` de CSS, junto con
 
 ## Organización de evidencias
 
-- **Primer parcial:** cinco actividades registradas. Las Actividades 01 a 04 están documentadas y la Actividad 05 publica el avance completo disponible de Snakeoil.
+- **Primer parcial:** cuatro actividades registradas y el proyecto independiente PR01.
 - **Segundo parcial:** apartado reservado para futuras actividades.
 - **Tercer parcial:** apartado reservado para actividades finales y conclusiones.
+- **Road to Hall of Fame:** ruta visual con 18 estaciones numeradas. Actualmente muestra progreso 0/18, sin evidencias ficticias; cada laboratorio se completará cuando exista su material y el botón del PDF permanece desactivado hasta contar con el documento final.
 
 Consultar `GUIA_EVIDENCIAS.md` para conocer la ubicación de archivos, el formato recomendado y los pasos de actualización.
 
 La Actividad 04 incluye un informe profesional de 31 páginas, su versión editable, la consigna original, un diagrama técnico y 30 capturas ordenadas. Por seguridad, el sitio publica documentación académica y no componentes funcionales del laboratorio.
 
-La Actividad 02 integra el caso de estudio del ciberataque a PEMEX en 2019, con reporte, línea de tiempo, análisis técnico, modelo CIA y estimación del impacto. La Actividad 05 incorpora 15 capturas del laboratorio Snakeoil; únicamente quedan pendientes su reporte final en PDF y el enlace del video walkthrough, detallados en `PENDIENTES_ENTREGA.md`.
+La Actividad 02 integra el caso de estudio del ciberataque a PEMEX en 2019, con reporte, línea de tiempo, análisis técnico, modelo CIA y estimación del impacto. El proyecto PR01 incorpora el walkthrough técnico de SNAKEOIL y 15 capturas del laboratorio; únicamente quedan pendientes su reporte final en PDF y el enlace del video, detallados en `PENDIENTES_ENTREGA.md`.
 
 ## Configuración obligatoria del formulario
 

@@ -92,7 +92,7 @@ https://juanfranortega.github.io/portafolio-web/assets/evidencias/parcial-1/acti
 
 Comprobar que:
 
-- la portada indique cinco actividades;
+- la portada indique cuatro actividades y el proyecto PR01;
 - la tarjeta A04 abra la página correcta;
 - el reporte PDF se visualice y se descargue;
 - las 30 capturas se abran sin error 404;

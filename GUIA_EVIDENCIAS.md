@@ -81,9 +81,9 @@ La página `evidencias/parcial-1/actividad-02.html` contiene el caso de estudio 
 - ejercicio académico de estimación de costos;
 - reflexión y recomendaciones.
 
-## Evidencia disponible de la Actividad 05
+## Evidencia disponible del proyecto PR01
 
-La página `evidencias/parcial-1/actividad-05.html` documenta el avance del walkthrough de Snakeoil e incorpora 15 capturas ordenadas. Solo quedan pendientes:
+La página `evidencias/parcial-1/actividad-05.html` conserva el URL público del proyecto PR01, documenta el walkthrough de SNAKEOIL e incorpora 15 capturas ordenadas. Solo quedan pendientes:
 
 1. adjuntar el reporte final en PDF;
 2. subir y enlazar el video walkthrough.
