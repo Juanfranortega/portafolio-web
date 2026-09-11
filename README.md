@@ -37,9 +37,9 @@ portafolio-web/
 │       ├── actividad-02.html
 │       ├── actividad-03.html
 │       ├── actividad-04.html
-│       └── actividad-05.html  # URL estable del proyecto PR01
+│       └── actividad-05.html  # redirección compatible al proyecto PR01
 ├── proyectos/
-│   └── pr01.html             # acceso alterno que dirige al proyecto
+│   └── pr01.html             # página canónica del proyecto PR01
 ├── site.webmanifest
 └── assets/
     ├── css/styles.css
@@ -47,8 +47,9 @@ portafolio-web/
     │   ├── actividad-01/
     │   ├── actividad-02/
     │   ├── actividad-03/
-    │   ├── actividad-04/
-    │   └── actividad-05/
+    │   └── actividad-04/
+    ├── proyectos/
+    │   └── pr01/             # capturas, reporte PDF y versión DOCX
     ├── img/favicon.svg
     └── js/main.js
 ```
@@ -76,7 +77,7 @@ Consultar `GUIA_EVIDENCIAS.md` para conocer la ubicación de archivos, el format
 
 La Actividad 04 incluye un informe profesional de 31 páginas, su versión editable, la consigna original, un diagrama técnico y 30 capturas ordenadas. Por seguridad, el sitio publica documentación académica y no componentes funcionales del laboratorio.
 
-La Actividad 02 integra el caso de estudio del ciberataque a PEMEX en 2019, con reporte, línea de tiempo, análisis técnico, modelo CIA y estimación del impacto. El proyecto PR01 incorpora el walkthrough técnico de SNAKEOIL y 15 capturas del laboratorio; únicamente quedan pendientes su reporte final en PDF y el enlace del video, detallados en `PENDIENTES_ENTREGA.md`.
+La Actividad 02 integra el caso de estudio del ciberataque a PEMEX en 2019, con reporte, línea de tiempo, análisis técnico, modelo CIA y estimación del impacto. El proyecto **PR01 De la teoría a la práctica** incorpora el walkthrough técnico de SNAKEOIL, 15 capturas del laboratorio, el reporte técnico en PDF y DOCX, y el enlace institucional al video. La página canónica es `proyectos/pr01.html`; la dirección anterior conserva una redirección para evitar enlaces rotos.
 
 ## Configuración obligatoria del formulario
 

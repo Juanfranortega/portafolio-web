@@ -11,7 +11,7 @@
 | 7 | Documentación técnica | Herramientas diferencia el entorno de laboratorio de HTML, CSS, JavaScript, Git y GitHub Pages; el README explica el flujo general. | Mostrar Herramientas, `README.md` y `GUIA_EVIDENCIAS.md`. |
 | 8 | Diseño e innovación | Identidad tipo expediente digital de ciberseguridad, tema dual, composición editorial y animaciones accesibles. | Revisar contraste, legibilidad, originalidad y preferencia de movimiento reducido. |
 | 9 | Orden profesional | Componentes consistentes, jerarquía tipográfica, retícula, espaciado y diseño adaptable. | Revisar 360 px, tableta y escritorio. |
-| 10 | Cumplimiento | Tres parciales estructurados, cuatro fichas de actividades, una ficha independiente de PR01 y formulario configurado con correo y autorespuesta. | Confirmar la activación, hacer dos pruebas y entregar en fecha y formato. |
+| 10 | Cumplimiento | Tres parciales estructurados, cuatro fichas de actividades, una ficha independiente de PR01, reporte descargable, video enlazado y formulario configurado con correo y autorespuesta. | Confirmar la activación, probar los entregables y entregar en fecha y formato. |
 
 ## Componentes obligatorios de Inicio
 
@@ -31,7 +31,7 @@
 - [x] Control de versiones.
 - [x] Lógica general del sitio.
 - [x] Evidencias divididas en tres parciales.
-- [x] Cinco páginas individuales para las actividades del primer parcial.
+- [x] Cuatro páginas individuales de actividades y una página independiente para PR01.
 - [x] Animaciones accesibles documentadas.
 - [x] Formulario configurado con el correo real `twitchjfortnez@gmail.com`.
 - [x] Activación confirmada desde el correo.
@@ -40,4 +40,4 @@
 - [x] Pie de página.
 - [x] URL pública verificada con HTTPS.
 
-Los únicos archivos pendientes del proyecto PR01 son el reporte final de SNAKEOIL y el enlace del video walkthrough. Ambos están señalados sin enlaces rotos en la página correspondiente.
+El proyecto PR01 incluye su reporte técnico en PDF y DOCX, el enlace institucional al video walkthrough y una redirección compatible desde la dirección anterior. Las fases técnicas aún no ejecutadas permanecen identificadas como pendientes dentro del reporte.

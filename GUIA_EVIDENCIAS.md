@@ -1,6 +1,6 @@
 # Guía para agregar evidencias por parcial
 
-El portafolio divide las evidencias en **tres parciales**. El primer parcial ya contiene páginas independientes para las Actividades 01, 02, 03, 04 y 05; los parciales 2 y 3 quedan reservados hasta que existan nuevas actividades.
+El portafolio divide las evidencias en **tres parciales**. El primer parcial contiene páginas independientes para las Actividades 01, 02, 03 y 04, además del proyecto **PR01 De la teoría a la práctica**. Los parciales 2 y 3 quedan reservados hasta que existan nuevas actividades.
 
 ## Contenido mínimo de cada actividad
 
@@ -25,8 +25,15 @@ assets/evidencias/
     ├── actividad-01/
     ├── actividad-02/
     ├── actividad-03/
-    ├── actividad-04/
-    └── actividad-05/
+    └── actividad-04/
+
+assets/proyectos/
+└── pr01/
+    ├── 01-inicio-maquina.webp
+    ├── ...
+    ├── 15-metodos-login-run.webp
+    ├── PR01_Reporte_De_la_teoria_a_la_practica_SNAKEOIL.pdf
+    └── PR01_Reporte_De_la_teoria_a_la_practica_SNAKEOIL.docx
 ```
 
 Ejemplos de nombres recomendados:
@@ -83,12 +90,9 @@ La página `evidencias/parcial-1/actividad-02.html` contiene el caso de estudio 
 
 ## Evidencia disponible del proyecto PR01
 
-La página `evidencias/parcial-1/actividad-05.html` conserva el URL público del proyecto PR01, documenta el walkthrough de SNAKEOIL e incorpora 15 capturas ordenadas. Solo quedan pendientes:
+La página `proyectos/pr01.html` documenta el walkthrough de SNAKEOIL e incorpora 15 capturas ordenadas, el reporte técnico en PDF y DOCX, y el enlace institucional al video walkthrough. `evidencias/parcial-1/actividad-05.html` funciona únicamente como redirección compatible hacia la página canónica de PR01.
 
-1. adjuntar el reporte final en PDF;
-2. subir y enlazar el video walkthrough.
-
-Las instrucciones exactas para cerrar ambos puntos se encuentran en `PENDIENTES_ENTREGA.md`.
+Las fases técnicas todavía no realizadas se conservan como pendientes dentro del reporte; no se presentan como resultados completados.
 
 ## Cómo actualizar GitHub desde el navegador
 
