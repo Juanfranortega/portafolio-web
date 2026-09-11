@@ -3,22 +3,280 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Acceso al proyecto PR01 del portafolio de Juan Francisco Ortega Jiménez.">
-    <meta http-equiv="refresh" content="0; url=../evidencias/parcial-1/actividad-05.html">
-    <title>PR01 | Portafolio JFOJ</title>
-    <link rel="canonical" href="https://juanfranortega.github.io/portafolio-web/evidencias/parcial-1/actividad-05.html">
+    <meta name="description" content="PR01 - De la teoría a la práctica: walkthrough técnico de digitalworld.local SNAKEOIL en un laboratorio virtual aislado.">
+    <meta name="author" content="Juan Francisco Ortega Jiménez">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="color-scheme" content="dark light">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <title>PR01 - De la teoría a la práctica | Portafolio JFOJ</title>
+    <link rel="canonical" href="https://juanfranortega.github.io/portafolio-web/proyectos/pr01.html">
     <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="../assets/js/main.js" defer></script>
   </head>
   <body class="evidence-detail-body">
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+    <header class="detail-header">
+      <div class="container">
+        <a class="brand" href="../index.html#inicio" aria-label="Volver al inicio del portafolio">
+          <span class="brand-mark" aria-hidden="true">JF</span>
+          <span class="brand-copy"><strong>Juan F. Ortega</strong><small>Proyecto PR01</small></span>
+        </a>
+        <div class="detail-header-actions">
+          <a class="button button-secondary" href="../index.html#proyectos"><span aria-hidden="true">←</span> Volver a proyectos</a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema de color" aria-pressed="true"><span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span><span class="theme-icon theme-icon-light" aria-hidden="true">☀</span></button>
+        </div>
+      </div>
+    </header>
+
     <main class="detail-main" id="contenido">
       <section class="detail-hero" data-activity="PR01" aria-labelledby="project-title">
-        <div class="container">
-          <h1 id="project-title">PR01</h1>
-          <p class="detail-lead">Abriendo el proyecto completo.</p>
-          <a class="button button-primary" href="../evidencias/parcial-1/actividad-05.html">Continuar al proyecto</a>
+        <div class="container reveal">
+          <nav class="detail-breadcrumb" aria-label="Ruta de navegación"><a href="../index.html">Portafolio</a><span>/</span><a href="../index.html#proyectos">Proyectos</a><span>/</span><span aria-current="page">PR01</span></nav>
+          <p class="eyebrow"><span></span> Primer parcial · Proyecto PR01</p>
+          <h1 id="project-title">PR01 · De la teoría a la práctica</h1>
+          <p class="detail-lead">Walkthrough en acción de <code>digitalworld.local: SNAKEOIL</code>. Preparación del laboratorio, reconocimiento, enumeración, análisis técnico y documentación reproducible dentro de un entorno autorizado.</p>
+          <ul class="detail-metadata" aria-label="Datos principales del proyecto">
+            <li>Proyecto: PR01</li>
+            <li>Fecha: 08/09/2026</li>
+            <li>8 fases completas</li>
+            <li>Fase 9 en proceso</li>
+            <li>Reporte y video disponibles</li>
+          </ul>
+          <div class="detail-hero-actions" aria-label="Accesos principales del proyecto">
+            <a class="button button-primary" href="../assets/proyectos/pr01/PR01_Reporte_De_la_teoria_a_la_practica_SNAKEOIL.pdf" download>Descargar reporte PDF <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="https://upslpedu-my.sharepoint.com/:v:/g/personal/184918_upslp_edu_mx/IQB2DP0T89AKSZDgbnNwZk3eAbmFGycVLsiQbxvGjbF6LfQ?e=P4Ss9T&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank" rel="noopener noreferrer">Ver video walkthrough <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </section>
+
+      <div class="container detail-content">
+        <div class="detail-layout">
+          <div class="detail-sections">
+            <section class="detail-section reveal" aria-labelledby="summary-title">
+              <p class="section-number">01 / RESUMEN EJECUTIVO</p>
+              <h2 id="summary-title">Estado actual del walkthrough</h2>
+              <p>El proyecto aplica los conocimientos de seguridad informática a la evaluación controlada de una máquina virtual deliberadamente vulnerable. Kali Linux funciona como estación de análisis y SNAKEOIL como único objetivo autorizado; ambas máquinas operan dentro de una red privada de VirtualBox sin exposición a Internet.</p>
+              <p>Se completaron la preparación del laboratorio, la identificación de direcciones, el descubrimiento del objetivo, el escaneo de los 65,535 puertos TCP, el reconocimiento web y la enumeración manual y automática. La validación no destructiva confirmó la superficie de entrada de la aplicación, pero todavía no se ha realizado explotación, acceso inicial ni escalamiento de privilegios.</p>
+              <div class="security-note"><strong>Resultado principal:</strong> SNAKEOIL fue identificada en <code>192.168.56.103</code> con los puertos <code>22</code>, <code>80</code> y <code>8080</code> abiertos. El servicio web del puerto 8080 concentra los hallazgos actuales.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="objective-title">
+              <p class="section-number">02 / OBJETIVOS</p>
+              <h2 id="objective-title">Aplicar teoría mediante una evaluación reproducible</h2>
+              <p>El objetivo general es demostrar la aplicación práctica de técnicas y metodologías de seguridad mediante un walkthrough detallado, seguro y documentado de una máquina virtual vulnerable.</p>
+              <ul class="implementation-flow">
+                <li>Configurar un entorno de virtualización aislado para realizar las pruebas de forma segura.</li>
+                <li>Descubrir el sistema objetivo e identificar puertos, servicios y versiones expuestas.</li>
+                <li>Enumerar aplicaciones, recursos y mecanismos de autenticación para construir hipótesis técnicas.</li>
+                <li>Investigar vulnerabilidades y evaluar su viabilidad antes de seleccionar una prueba de concepto.</li>
+                <li>Documentar, si procede, el acceso inicial, la post-explotación y el escalamiento de privilegios.</li>
+                <li>Registrar comandos, resultados, capturas, riesgos, mitigaciones y aprendizajes.</li>
+                <li>Preparar un informe final y un video explicativo del recorrido completo.</li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="scope-title">
+              <p class="section-number">03 / ALCANCE Y LABORATORIO</p>
+              <h2 id="scope-title">Topología aislada y límites de la práctica</h2>
+              <div class="code-doc-grid">
+                <article><h3>Estación de análisis</h3><p>Kali Linux en <code>192.168.56.104/24</code>.</p></article>
+                <article><h3>Sistema objetivo</h3><p><code>digitalworld.local</code> SNAKEOIL en <code>192.168.56.103</code>.</p></article>
+                <article><h3>Segmento virtual</h3><p>Red <code>192.168.56.0/24</code> configurada como solo-anfitrión.</p></article>
+                <article><h3>Virtualización</h3><p>Oracle VirtualBox con ambas máquinas conectadas al mismo adaptador privado.</p></article>
+                <article><h3>Sistema identificado</h3><p>Objetivo Linux basado en Debian 10; detección aproximada mediante Nmap.</p></article>
+                <article><h3>Límite autorizado</h3><p>Las pruebas se restringen a la máquina local de práctica y no incluyen sistemas externos.</p></article>
+              </div>
+              <div class="security-note"><strong>Control de seguridad:</strong> SNAKEOIL no utiliza modo puente ni NAT. Los adaptadores adicionales permanecen desactivados y el modo promiscuo está denegado.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="method-title">
+              <p class="section-number">04 / METODOLOGÍA Y AVANCE</p>
+              <h2 id="method-title">Doce fases con estado verificable</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>01 · Configuración del laboratorio</strong><p>Máquinas importadas y adaptadores privados verificados.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>02 · Inicio y validación</strong><p>SNAKEOIL inició correctamente sobre Debian 10.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>03 · Identificación de Kali</strong><p>La interfaz activa confirmó la dirección <code>192.168.56.104/24</code>.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>04 · Descubrimiento del objetivo</strong><p>La dirección IP se correlacionó con la MAC registrada en VirtualBox.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>05 · Escaneo de servicios</strong><p>Se revisaron todos los puertos TCP, versiones y scripts básicos.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>06 · Reconocimiento web</strong><p>Se examinaron las aplicaciones de los puertos 80 y 8080.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>07 · Enumeración manual</strong><p>Se revisaron publicaciones, identificadores y pistas tecnológicas.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>08 · Enumeración automática</strong><p>Gobuster localizó rutas no visibles desde la navegación principal.</p></div></li>
+                <li><span aria-hidden="true">◐</span><div><strong>09 · Análisis y validación</strong><p>En proceso mediante solicitudes GET y OPTIONS sin cargas útiles.</p></div></li>
+                <li><span aria-hidden="true">—</span><div><strong>10 · Explotación y acceso inicial</strong><p>Pendiente de una hipótesis confirmada y una prueba de concepto controlada.</p></div></li>
+                <li><span aria-hidden="true">—</span><div><strong>11 · Post-explotación y escalamiento</strong><p>Pendiente; se documentará solo si se obtiene acceso autorizado.</p></div></li>
+                <li><span aria-hidden="true">—</span><div><strong>12 · Riesgos, mitigaciones y cierre</strong><p>Pendiente de los resultados definitivos del recorrido.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="commands-title">
+              <p class="section-number">05 / REGISTRO DE COMANDOS</p>
+              <h2 id="commands-title">Acciones ejecutadas y finalidad</h2>
+              <div class="record-sample"><span>Identificación de Kali</span><code>ip -br addr</code><p>Consulta resumida de interfaces, estado y prefijo de red.</p></div>
+              <div class="record-sample"><span>Descubrimiento del segmento</span><code>sudo nmap -sn 192.168.56.0/24</code><p>Identificación de hosts activos sin escaneo de puertos.</p></div>
+              <div class="record-sample"><span>Escaneo completo del objetivo</span><code>sudo nmap -sS -sV -sC -O -p- 192.168.56.103 -oN snakeoil_escaneo_completo.txt</code><p>Revisión de todos los puertos TCP, versiones, scripts básicos y sistema operativo aproximado.</p></div>
+              <div class="record-sample"><span>Enumeración de contenido web</span><code>gobuster dir -u http://192.168.56.103:8080 -w /usr/share/wordlists/dirb/common.txt -x txt,html,py -o gobuster_8080.txt</code><p>Búsqueda de rutas y archivos no enlazados desde la interfaz.</p></div>
+              <div class="record-sample"><span>Validación no destructiva</span><code>curl -sS -i http://192.168.56.103:8080/&lt;ruta&gt;</code><p>Inspección de encabezados y respuestas de <code>/users</code>, <code>/registration</code>, <code>/create</code>, <code>/test</code> y <code>/secret</code>.</p></div>
+              <div class="record-sample"><span>Métodos permitidos</span><code>curl -sS -i -X OPTIONS http://192.168.56.103:8080/&lt;login|run&gt;</code><p>Caracterización de los endpoints sin ejecutar su operación principal.</p></div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="services-title">
+              <p class="section-number">06 / PUERTOS Y SERVICIOS</p>
+              <h2 id="services-title">Superficie inicial identificada</h2>
+              <div class="code-doc-grid">
+                <article><h3>22/TCP · SSH</h3><p><strong>OpenSSH 7.9p1 Debian 10+deb10u2.</strong> Servicio de acceso remoto que requiere autenticación.</p></article>
+                <article><h3>80/TCP · HTTP</h3><p><strong>nginx 1.14.2.</strong> Página estática de bienvenida que confirma la configuración de SNAKEOIL.</p></article>
+                <article><h3>8080/TCP · HTTP</h3><p><strong>nginx 1.14.2.</strong> Aplicación Good Tech Inc.'s Snake Oil Project y principal superficie de análisis.</p></article>
+                <article><h3>Plataforma</h3><p>Nmap estimó un sistema Linux; la máquina inició sobre Debian 10 dentro de VirtualBox.</p></article>
+              </div>
+              <div class="security-note"><strong>Criterio técnico:</strong> una versión observada no demuestra por sí sola una vulnerabilidad. Cada posible debilidad debe correlacionarse con la configuración real y validarse dentro del laboratorio.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="manual-title">
+              <p class="section-number">07 / ENUMERACIÓN MANUAL</p>
+              <h2 id="manual-title">Publicaciones, identificadores y tecnología</h2>
+              <div class="code-doc-grid">
+                <article><h3>Recurso /1</h3><p>Publicación Introduction accesible mediante un identificador numérico predecible.</p></article>
+                <article><h3>Recurso /2</h3><p>House Rules está firmada por Patrick y lo relaciona con el desarrollo de la aplicación.</p></article>
+                <article><h3>Recurso /4</h3><p>Useful Links indica que la aplicación utiliza Flask y autenticación mediante Flask-JWT-Extended.</p></article>
+                <article><h3>Recurso /3</h3><p>El identificador ausente respondió con JSON personalizado: <code>Who moved my cheese?</code> y <code>success: false</code>.</p></article>
+              </div>
+              <p>La secuencia de recursos y las pistas tecnológicas orientan el análisis de autenticación y manejo de contenido, pero no constituyen por sí mismas una explotación confirmada.</p>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="routes-title">
+              <p class="section-number">08 / ENUMERACIÓN DE ENDPOINTS</p>
+              <h2 id="routes-title">Rutas descubiertas en el puerto 8080</h2>
+              <div class="code-doc-grid">
+                <article><h3>/create · 200</h3><p>GET devuelve una vista HTML titulada <em>Create a New Post</em>. No se enviaron ni guardaron datos.</p></article>
+                <article><h3>/login · 405</h3><p>GET no está permitido; OPTIONS declara <code>POST</code> y <code>OPTIONS</code>.</p></article>
+                <article><h3>/registration · 200</h3><p>GET devuelve JSON con el mensaje <code>Wrong Method!!!</code>, aunque el transporte responde 200.</p></article>
+                <article><h3>/run · 405</h3><p>GET no está permitido; OPTIONS declara <code>POST</code> y <code>OPTIONS</code>. No se enviaron comandos.</p></article>
+                <article><h3>/secret · 500</h3><p>GET produce un error interno con una respuesta JSON genérica.</p></article>
+                <article><h3>/test · 200</h3><p>GET devuelve el objeto JSON <code>{"TestValue": 0}</code>.</p></article>
+                <article><h3>/users · 200</h3><p>GET expone sin autenticación aparente el usuario <code>patrick</code> y un hash PBKDF2-SHA256.</p></article>
+              </div>
+              <div class="security-note"><strong>Protección de datos:</strong> el valor completo del hash se conserva únicamente en la evidencia del laboratorio y no se transcribe en esta página pública.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="findings-title">
+              <p class="section-number">09 / HALLAZGOS PRELIMINARES</p>
+              <h2 id="findings-title">Evidencia confirmada y límites de interpretación</h2>
+              <div class="code-doc-grid">
+                <article><h3>F-01 · Exposición en /users</h3><p>Divulgación confirmada de un nombre de usuario y material de autenticación. Severidad preliminar: <strong>media</strong>.</p></article>
+                <article><h3>F-02 · Error en /secret</h3><p>Respuesta HTTP 500 reproducible. Requiere más validación; un error aislado no prueba impacto explotable.</p></article>
+                <article><h3>F-03 · Superficie POST</h3><p><code>/login</code> y <code>/run</code> aceptan POST, pero todavía se desconocen campos, validaciones y controles JWT.</p></article>
+                <article><h3>Estado de explotación</h3><p>No se ha recuperado ninguna contraseña, enviado una carga útil, ejecutado comandos ni obtenido acceso al sistema.</p></article>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="mitigation-title">
+              <p class="section-number">10 / RIESGOS Y MITIGACIONES</p>
+              <h2 id="mitigation-title">Controles defensivos recomendados</h2>
+              <ul class="implementation-flow">
+                <li>Exigir autenticación y autorización antes de consultar listados de usuarios.</li>
+                <li>Excluir hashes y cualquier material de autenticación de las respuestas de la API.</li>
+                <li>Aplicar códigos HTTP coherentes y mensajes de error mínimos para el cliente.</li>
+                <li>Registrar excepciones detalladas solo en el servidor y evitar trazas o datos internos en producción.</li>
+                <li>Validar estrictamente los cuerpos POST y limitar las funciones de creación y ejecución por rol.</li>
+                <li>Revisar expiración, firma, almacenamiento y revocación de tokens JWT.</li>
+                <li>Aplicar mínimo privilegio al servicio web y mantener nginx, OpenSSH y dependencias actualizados.</li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="evidence-title">
+              <p class="section-number">11 / EVIDENCIAS</p>
+              <h2 id="evidence-title">Quince capturas del recorrido actual</h2>
+              <p>Cada imagen conserva una fase verificable del laboratorio y puede abrirse en tamaño completo.</p>
+              <div class="evidence-gallery">
+                <figure><a href="../assets/proyectos/pr01/01-inicio-maquina.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/01-inicio-maquina.webp" alt="Pantalla de inicio de la máquina SNAKEOIL en VirtualBox" loading="lazy"></a><figcaption>01 · Inicio correcto de la máquina virtual objetivo.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/02-identificacion-kali.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/02-identificacion-kali.webp" alt="Terminal de Kali mostrando sus interfaces de red" loading="lazy"></a><figcaption>02 · Identificación de Kali y su interfaz activa.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/03-descubrimiento-host.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/03-descubrimiento-host.webp" alt="Descubrimiento de hosts en la red privada mediante Nmap" loading="lazy"></a><figcaption>03 · Descubrimiento de <code>192.168.56.103</code>.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/04-escaneo-puertos.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/04-escaneo-puertos.webp" alt="Resultado del escaneo completo de puertos y servicios" loading="lazy"></a><figcaption>04 · Puertos 22, 80 y 8080 identificados.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/05-servicio-http-80.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/05-servicio-http-80.webp" alt="Página de bienvenida del servicio HTTP del puerto 80" loading="lazy"></a><figcaption>05 · Servicio HTTP expuesto en el puerto 80.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/06-aplicacion-web-8080.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/06-aplicacion-web-8080.webp" alt="Aplicación Good Tech Inc.'s Snake Oil Project en el puerto 8080" loading="lazy"></a><figcaption>06 · Aplicación principal del puerto 8080.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/07-ruta-about.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/07-ruta-about.webp" alt="Recurso About de la aplicación SNAKEOIL" loading="lazy"></a><figcaption>07 · Recurso informativo About.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/08-ruta-house-rules.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/08-ruta-house-rules.webp" alt="Publicación House Rules de la aplicación SNAKEOIL" loading="lazy"></a><figcaption>08 · Publicación House Rules firmada por Patrick.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/09-ruta-useful-links.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/09-ruta-useful-links.webp" alt="Publicación Useful Links con referencias a Flask y JWT" loading="lazy"></a><figcaption>09 · Pista tecnológica sobre Flask y JWT.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/10-identificador-ausente.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/10-identificador-ausente.webp" alt="Respuesta del identificador numérico ausente" loading="lazy"></a><figcaption>10 · Comportamiento personalizado del recurso <code>/3</code>.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/11-enumeracion-automatica.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/11-enumeracion-automatica.webp" alt="Resultados de enumeración automática de rutas con Gobuster" loading="lazy"></a><figcaption>11 · Rutas localizadas mediante Gobuster.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/12-exposicion-users.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/12-exposicion-users.webp" alt="Respuesta de users y comprobaciones iniciales de rutas" loading="lazy"></a><figcaption>12 · Exposición observada en <code>/users</code>.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/13-rutas-create-registration.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/13-rutas-create-registration.webp" alt="Código HTML entregado por create y revisión de registration" loading="lazy"></a><figcaption>13 · Revisión de <code>/create</code> y <code>/registration</code>.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/14-respuestas-test-secret.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/14-respuestas-test-secret.webp" alt="Respuestas de los endpoints test y secret" loading="lazy"></a><figcaption>14 · Respuestas de <code>/test</code> y <code>/secret</code>.</figcaption></figure>
+                <figure><a href="../assets/proyectos/pr01/15-metodos-login-run.webp" target="_blank" rel="noopener"><img src="../assets/proyectos/pr01/15-metodos-login-run.webp" alt="Métodos HTTP permitidos en login y run" loading="lazy"></a><figcaption>15 · Métodos permitidos en <code>/login</code> y <code>/run</code>.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="deliverables-title">
+              <p class="section-number">12 / ENTREGABLES</p>
+              <h2 id="deliverables-title">Reporte técnico y video disponibles</h2>
+              <p>La página reúne las capturas, el reporte técnico de avance y el acceso institucional al video walkthrough de PR01.</p>
+              <div class="evidence-file-grid" aria-label="Entregables del proyecto PR01">
+                <a class="evidence-file" href="../assets/proyectos/pr01/PR01_Reporte_De_la_teoria_a_la_practica_SNAKEOIL.pdf" download><span>REPORTE TÉCNICO · PDF</span><strong>Descargar reporte PR01 ↓</strong><small>Documento de 25 páginas con evidencias, resultados y enlace audiovisual.</small></a>
+                <a class="evidence-file" href="../assets/proyectos/pr01/PR01_Reporte_De_la_teoria_a_la_practica_SNAKEOIL.docx" download><span>VERSIÓN EDITABLE · DOCX</span><strong>Descargar archivo Word ↓</strong><small>Versión editable del mismo reporte técnico.</small></a>
+                <a class="evidence-file evidence-file-wide" href="https://upslpedu-my.sharepoint.com/:v:/g/personal/184918_upslp_edu_mx/IQB2DP0T89AKSZDgbnNwZk3eAbmFGycVLsiQbxvGjbF6LfQ?e=P4Ss9T&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank" rel="noopener noreferrer"><span>VIDEO WALKTHROUGH · STREAM</span><strong>Ver video de PR01 ↗</strong><small>Reproducción institucional alojada en Microsoft Stream y SharePoint.</small></a>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="next-title">
+              <p class="section-number">13 / SIGUIENTES PASOS</p>
+              <h2 id="next-title">Continuación controlada del proyecto</h2>
+              <ol class="implementation-flow">
+                <li>Crear o verificar una instantánea y confirmar nuevamente la IP del objetivo.</li>
+                <li>Auditar el hash de forma offline dentro del laboratorio y documentar el resultado sin publicar credenciales.</li>
+                <li>Caracterizar los formatos POST de registro, inicio de sesión y ejecución.</li>
+                <li>Seleccionar una sola hipótesis sustentada y validar una prueba de concepto reproducible.</li>
+                <li>Si se obtiene acceso, registrar usuario, host, privilegios y vector de escalamiento con evidencia mínima.</li>
+                <li>Evaluar el impacto, completar las fases pendientes y actualizar el reporte con los resultados definitivos.</li>
+                <li>Comprobar antes de la entrega que el enlace institucional del video mantenga permisos de visualización.</li>
+              </ol>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="conclusion-title">
+              <p class="section-number">14 / CONCLUSIÓN Y REFLEXIÓN</p>
+              <h2 id="conclusion-title">Observar, comprobar y documentar</h2>
+              <p>El laboratorio quedó correctamente segmentado y la superficie inicial se redujo a tres servicios TCP. La aplicación del puerto 8080 permitió confirmar una exposición de información en <code>/users</code> y caracterizar varios endpoints sin ejecutar acciones destructivas.</p>
+              <p>El principal aprendizaje es separar las pistas de los hallazgos confirmados: descubrir una ruta, versión o respuesta anómala orienta la investigación, pero no basta para afirmar que existe una vulnerabilidad explotable. Mantener el alcance aislado, registrar cada comando y reconocer los límites de la evidencia hace que el walkthrough sea seguro, honesto y reproducible.</p>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="references-title">
+              <p class="section-number">15 / REFERENCIAS</p>
+              <h2 id="references-title">Fuentes técnicas consultadas</h2>
+              <ol class="implementation-flow">
+                <li><a class="text-link" href="https://www.vulnhub.com/entry/digitalworldlocal-snakeoil,738/" target="_blank" rel="noopener noreferrer">VulnHub · digitalworld.local: snakeoil</a>.</li>
+                <li><a class="text-link" href="https://nmap.org/book/man.html" target="_blank" rel="noopener noreferrer">Nmap Reference Guide</a>.</li>
+                <li><a class="text-link" href="https://github.com/OJ/gobuster" target="_blank" rel="noopener noreferrer">Gobuster · Directory/File enumeration</a>.</li>
+                <li><a class="text-link" href="https://flask-jwt-extended.readthedocs.io/en/stable/options/" target="_blank" rel="noopener noreferrer">Flask-JWT-Extended · Configuration Options</a>.</li>
+              </ol>
+            </section>
+          </div>
+
+          <aside class="detail-aside reveal" aria-labelledby="technical-record-title">
+            <p class="section-number">FICHA TÉCNICA</p>
+            <h2 id="technical-record-title">Datos de control</h2>
+            <ul>
+              <li><strong>Proyecto:</strong> PR01.</li>
+              <li><strong>Alumno:</strong> Juan Francisco Ortega Jiménez.</li>
+              <li><strong>Matrícula:</strong> 184918.</li>
+              <li><strong>Programa:</strong> Ingeniería en Tecnologías de la Información.</li>
+              <li><strong>Materia:</strong> CNO IV - Seguridad Informática.</li>
+              <li><strong>Docente:</strong> Mtro. Servando López Contreras.</li>
+              <li><strong>Institución:</strong> Universidad Politécnica de San Luis Potosí.</li>
+              <li><strong>Estación:</strong> Kali Linux · 192.168.56.104.</li>
+              <li><strong>Objetivo:</strong> digitalworld.local · 192.168.56.103.</li>
+              <li><strong>Virtualización:</strong> Oracle VirtualBox.</li>
+              <li><strong>Red:</strong> solo-anfitrión.</li>
+              <li><strong>Puertos:</strong> 22, 80 y 8080.</li>
+              <li><strong>Alcance:</strong> laboratorio autorizado.</li>
+            </ul>
+            <a class="button button-primary detail-cta" href="#evidence-title">Ver evidencias</a>
+          </aside>
+        </div>
+      </div>
     </main>
+
+    <footer class="site-footer"><div class="container footer-grid"><div><strong>JFOJ // PR01</strong><p>CNO IV - Seguridad Informática</p></div><nav aria-label="Navegación secundaria"><a href="../index.html">Inicio</a><a href="../index.html#proyectos">Proyectos</a></nav><p class="copyright">© <span id="current-year">2026</span> Juan Francisco Ortega Jiménez.</p></div></footer>
   </body>
 </html>
