@@ -54,7 +54,8 @@ function updateScrollProgress() {
 
 function initializeSectionObserver() {
   const sections = [...document.querySelectorAll("main section[id], header[id]")];
-  if (!("IntersectionObserver" in window)) return;
+  const sectionLinks = navigationLinks.filter((link) => link.getAttribute("href")?.startsWith("#"));
+  if (!("IntersectionObserver" in window) || !sectionLinks.length) return;
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -64,7 +65,7 @@ function initializeSectionObserver() {
 
       if (!visibleEntry) return;
 
-      navigationLinks.forEach((link) => {
+      sectionLinks.forEach((link) => {
         const matchesSection = link.getAttribute("href") === `#${visibleEntry.target.id}`;
         link.classList.toggle("active", matchesSection);
       });
