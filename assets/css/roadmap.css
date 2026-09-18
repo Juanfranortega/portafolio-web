@@ -438,9 +438,12 @@
 }
 
 .route-card-top .route-lab-card { top: auto; bottom: 98px; }
+.route-node-01 .route-lab-card { left: -34px; transform: none; }
 .route-node-06 .route-lab-card { right: -34px; left: auto; transform: none; }
 .route-node:hover .route-lab-card { border-color: var(--node-color); background: color-mix(in srgb, var(--surface) 82%, var(--node-color)); }
-.route-node:not(.route-node-06):hover .route-lab-card { transform: translateX(-50%) translateY(-3px); }
+.route-node:not(.route-node-01):not(.route-node-06):hover .route-lab-card { transform: translateX(-50%) translateY(-3px); }
+.route-node-01:hover .route-lab-card,
+.route-node-06:hover .route-lab-card { transform: translateY(-3px); }
 
 .route-lab-code {
   display: block;
