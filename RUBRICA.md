@@ -22,7 +22,7 @@
 - [x] Semestre: 7mo Semestre.
 - [x] Menú de navegación.
 - [x] Apartados Inicio, Notas, Herramientas, Proyectos y Certificados.
-- [x] Módulo Road to Hall of Fame con estructura tipo ruta.
+- [x] Página independiente Road to Hall of Fame con estructura tipo ruta y 6 laboratorios.
 - [x] Presentación del portafolio.
 - [x] Propósito, enfoque e importancia.
 - [x] Perfil e intereses.

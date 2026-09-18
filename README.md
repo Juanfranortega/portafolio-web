@@ -24,6 +24,7 @@ El sitio no usa frameworks ni bibliotecas externas. Todos los recursos funcional
 ```text
 portafolio-web/
 ├── index.html
+├── roadmap.html             # página independiente con los 6 laboratorios
 ├── gracias.html
 ├── 404.html
 ├── README.md
@@ -42,7 +43,9 @@ portafolio-web/
 │   └── pr01.html             # página canónica del proyecto PR01
 ├── site.webmanifest
 └── assets/
-    ├── css/styles.css
+    ├── css/
+    │   ├── styles.css
+    │   └── roadmap.css      # estética y ruta futurista del roadmap
     ├── evidencias/parcial-1/
     │   ├── actividad-01/
     │   ├── actividad-02/
@@ -71,7 +74,7 @@ Las animaciones se implementan con transiciones y `@keyframes` de CSS, junto con
 - **Primer parcial:** cuatro actividades registradas y el proyecto independiente PR01.
 - **Segundo parcial:** apartado reservado para futuras actividades.
 - **Tercer parcial:** apartado reservado para actividades finales y conclusiones.
-- **Road to Hall of Fame:** ruta visual con 18 estaciones numeradas. Actualmente muestra progreso 0/18, sin evidencias ficticias; cada laboratorio se completará cuando exista su material y el botón del PDF permanece desactivado hasta contar con el documento final.
+- **Road to Hall of Fame:** página independiente con una ruta futurista de seis laboratorios. Actualmente muestra progreso 0/6, sin evidencias ficticias; cada laboratorio se desbloqueará cuando exista su material y el botón del PDF permanece desactivado hasta contar con el documento final.
 
 Consultar `GUIA_EVIDENCIAS.md` para conocer la ubicación de archivos, el formato recomendado y los pasos de actualización.
 
