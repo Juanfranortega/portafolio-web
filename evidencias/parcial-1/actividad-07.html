@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Actividad 07 y laboratorio FPT 01: explotación controlada de File Path Traversal con Burp Suite, evidencia Lab Solved y medidas de mitigación.">
+    <meta name="description" content="Actividad 07 y laboratorio FPT 01: procedimiento completo de File Path Traversal con Burp Suite, 13 capturas, evidencia Lab Solved, explicación técnica y mitigaciones.">
     <meta name="author" content="Juan Francisco Ortega Jiménez">
     <meta name="theme-color" content="#0b1020">
     <meta name="color-scheme" content="dark light">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
     <title>Actividad 07 - File Path Traversal | Portafolio JFOJ</title>
     <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css?v=20260919-2">
     <script src="../../assets/js/main.js" defer></script>
   </head>
   <body class="evidence-detail-body">
@@ -37,7 +37,7 @@
           <p class="eyebrow"><span></span> Actividad 07 · Laboratorio FPT 01</p>
           <h1 id="activity-title">Explotando un Path Traversal con Burp Suite</h1>
           <p class="detail-lead">Documentación del laboratorio “File path traversal, simple case”: interceptación de la solicitud, manipulación controlada del parámetro <code>filename</code> y validación del resultado.</p>
-          <ul class="detail-metadata" aria-label="Datos de la actividad"><li>Estado: completado</li><li>Fecha: 18/09/2026</li><li>Nivel: Apprentice</li><li>Reporte: 10 páginas</li></ul>
+          <ul class="detail-metadata" aria-label="Datos de la actividad"><li>Estado: completado</li><li>Fecha: 18/09/2026</li><li>Nivel: Apprentice</li><li>Evidencias: 13 capturas</li></ul>
         </div>
       </section>
 
@@ -51,52 +51,109 @@
               <div class="security-note"><strong>Entorno autorizado:</strong> la prueba se realizó exclusivamente dentro del laboratorio interactivo de PortSwigger Web Security Academy. El contenido se publica con fines académicos y defensivos.</div>
             </section>
 
-            <section class="detail-section reveal" aria-labelledby="method-title">
-              <p class="section-number">02 / PROCEDIMIENTO</p>
-              <h2 id="method-title">Del tráfico de imágenes a la petición manipulada</h2>
-              <ol class="implementation-flow">
-                <li><strong>Preparación:</strong> se inició Burp Suite Community con un proyecto temporal y el navegador integrado.</li>
-                <li><strong>Observación:</strong> se filtró el historial HTTP hasta localizar una solicitud <code>GET /image?filename=...</code>.</li>
-                <li><strong>Repetición:</strong> la petición se envió a Repeater para modificar únicamente el parámetro vulnerable.</li>
-                <li><strong>Payload:</strong> se utilizó <code>../../../etc/passwd</code> sin espacios adicionales.</li>
-                <li><strong>Validación:</strong> la respuesta <code>HTTP/2 200 OK</code> mostró el contenido solicitado y PortSwigger cambió el estado a <em>Solved</em>.</li>
-              </ol>
-            </section>
-
-            <section class="detail-section reveal" aria-labelledby="result-title">
-              <p class="section-number">03 / RESULTADO</p>
-              <h2 id="result-title">FPT 01 completado y validado</h2>
+            <section class="detail-section reveal" aria-labelledby="theory-title">
+              <p class="section-number">02 / FUNDAMENTACIÓN TÉCNICA</p>
+              <h2 id="theory-title">¿Por qué ocurre un Path Traversal?</h2>
+              <p>La vulnerabilidad aparece cuando una aplicación construye una ruta de archivo con datos controlados por el usuario y después la utiliza sin validar su destino canónico. En este laboratorio, la ruta vulnerable se encuentra en la consulta <code>GET /image?filename=25.jpg</code>: el servidor espera el nombre de una imagen, pero el parámetro <code>filename</code> también acepta secuencias de navegación entre directorios.</p>
               <div class="code-doc-grid">
-                <article><h3>Vector</h3><p>El parámetro <code>filename</code> aceptó una ruta relativa sin una validación suficiente del destino final.</p></article>
-                <article><h3>Respuesta</h3><p>El servidor devolvió estado 200 y expuso el contenido de un archivo fuera del directorio previsto para imágenes.</p></article>
-                <article><h3>Evidencia</h3><p>El reporte conserva la solicitud en Repeater, la respuesta del servidor y la pantalla oficial con el indicador <em>Lab Solved</em>.</p></article>
-                <article><h3>Progreso</h3><p>Este resultado desbloquea el primer nodo de seis dentro del camino Road to Hall of Fame.</p></article>
+                <article><h3>Clasificación</h3><p>Corresponde a <strong>CWE-22</strong> y se relaciona con <strong>OWASP A01: Broken Access Control</strong>, porque permite superar el límite lógico del directorio autorizado.</p></article>
+                <article><h3>Impacto CIA</h3><p>Afecta principalmente la confidencialidad. Si el mismo patrón se usa en funciones de escritura o borrado, también puede comprometer integridad y disponibilidad.</p></article>
+                <article><h3>Contexto de datos</h3><p>No se ataca una base de datos: se accede al sistema de archivos. Una aplicación puede obtener nombres desde una BD, pero debe validar la ruta real antes de abrir el recurso.</p></article>
+                <article><h3>Variantes</h3><p>Las defensas débiles pueden evadirse con rutas absolutas, eliminación no recursiva, doble codificación URL, validación parcial del inicio o bytes nulos.</p></article>
               </div>
             </section>
 
-            <section class="detail-section reveal" aria-labelledby="incident-title">
-              <p class="section-number">04 / INCIDENCIAS</p>
-              <h2 id="incident-title">Errores detectados y correcciones aplicadas</h2>
+            <section class="detail-section reveal" aria-labelledby="method-title">
+              <p class="section-number">03 / PROCEDIMIENTO · PREPARACIÓN</p>
+              <h2 id="method-title">Configuración de Burp Suite y acceso al laboratorio</h2>
+              <ol class="implementation-flow">
+                <li><strong>Iniciar Burp Suite:</strong> se abrió Burp Suite Community Edition 2026.8 con un proyecto temporal y la configuración predeterminada.</li>
+                <li><strong>Preparar el Proxy:</strong> en la pestaña <em>Proxy</em> se mantuvo <em>Intercept off</em> para registrar la navegación sin detener cada solicitud y se abrió el navegador integrado.</li>
+                <li><strong>Leer la consigna:</strong> PortSwigger indicó que el laboratorio “File path traversal, simple case”, nivel Apprentice, debía resolverse recuperando <code>/etc/passwd</code>.</li>
+                <li><strong>Acceder al entorno:</strong> se abrió la tienda vulnerable; en ese momento el indicador todavía mostraba <em>Not solved</em>.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/01-configuracion-burp.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/01-configuracion-burp.webp" alt="Burp Suite Community mostrando la selección de configuración predeterminada para el proyecto temporal" loading="lazy"></a><figcaption>01 · Configuración predeterminada antes de iniciar Burp Suite.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/02-burp-proxy-listo.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/02-burp-proxy-listo.webp" alt="Pestaña Proxy de Burp Suite preparada para abrir el navegador integrado" loading="lazy"></a><figcaption>02 · Proxy listo y navegador integrado disponible.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/03-laboratorio-objetivo.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/03-laboratorio-objetivo.webp" alt="Descripción oficial del laboratorio File path traversal simple case con estado Not solved" loading="lazy"></a><figcaption>03 · Nombre, nivel, objetivo y estado inicial del laboratorio.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/04-tienda-laboratorio.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/04-tienda-laboratorio.webp" alt="Tienda vulnerable del laboratorio con productos e imágenes cargadas" loading="lazy"></a><figcaption>04 · Acceso al entorno vulnerable antes de la prueba.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="capture-title">
+              <p class="section-number">04 / PROCEDIMIENTO · CAPTURA</p>
+              <h2 id="capture-title">Localización de la consulta vulnerable</h2>
+              <ol class="implementation-flow">
+                <li><strong>Ajustar el filtro:</strong> en <em>HTTP history</em> se habilitó la visualización de imágenes, ya que el filtro inicial ocultaba ese tipo de contenido.</li>
+                <li><strong>Recargar la tienda:</strong> al navegar por los productos aparecieron múltiples solicitudes <code>/image?filename=...</code> con respuesta JPEG.</li>
+                <li><strong>Inspeccionar una petición:</strong> se seleccionó <code>GET /image?filename=25.jpg</code> y se verificó que el valor de <code>filename</code> llegaba directamente al servidor.</li>
+                <li><strong>Enviar a Repeater:</strong> mediante el menú contextual se copió la solicitud a Repeater para modificarla y reenviarla de forma controlada.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/05-filtro-trafico-imagenes.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/05-filtro-trafico-imagenes.webp" alt="Ventana de filtros del historial HTTP con el tipo de contenido Images habilitado" loading="lazy"></a><figcaption>05 · Corrección del filtro para mostrar el tráfico de imágenes.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/06-solicitudes-imagenes.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/06-solicitudes-imagenes.webp" alt="Historial HTTP de Burp Suite con varias solicitudes image filename del laboratorio" loading="lazy"></a><figcaption>06 · Solicitudes de imágenes registradas por el Proxy.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/07-solicitud-filename.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/07-solicitud-filename.webp" alt="Solicitud GET image filename 25.jpg y respuesta JPEG seleccionadas en el historial HTTP" loading="lazy"></a><figcaption>07 · Petición capturada y parámetro <code>filename</code> identificado.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/08-enviar-repeater.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/08-enviar-repeater.webp" alt="Menú contextual de Burp Suite con la opción Send to Repeater seleccionada" loading="lazy"></a><figcaption>08 · Envío de la solicitud seleccionada a Repeater.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="exploit-title">
+              <p class="section-number">05 / PROCEDIMIENTO · EXPLOTACIÓN</p>
+              <h2 id="exploit-title">Modificación, error inicial y respuesta vulnerable</h2>
+              <ol class="implementation-flow">
+                <li><strong>Conservar la línea base:</strong> Repeater recibió la petición original con <code>filename=25.jpg</code>.</li>
+                <li><strong>Modificar el parámetro:</strong> se sustituyó únicamente el valor de <code>filename</code> por <code>../../../etc/passwd</code>.</li>
+                <li><strong>Diagnosticar el primer intento:</strong> un espacio agregado por error provocó <code>HTTP/2 400 Bad Request</code> y el mensaje <em>No such file</em>.</li>
+                <li><strong>Corregir y reenviar:</strong> al eliminar los espacios, el servidor respondió <code>HTTP/2 200 OK</code> y devolvió el contenido de <code>/etc/passwd</code>.</li>
+                <li><strong>Validar el resultado:</strong> PortSwigger mostró el mensaje “Congratulations, you solved the lab!” y el indicador oficial cambió a <em>Solved</em>.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/09-repeater-solicitud-original.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/09-repeater-solicitud-original.webp" alt="Burp Repeater mostrando la solicitud original image filename 25.jpg antes de modificarla" loading="lazy"></a><figcaption>09 · Solicitud original recibida en Repeater.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/10-intento-error.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/10-intento-error.webp" alt="Respuesta HTTP 400 No such file causada por espacios en el primer payload" loading="lazy"></a><figcaption>10 · Intento fallido: espacios en el payload y respuesta 400.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/11-respuesta-etc-passwd.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/11-respuesta-etc-passwd.webp" alt="Burp Repeater con el payload de path traversal y la respuesta HTTP 200 que contiene etc passwd" loading="lazy"></a><figcaption>11 · Payload corregido, respuesta vulnerable y contenido de <code>/etc/passwd</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/12-confirmacion-solved.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/12-confirmacion-solved.webp" alt="PortSwigger mostrando Congratulations you solved the lab y estado Solved" loading="lazy"></a><figcaption>12 · Confirmación inmediata: laboratorio resuelto.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-07/13-estado-final-solved.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-07/13-estado-final-solved.webp" alt="Descripción oficial del laboratorio con el indicador final Solved" loading="lazy"></a><figcaption>13 · Estado final <em>Solved</em> verificado en la descripción oficial.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="payload-title">
+              <p class="section-number">06 / EXPLICACIÓN DEL PAYLOAD</p>
+              <h2 id="payload-title"><code>../../../etc/passwd</code>, componente por componente</h2>
+              <div class="code-doc-grid">
+                <article><h3><code>../</code></h3><p>Cada secuencia indica al sistema que suba un nivel desde el directorio actual. Tres repeticiones abandonan la carpeta donde la aplicación busca imágenes.</p></article>
+                <article><h3><code>etc/passwd</code></h3><p>Después del recorrido se solicita un archivo estándar de Linux que contiene información de cuentas locales. No almacena contraseñas en texto plano.</p></article>
+                <article><h3>Normalización</h3><p>El sistema operativo resuelve los segmentos <code>..</code> antes de abrir el archivo. La aplicación vulnerable no verificó que la ruta resultante permaneciera dentro del directorio permitido.</p></article>
+                <article><h3>Condición de éxito</h3><p>El payload debía enviarse sin espacios. El estado 200 y las líneas con formato <code>usuario:x:UID:GID:...</code> confirmaron la lectura del archivo.</p></article>
+              </div>
+              <div class="security-note"><strong>Tipo de explotación:</strong> lectura arbitraria de archivos mediante ruta relativa. No hubo carga de archivos, ejecución de comandos, alteración de datos ni acceso fuera del laboratorio autorizado.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="result-title">
+              <p class="section-number">07 / RESULTADO E INCIDENCIAS</p>
+              <h2 id="result-title">FPT 01 completado con trazabilidad del diagnóstico</h2>
               <ul class="rubric-checklist">
-                <li><span aria-hidden="true">1</span><div><strong>Filtro de tráfico</strong><p>La configuración inicial de Burp ocultaba algunas solicitudes de imágenes; se ajustó la vista para localizar el recurso vulnerable.</p></div></li>
-                <li><span aria-hidden="true">2</span><div><strong>Espacios en el payload</strong><p>El primer intento incluyó espacios y produjo un error 400 con el mensaje “No such file”. Se eliminó el espacio sobrante y se repitió la solicitud.</p></div></li>
-                <li><span aria-hidden="true">3</span><div><strong>Confirmación independiente</strong><p>Además de inspeccionar la respuesta, se regresó a la página del laboratorio para comprobar el cambio oficial de estado a <em>Solved</em>.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Resultado verificable</strong><p>La petición corregida obtuvo <code>HTTP/2 200 OK</code>, mostró el contenido esperado y desbloqueó el estado <em>Lab Solved</em>.</p></div></li>
+                <li><span aria-hidden="true">1</span><div><strong>Filtro de tráfico</strong><p>Las imágenes estaban ocultas en el historial; se habilitó su tipo MIME para localizar la consulta afectada.</p></div></li>
+                <li><span aria-hidden="true">2</span><div><strong>Espacios en el payload</strong><p>El primer intento devolvió 400 y <em>No such file</em>. La revisión comparativa permitió detectar y retirar los espacios sobrantes.</p></div></li>
+                <li><span aria-hidden="true">3</span><div><strong>Doble validación</strong><p>Se comprobó tanto la respuesta técnica en Repeater como el cambio de estado dentro de PortSwigger.</p></div></li>
               </ul>
             </section>
 
             <section class="detail-section reveal" aria-labelledby="controls-title">
-              <p class="section-number">05 / MITIGACIÓN</p>
-              <h2 id="controls-title">Controles para prevenir Path Traversal</h2>
+              <p class="section-number">08 / MITIGACIÓN</p>
+              <h2 id="controls-title">Defensa en profundidad contra Path Traversal</h2>
               <ul class="rubric-checklist">
-                <li><span aria-hidden="true">✓</span><div><strong>Lista permitida</strong><p>Aceptar solamente nombres o identificadores de archivo previamente autorizados.</p></div></li>
-                <li><span aria-hidden="true">✓</span><div><strong>Ruta canónica</strong><p>Resolver la ruta final y comprobar que permanezca dentro del directorio autorizado antes de abrir el archivo.</p></div></li>
-                <li><span aria-hidden="true">✓</span><div><strong>Identificadores indirectos</strong><p>Mapear un ID interno a un recurso, en lugar de recibir rutas proporcionadas directamente por el usuario.</p></div></li>
-                <li><span aria-hidden="true">✓</span><div><strong>Mínimo privilegio</strong><p>Ejecutar el servicio con permisos restringidos para limitar el impacto de una lectura no autorizada.</p></div></li>
+                <li><span aria-hidden="true">1</span><div><strong>Evitar rutas proporcionadas por el usuario</strong><p>Usar identificadores indirectos y mapearlos en el servidor a archivos conocidos reduce la superficie de entrada.</p></div></li>
+                <li><span aria-hidden="true">2</span><div><strong>Lista permitida estricta</strong><p>Aceptar únicamente nombres, extensiones y formatos esperados; rechazar separadores, rutas absolutas y secuencias de navegación.</p></div></li>
+                <li><span aria-hidden="true">3</span><div><strong>Canonicalización y confinamiento</strong><p>Resolver la ruta real con una función equivalente a <code>realpath()</code> y verificar que comience dentro del directorio base autorizado.</p></div></li>
+                <li><span aria-hidden="true">4</span><div><strong>Decodificación controlada</strong><p>Normalizar y decodificar una sola vez antes de validar para impedir que variantes URL codificadas evadan el filtro.</p></div></li>
+                <li><span aria-hidden="true">5</span><div><strong>Mínimo privilegio</strong><p>Ejecutar el servicio con permisos restringidos y separar archivos sensibles para limitar el impacto si falla la validación.</p></div></li>
+                <li><span aria-hidden="true">6</span><div><strong>Registro y pruebas</strong><p>Monitorear solicitudes anómalas y probar rutas relativas, absolutas, codificadas y entradas de borde durante el desarrollo.</p></div></li>
               </ul>
             </section>
 
             <section class="detail-section reveal" aria-labelledby="report-title">
-              <p class="section-number">06 / REPORTE</p>
+              <p class="section-number">09 / REPORTE</p>
               <h2 id="report-title">Evidencia completa de la Actividad 07</h2>
               <p>El documento de 10 páginas reúne portada, objetivo, entorno, procedimiento en Burp Suite, capturas de la solicitud y respuesta, confirmación del laboratorio, explicación del payload, incidencias, mitigaciones, conclusión y referencias.</p>
               <div class="presentation-frame report-frame"><iframe src="../../assets/evidencias/parcial-1/Actividad07_FilePathTraversal_Juan_Francisco_Ortega.pdf#view=FitH&amp;toolbar=1" title="Vista previa del reporte de la Actividad 07 sobre File Path Traversal" loading="lazy"></iframe></div>
@@ -104,15 +161,27 @@
             </section>
 
             <section class="detail-section reveal" aria-labelledby="downloads-title">
-              <p class="section-number">07 / ARCHIVO ENTREGABLE</p>
+              <p class="section-number">10 / ARCHIVO ENTREGABLE</p>
               <h2 id="downloads-title">Reporte técnico adjunto</h2>
               <div class="evidence-file-grid" aria-label="Archivo descargable de la actividad">
                 <a class="evidence-file evidence-file-wide" href="../../assets/evidencias/parcial-1/Actividad07_FilePathTraversal_Juan_Francisco_Ortega.pdf" target="_blank" rel="noopener"><span>REPORTE PDF · 10 PÁGINAS</span><strong>Abrir Actividad 07 ↗</strong><small>Incluye evidencias de Burp Suite y validación Lab Solved.</small></a>
               </div>
             </section>
 
+            <section class="detail-section reveal" aria-labelledby="rubric-title">
+              <p class="section-number">11 / CUMPLIMIENTO DE RÚBRICA</p>
+              <h2 id="rubric-title">Correspondencia entre criterios y evidencias</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Marco teórico y fundamentación</strong><p>Se explican CWE-22, OWASP A01, impacto CIA, contexto de datos, variantes y defensa conceptual.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Documentación técnica</strong><p>Se identifica el parámetro <code>filename</code>, la consulta afectada, la causa, el contexto y el resultado del laboratorio.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Procedimiento con Burp Suite</strong><p>Los pasos son replicables y muestran preparación, Proxy, filtros, análisis, Repeater, modificación y validación.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Explicación del payload</strong><p>Se detalla la función de <code>../</code>, la normalización de rutas, el archivo objetivo y la condición de éxito.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Evidencias obligatorias</strong><p>Trece capturas ordenadas muestran solicitud, payload, error, respuesta vulnerable y confirmación <em>Lab Solved</em>.</p></div></li>
+              </ul>
+            </section>
+
             <section class="detail-section reveal" aria-labelledby="reflection-title">
-              <p class="section-number">08 / CONCLUSIÓN</p>
+              <p class="section-number">12 / CONCLUSIÓN</p>
               <h2 id="reflection-title">Aprendizaje obtenido</h2>
               <p>El laboratorio demostró de forma práctica cómo una entrada no validada puede permitir la lectura de archivos sensibles. El uso combinado de Proxy y Repeater ayudó a relacionar la solicitud visible con el comportamiento del servidor, mientras que los intentos fallidos reforzaron la importancia de revisar con precisión la sintaxis y validar el resultado con más de una evidencia.</p>
             </section>
@@ -132,6 +201,8 @@
               <li><strong>Laboratorio:</strong> File path traversal, simple case.</li>
               <li><strong>Plataforma:</strong> PortSwigger Web Security Academy.</li>
               <li><strong>Herramienta:</strong> Burp Suite Community.</li>
+              <li><strong>Payload:</strong> <code>../../../etc/passwd</code>.</li>
+              <li><strong>Evidencias:</strong> 13 capturas verificables.</li>
               <li><strong>Resultado:</strong> Lab Solved.</li>
             </ul>
             <a class="button button-primary detail-cta" href="#report-title">Ver reporte</a>
