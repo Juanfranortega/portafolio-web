@@ -174,6 +174,15 @@
   text-transform: uppercase;
 }
 
+.road-stats dd.road-status-active {
+  padding-top: 11px;
+  color: var(--success);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .road-progress {
   padding: 22px 24px 26px;
 }
@@ -209,7 +218,7 @@
 
 .road-progress-track i {
   display: block;
-  width: 4px;
+  width: 16.6667%;
   height: 100%;
   background: var(--accent);
   box-shadow: 0 0 18px var(--accent);
@@ -289,11 +298,15 @@
   color: var(--danger);
 }
 
+.route-scan-state.route-scan-active {
+  color: var(--success);
+}
+
 .cyber-route {
   position: relative;
   z-index: 1;
-  height: 680px;
-  min-height: 680px;
+  height: 820px;
+  min-height: 820px;
 }
 
 .route-circuit {
@@ -346,11 +359,11 @@
   transform: translate(-50%, -50%);
 }
 
-.route-node-01 { --node-color: var(--accent); top: 68.5%; left: 7.1%; }
-.route-node-02 { top: 37.9%; left: 26.25%; }
-.route-node-03 { --node-color: var(--primary-strong); top: 25%; left: 47.9%; }
-.route-node-04 { top: 67.7%; left: 63.75%; }
-.route-node-05 { --node-color: var(--accent); top: 41.9%; left: 82.5%; }
+.route-node-01 { --card-shift: 24px; --node-color: var(--accent); top: 68.5%; left: 7.1%; }
+.route-node-02 { --card-shift: 24px; top: 37.9%; left: 26.25%; }
+.route-node-03 { --card-shift: -12px; --node-color: var(--primary-strong); top: 25%; left: 47.9%; }
+.route-node-04 { --card-shift: 18px; top: 67.7%; left: 63.75%; }
+.route-node-05 { --card-shift: -4px; --node-color: var(--accent); top: 41.9%; left: 82.5%; }
 .route-node-06 { --node-color: var(--primary-strong); top: 28.2%; left: 93.3%; }
 
 .route-lock {
@@ -424,10 +437,13 @@
 
 .route-lab-card {
   position: absolute;
-  top: 98px;
-  left: 50%;
-  width: 205px;
-  padding: 15px 16px 16px;
+  top: 112px;
+  left: calc(50% + var(--card-shift, 0px));
+  display: flex;
+  width: 196px;
+  min-height: 176px;
+  flex-direction: column;
+  padding: 17px 18px 18px;
   border: 1px solid color-mix(in srgb, var(--node-color) 36%, var(--border));
   background: color-mix(in srgb, var(--surface) 90%, transparent);
   box-shadow: 0 18px 42px color-mix(in srgb, #000 28%, transparent), inset 2px 0 0 var(--node-color);
@@ -435,14 +451,13 @@
   clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
   transform: translateX(-50%);
   transition: 180ms ease;
+  text-decoration: none;
 }
 
-.route-card-top .route-lab-card { top: auto; bottom: 98px; }
-.route-node-01 .route-lab-card { left: -34px; transform: none; }
-.route-node-06 .route-lab-card { right: -34px; left: auto; transform: none; }
+.route-card-top .route-lab-card { top: auto; bottom: 112px; }
+.route-node-06 .route-lab-card { right: -24px; left: auto; transform: none; }
 .route-node:hover .route-lab-card { border-color: var(--node-color); background: color-mix(in srgb, var(--surface) 82%, var(--node-color)); }
-.route-node:not(.route-node-01):not(.route-node-06):hover .route-lab-card { transform: translateX(-50%) translateY(-3px); }
-.route-node-01:hover .route-lab-card,
+.route-node:not(.route-node-06):hover .route-lab-card { transform: translateX(-50%) translateY(-3px); }
 .route-node-06:hover .route-lab-card { transform: translateY(-3px); }
 
 .route-lab-code {
@@ -473,6 +488,7 @@
 .route-lab-state {
   display: inline-flex;
   align-items: center;
+  margin-top: auto;
   font-size: 0.64rem;
   gap: 7px;
 }
@@ -483,6 +499,43 @@
   border-radius: 50%;
   background: currentColor;
   box-shadow: 0 0 8px currentColor;
+}
+
+.route-node.is-complete .route-lock {
+  border-style: solid;
+  background: radial-gradient(circle, color-mix(in srgb, var(--success) 23%, var(--surface-2)), var(--surface) 72%);
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--surface) 82%, transparent), 0 0 38px color-mix(in srgb, var(--success) 38%, transparent);
+  color: var(--success);
+}
+
+.route-node.is-complete .route-lock i {
+  width: 27px;
+  height: 15px;
+  margin: -4px 0 0;
+  border: 0;
+  border-bottom: 3px solid currentColor;
+  border-left: 3px solid currentColor;
+  border-radius: 0;
+  transform: rotate(-45deg);
+}
+
+.route-node.is-complete .route-lock i::before,
+.route-node.is-complete .route-lock i::after {
+  display: none;
+}
+
+.route-node.is-complete .route-lab-card {
+  border-color: color-mix(in srgb, var(--success) 58%, var(--border));
+  box-shadow: 0 18px 42px color-mix(in srgb, #000 28%, transparent), inset 2px 0 0 var(--success), 0 0 28px color-mix(in srgb, var(--success) 9%, transparent);
+}
+
+.route-node.is-complete .route-lab-state {
+  color: var(--success);
+}
+
+.route-node.is-complete:hover .route-lab-card {
+  border-color: var(--success);
+  background: color-mix(in srgb, var(--surface) 84%, var(--success));
 }
 
 .route-finish {
@@ -611,7 +664,7 @@ html[data-theme="light"] .route-lab-card {
     transform: none;
   }
   .route-lock { grid-column: 1; }
-  .route-lab-card,
+  .route-node .route-lab-card,
   .route-card-top .route-lab-card,
   .route-node-06 .route-lab-card {
     position: relative;
@@ -655,7 +708,8 @@ html[data-theme="light"] .route-lab-card {
   .route-lock i { width: 19px; height: 16px; margin-top: 6px; }
   .route-lock i::before { bottom: 13px; width: 12px; height: 12px; }
   .route-lock i::after { top: 4px; height: 6px; }
-  .route-lab-card,
+  .route-node.is-complete .route-lock i { width: 22px; height: 12px; margin-top: -3px; }
+  .route-node .route-lab-card,
   .route-card-top .route-lab-card,
   .route-node-06 .route-lab-card { min-height: 0; padding: 14px; }
   .route-lab-card h3 { font-size: 0.9rem; }
