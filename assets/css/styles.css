@@ -2037,6 +2037,12 @@ html[data-theme="light"] .theme-icon-dark {
   transition: transform var(--transition);
 }
 
+.evidence-gallery-contain img {
+  aspect-ratio: 16 / 9;
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg));
+  object-fit: contain;
+}
+
 .evidence-gallery a:hover img {
   transform: scale(1.025);
 }
