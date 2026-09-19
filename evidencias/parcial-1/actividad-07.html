@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es-MX" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Actividad 07 y laboratorio FPT 01: explotación controlada de File Path Traversal con Burp Suite, evidencia Lab Solved y medidas de mitigación.">
+    <meta name="author" content="Juan Francisco Ortega Jiménez">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="color-scheme" content="dark light">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <title>Actividad 07 - File Path Traversal | Portafolio JFOJ</title>
+    <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <script src="../../assets/js/main.js" defer></script>
+  </head>
+  <body class="evidence-detail-body">
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+    <header class="detail-header">
+      <div class="container">
+        <a class="brand" href="../../roadmap.html" aria-label="Volver al camino Road to Hall of Fame">
+          <span class="brand-mark" aria-hidden="true">JF</span>
+          <span class="brand-copy"><strong>Juan F. Ortega</strong><small>Road to Hall of Fame</small></span>
+        </a>
+        <div class="detail-header-actions">
+          <a class="button button-secondary" href="../../roadmap.html#ruta"><span aria-hidden="true">←</span> Volver al camino</a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema de color" aria-pressed="true"><span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span><span class="theme-icon theme-icon-light" aria-hidden="true">☀</span></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="detail-main" id="contenido">
+      <section class="detail-hero" data-activity="07" aria-labelledby="activity-title">
+        <div class="container reveal">
+          <nav class="detail-breadcrumb" aria-label="Ruta de navegación"><a href="../../index.html">Portafolio</a><span>/</span><a href="../../roadmap.html">Road to Hall of Fame</a><span>/</span><span aria-current="page">FPT 01</span></nav>
+          <p class="eyebrow"><span></span> Actividad 07 · Laboratorio FPT 01</p>
+          <h1 id="activity-title">Explotando un Path Traversal con Burp Suite</h1>
+          <p class="detail-lead">Documentación del laboratorio “File path traversal, simple case”: interceptación de la solicitud, manipulación controlada del parámetro <code>filename</code> y validación del resultado.</p>
+          <ul class="detail-metadata" aria-label="Datos de la actividad"><li>Estado: completado</li><li>Fecha: 18/09/2026</li><li>Nivel: Apprentice</li><li>Reporte: 10 páginas</li></ul>
+        </div>
+      </section>
+
+      <div class="container detail-content">
+        <div class="detail-layout">
+          <div class="detail-sections">
+            <section class="detail-section reveal" aria-labelledby="objective-title">
+              <p class="section-number">01 / OBJETIVO</p>
+              <h2 id="objective-title">Comprobar una lectura de archivos fuera del directorio permitido</h2>
+              <p>La práctica consistió en identificar el parámetro utilizado para cargar imágenes y modificarlo dentro de Burp Suite Repeater. El objetivo técnico fue recuperar el archivo <code>/etc/passwd</code> mediante una secuencia de recorrido de directorios y confirmar que el laboratorio reconociera la solución.</p>
+              <div class="security-note"><strong>Entorno autorizado:</strong> la prueba se realizó exclusivamente dentro del laboratorio interactivo de PortSwigger Web Security Academy. El contenido se publica con fines académicos y defensivos.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="method-title">
+              <p class="section-number">02 / PROCEDIMIENTO</p>
+              <h2 id="method-title">Del tráfico de imágenes a la petición manipulada</h2>
+              <ol class="implementation-flow">
+                <li><strong>Preparación:</strong> se inició Burp Suite Community con un proyecto temporal y el navegador integrado.</li>
+                <li><strong>Observación:</strong> se filtró el historial HTTP hasta localizar una solicitud <code>GET /image?filename=...</code>.</li>
+                <li><strong>Repetición:</strong> la petición se envió a Repeater para modificar únicamente el parámetro vulnerable.</li>
+                <li><strong>Payload:</strong> se utilizó <code>../../../etc/passwd</code> sin espacios adicionales.</li>
+                <li><strong>Validación:</strong> la respuesta <code>HTTP/2 200 OK</code> mostró el contenido solicitado y PortSwigger cambió el estado a <em>Solved</em>.</li>
+              </ol>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="result-title">
+              <p class="section-number">03 / RESULTADO</p>
+              <h2 id="result-title">FPT 01 completado y validado</h2>
+              <div class="code-doc-grid">
+                <article><h3>Vector</h3><p>El parámetro <code>filename</code> aceptó una ruta relativa sin una validación suficiente del destino final.</p></article>
+                <article><h3>Respuesta</h3><p>El servidor devolvió estado 200 y expuso el contenido de un archivo fuera del directorio previsto para imágenes.</p></article>
+                <article><h3>Evidencia</h3><p>El reporte conserva la solicitud en Repeater, la respuesta del servidor y la pantalla oficial con el indicador <em>Lab Solved</em>.</p></article>
+                <article><h3>Progreso</h3><p>Este resultado desbloquea el primer nodo de seis dentro del camino Road to Hall of Fame.</p></article>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="incident-title">
+              <p class="section-number">04 / INCIDENCIAS</p>
+              <h2 id="incident-title">Errores detectados y correcciones aplicadas</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">1</span><div><strong>Filtro de tráfico</strong><p>La configuración inicial de Burp ocultaba algunas solicitudes de imágenes; se ajustó la vista para localizar el recurso vulnerable.</p></div></li>
+                <li><span aria-hidden="true">2</span><div><strong>Espacios en el payload</strong><p>El primer intento incluyó espacios y produjo un error 400 con el mensaje “No such file”. Se eliminó el espacio sobrante y se repitió la solicitud.</p></div></li>
+                <li><span aria-hidden="true">3</span><div><strong>Confirmación independiente</strong><p>Además de inspeccionar la respuesta, se regresó a la página del laboratorio para comprobar el cambio oficial de estado a <em>Solved</em>.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="controls-title">
+              <p class="section-number">05 / MITIGACIÓN</p>
+              <h2 id="controls-title">Controles para prevenir Path Traversal</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Lista permitida</strong><p>Aceptar solamente nombres o identificadores de archivo previamente autorizados.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Ruta canónica</strong><p>Resolver la ruta final y comprobar que permanezca dentro del directorio autorizado antes de abrir el archivo.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Identificadores indirectos</strong><p>Mapear un ID interno a un recurso, en lugar de recibir rutas proporcionadas directamente por el usuario.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Mínimo privilegio</strong><p>Ejecutar el servicio con permisos restringidos para limitar el impacto de una lectura no autorizada.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="report-title">
+              <p class="section-number">06 / REPORTE</p>
+              <h2 id="report-title">Evidencia completa de la Actividad 07</h2>
+              <p>El documento de 10 páginas reúne portada, objetivo, entorno, procedimiento en Burp Suite, capturas de la solicitud y respuesta, confirmación del laboratorio, explicación del payload, incidencias, mitigaciones, conclusión y referencias.</p>
+              <div class="presentation-frame report-frame"><iframe src="../../assets/evidencias/parcial-1/Actividad07_FilePathTraversal_Juan_Francisco_Ortega.pdf#view=FitH&amp;toolbar=1" title="Vista previa del reporte de la Actividad 07 sobre File Path Traversal" loading="lazy"></iframe></div>
+              <p class="embed-fallback">Si el visor no aparece, <a href="../../assets/evidencias/parcial-1/Actividad07_FilePathTraversal_Juan_Francisco_Ortega.pdf" target="_blank" rel="noopener">abre el reporte PDF en una pestaña nueva</a>.</p>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="downloads-title">
+              <p class="section-number">07 / ARCHIVO ENTREGABLE</p>
+              <h2 id="downloads-title">Reporte técnico adjunto</h2>
+              <div class="evidence-file-grid" aria-label="Archivo descargable de la actividad">
+                <a class="evidence-file evidence-file-wide" href="../../assets/evidencias/parcial-1/Actividad07_FilePathTraversal_Juan_Francisco_Ortega.pdf" target="_blank" rel="noopener"><span>REPORTE PDF · 10 PÁGINAS</span><strong>Abrir Actividad 07 ↗</strong><small>Incluye evidencias de Burp Suite y validación Lab Solved.</small></a>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="reflection-title">
+              <p class="section-number">08 / CONCLUSIÓN</p>
+              <h2 id="reflection-title">Aprendizaje obtenido</h2>
+              <p>El laboratorio demostró de forma práctica cómo una entrada no validada puede permitir la lectura de archivos sensibles. El uso combinado de Proxy y Repeater ayudó a relacionar la solicitud visible con el comportamiento del servidor, mientras que los intentos fallidos reforzaron la importancia de revisar con precisión la sintaxis y validar el resultado con más de una evidencia.</p>
+            </section>
+          </div>
+
+          <aside class="detail-aside reveal" aria-labelledby="technical-record-title">
+            <p class="section-number">FICHA TÉCNICA</p>
+            <h2 id="technical-record-title">Datos de control</h2>
+            <ul>
+              <li><strong>Alumno:</strong> Juan Francisco Ortega Jiménez.</li>
+              <li><strong>Matrícula:</strong> 184918.</li>
+              <li><strong>Materia:</strong> Fundamentos de Ciberseguridad.</li>
+              <li><strong>Docente:</strong> Mtro. Servando López Contreras.</li>
+              <li><strong>Institución:</strong> Universidad Politécnica de San Luis Potosí.</li>
+              <li><strong>Actividad:</strong> 07.</li>
+              <li><strong>Ruta:</strong> FPT 01 de 06.</li>
+              <li><strong>Laboratorio:</strong> File path traversal, simple case.</li>
+              <li><strong>Plataforma:</strong> PortSwigger Web Security Academy.</li>
+              <li><strong>Herramienta:</strong> Burp Suite Community.</li>
+              <li><strong>Resultado:</strong> Lab Solved.</li>
+            </ul>
+            <a class="button button-primary detail-cta" href="#report-title">Ver reporte</a>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer"><div class="container footer-grid"><div><strong>JFOJ // A07-FPT01</strong><p>CNO IV – Seguridad Informática</p></div><nav aria-label="Navegación secundaria"><a href="../../index.html">Inicio</a><a href="../../roadmap.html">Road to Hall of Fame</a></nav><p class="copyright">© <span id="current-year">2026</span> Juan Francisco Ortega Jiménez.</p></div></footer>
+  </body>
+</html>
