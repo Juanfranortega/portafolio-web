@@ -23,7 +23,7 @@
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
     <link rel="manifest" href="site.webmanifest">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/roadmap.css">
+    <link rel="stylesheet" href="assets/css/roadmap.css?v=20260919-3">
     <script src="assets/js/main.js" defer></script>
   </head>
 
@@ -61,7 +61,7 @@
         <div class="container">
           <span><i aria-hidden="true"></i> Módulo visual</span>
           <span>Actividad 06 // File Path Traversal</span>
-          <span>0 de 6</span>
+          <span>1 de 6</span>
         </div>
       </div>
     </header>
@@ -75,8 +75,8 @@
             <h1 id="road-title">Road to <span class="gradient-text">Hall of Fame.</span></h1>
             <p class="road-hero-description">
               Un recorrido visual por los seis laboratorios de File Path Traversal.
-              La estructura está preparada para añadir cada evidencia cuando sea realizada,
-              sin mostrar resultados ni avances ficticios.
+              El primer reto ya está documentado con su evidencia y reporte técnico;
+              los cinco restantes se habilitarán conforme sean realizados.
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#ruta">Explorar el camino <span aria-hidden="true">↓</span></a>
@@ -87,13 +87,13 @@
           <aside class="road-command-panel reveal" aria-label="Resumen del progreso">
             <div class="road-command-top"><span aria-hidden="true"></span><p>learning_path.status</p><small>JFOJ_SEC</small></div>
             <dl class="road-stats">
-              <div><dt>Desbloqueados</dt><dd>00</dd></div>
+              <div><dt>Desbloqueados</dt><dd>01</dd></div>
               <div><dt>Laboratorios</dt><dd>06</dd></div>
               <div><dt>Especialidad</dt><dd>FPT</dd></div>
-              <div><dt>Estado</dt><dd class="road-status-pending">Pendiente</dd></div>
+              <div><dt>Estado</dt><dd class="road-status-active">En curso</dd></div>
             </dl>
-            <div class="road-progress" aria-label="Progreso actual: cero por ciento">
-              <div><span>PROGRESO GENERAL</span><strong>0%</strong></div>
+            <div class="road-progress" aria-label="Progreso actual: diecisiete por ciento, un laboratorio de seis">
+              <div><span>PROGRESO GENERAL</span><strong>17%</strong></div>
               <span class="road-progress-track" aria-hidden="true"><i></i></span>
             </div>
           </aside>
@@ -107,16 +107,16 @@
               <p class="section-number">06 / MAPA DE PROGRESO</p>
               <h2 id="route-title">Seis retos. Una sola ruta.</h2>
             </div>
-            <p>Los nodos están bloqueados porque los laboratorios todavía no se han documentado. Cada uno se habilitará con su evidencia y reporte.</p>
+            <p>FPT 01 ya contiene la Actividad 07 y su reporte completo. Los cinco nodos restantes continúan bloqueados hasta contar con evidencia verificable.</p>
           </div>
 
           <div class="cyber-route-shell reveal">
             <div class="cyber-route-header">
               <div><span class="system-dot" aria-hidden="true"></span><p>PATH_TRAVERSAL // LEARNING_PATH</p></div>
-              <span class="route-scan-state">ESPERANDO EVIDENCIAS</span>
+              <span class="route-scan-state route-scan-active">01 EVIDENCIA VALIDADA</span>
             </div>
 
-            <div class="cyber-route" aria-label="Camino de seis laboratorios pendientes">
+            <div class="cyber-route" aria-label="Camino de seis laboratorios: uno completado y cinco pendientes">
               <svg class="route-circuit" viewBox="0 0 1200 620" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
                   <linearGradient id="route-gradient" x1="0" y1="0" x2="1" y2="0">
@@ -134,9 +134,9 @@
               </svg>
 
               <ol class="route-nodes">
-                <li class="route-node route-node-01 route-card-top" aria-label="FPT 01, Simple Case, bloqueado">
+                <li class="route-node route-node-01 route-card-top is-complete" aria-label="FPT 01, Simple Case, completado; abrir Actividad 07">
                   <span class="route-lock" aria-hidden="true"><i></i></span>
-                  <article class="route-lab-card"><span class="route-lab-code">FPT 01</span><h3>Simple Case</h3><p>Recorrido básico de directorios</p><span class="route-lab-state"><i aria-hidden="true"></i> Bloqueado</span></article>
+                  <a class="route-lab-card" href="evidencias/parcial-1/actividad-07.html"><span class="route-lab-code">FPT 01</span><h3>Simple Case</h3><p>Path Traversal con Burp Suite</p><span class="route-lab-state"><i aria-hidden="true"></i> Completado · abrir</span></a>
                 </li>
                 <li class="route-node route-node-02" aria-label="FPT 02, Absolute Path Bypass, bloqueado">
                   <span class="route-lock" aria-hidden="true"><i></i></span>
@@ -146,7 +146,7 @@
                   <span class="route-lock" aria-hidden="true"><i></i></span>
                   <article class="route-lab-card"><span class="route-lab-code">FPT 03</span><h3>Non-recursive Stripping</h3><p>Secuencias eliminadas una vez</p><span class="route-lab-state"><i aria-hidden="true"></i> Bloqueado</span></article>
                 </li>
-                <li class="route-node route-node-04 route-card-top" aria-label="FPT 04, URL-decode Bypass, bloqueado">
+                <li class="route-node route-node-04" aria-label="FPT 04, URL-decode Bypass, bloqueado">
                   <span class="route-lock" aria-hidden="true"><i></i></span>
                   <article class="route-lab-card"><span class="route-lab-code">FPT 04</span><h3>URL-decode Bypass</h3><p>Decodificación adicional de la ruta</p><span class="route-lab-state"><i aria-hidden="true"></i> Bloqueado</span></article>
                 </li>
@@ -164,14 +164,14 @@
             <div class="route-finish" aria-label="Meta final bloqueada">
               <span class="route-finish-icon" aria-hidden="true">♛</span>
               <div><small>META FINAL</small><strong>Hall of Fame</strong><p>Se desbloqueará al documentar los 6 laboratorios.</p></div>
-              <span class="route-finish-status">LOCKED // 0 OF 6</span>
+              <span class="route-finish-status">LOCKED // 1 OF 6</span>
             </div>
           </div>
 
           <div class="route-note reveal">
             <span aria-hidden="true">i</span>
-            <p><strong>Estado actual:</strong> esta sección es únicamente visual. No se presentan capturas, resultados ni reportes de laboratorios aún no realizados.</p>
-            <span class="button button-secondary route-pdf-disabled" aria-disabled="true">PDF general · pendiente</span>
+            <p><strong>Estado actual:</strong> FPT 01 está completado y enlazado a la Actividad 07. No se presentan resultados de los cinco laboratorios aún no realizados.</p>
+            <a class="button button-secondary" href="evidencias/parcial-1/actividad-07.html">Ver Actividad 07 <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </section>

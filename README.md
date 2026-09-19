@@ -38,7 +38,8 @@ portafolio-web/
 │       ├── actividad-02.html
 │       ├── actividad-03.html
 │       ├── actividad-04.html
-│       └── actividad-05.html  # redirección compatible al proyecto PR01
+│       ├── actividad-05.html  # redirección compatible al proyecto PR01
+│       └── actividad-07.html  # laboratorio FPT 01 y reporte técnico
 ├── proyectos/
 │   └── pr01.html             # página canónica del proyecto PR01
 ├── site.webmanifest
@@ -50,7 +51,8 @@ portafolio-web/
     │   ├── actividad-01/
     │   ├── actividad-02/
     │   ├── actividad-03/
-    │   └── actividad-04/
+    │   ├── actividad-04/
+    │   └── Actividad07_FilePathTraversal_Juan_Francisco_Ortega.pdf
     ├── proyectos/
     │   └── pr01/             # capturas, reporte PDF y versión DOCX
     ├── img/favicon.svg
@@ -71,10 +73,10 @@ Las animaciones se implementan con transiciones y `@keyframes` de CSS, junto con
 
 ## Organización de evidencias
 
-- **Primer parcial:** cuatro actividades registradas y el proyecto independiente PR01.
+- **Primer parcial:** cuatro actividades registradas, el proyecto independiente PR01 y la Actividad 07 correspondiente al primer laboratorio de File Path Traversal.
 - **Segundo parcial:** apartado reservado para futuras actividades.
 - **Tercer parcial:** apartado reservado para actividades finales y conclusiones.
-- **Road to Hall of Fame:** página independiente con una ruta futurista de seis laboratorios. Actualmente muestra progreso 0/6, sin evidencias ficticias; cada laboratorio se desbloqueará cuando exista su material y el botón del PDF permanece desactivado hasta contar con el documento final.
+- **Road to Hall of Fame:** página independiente con una ruta futurista de seis laboratorios. Actualmente muestra progreso 1/6; FPT 01 enlaza la Actividad 07 y los cinco laboratorios restantes permanecen bloqueados hasta contar con material verificable.
 
 Consultar `GUIA_EVIDENCIAS.md` para conocer la ubicación de archivos, el formato recomendado y los pasos de actualización.
 

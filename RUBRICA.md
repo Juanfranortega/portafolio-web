@@ -3,7 +3,7 @@
 | No. | Criterio | Implementación | Evidencia antes de entregar |
 |---:|---|---|---|
 | 1 | Publicación y accesibilidad | Preparado para GitHub Pages, recursos relativos y HTTPS. | Abrir la URL pública en incógnito y confirmar el candado. |
-| 2 | Estructura general | Encabezado, navegación, contenido principal por secciones, tres parciales, fichas individuales y pie de página. | Recorrer Inicio, Notas, Road to Hall of Fame, Proyectos, Herramientas, Certificados, las cuatro actividades y PR01. |
+| 2 | Estructura general | Encabezado, navegación, contenido principal por secciones, tres parciales, fichas individuales y pie de página. | Recorrer Inicio, Notas, Road to Hall of Fame, Proyectos, Herramientas, Certificados, las cuatro actividades del índice, la Actividad 07 desde FPT 01 y PR01. |
 | 3 | Contenido de Inicio | Presentación, perfil, identidad, estructura por parciales e información técnica completa. | Comparar visualmente contra la consigna. |
 | 4 | Claridad y redacción | Texto académico breve, técnico y organizado mediante títulos semánticos. | Revisión ortográfica final. |
 | 5 | Identidad académica | Nombre, alias, asignatura, institución, periodo y propósito visibles. | Confirmar que los datos personales sean correctos. |
@@ -23,6 +23,7 @@
 - [x] Menú de navegación.
 - [x] Apartados Inicio, Notas, Herramientas, Proyectos y Certificados.
 - [x] Página independiente Road to Hall of Fame con estructura tipo ruta y 6 laboratorios.
+- [x] FPT 01 desbloqueado con enlace a la Actividad 07 y reporte PDF de 10 páginas.
 - [x] Presentación del portafolio.
 - [x] Propósito, enfoque e importancia.
 - [x] Perfil e intereses.
