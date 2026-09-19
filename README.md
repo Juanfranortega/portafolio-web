@@ -52,6 +52,7 @@ portafolio-web/
     │   ├── actividad-02/
     │   ├── actividad-03/
     │   ├── actividad-04/
+    │   ├── actividad-07/    # 13 capturas del procedimiento FPT 01
     │   └── Actividad07_FilePathTraversal_Juan_Francisco_Ortega.pdf
     ├── proyectos/
     │   └── pr01/             # capturas, reporte PDF y versión DOCX
@@ -81,6 +82,8 @@ Las animaciones se implementan con transiciones y `@keyframes` de CSS, junto con
 Consultar `GUIA_EVIDENCIAS.md` para conocer la ubicación de archivos, el formato recomendado y los pasos de actualización.
 
 La Actividad 04 incluye un informe profesional de 31 páginas, su versión editable, la consigna original, un diagrama técnico y 30 capturas ordenadas. Por seguridad, el sitio publica documentación académica y no componentes funcionales del laboratorio.
+
+La Actividad 07 documenta el primer laboratorio de File Path Traversal con un procedimiento replicable en Burp Suite, 13 capturas ordenadas, explicación técnica del payload, diagnóstico del intento fallido, respuesta vulnerable, validación “Lab Solved”, controles de mitigación y reporte PDF.
 
 La Actividad 02 integra el caso de estudio del ciberataque a PEMEX en 2019, con reporte, línea de tiempo, análisis técnico, modelo CIA y estimación del impacto. El proyecto **PR01 De la teoría a la práctica** incorpora el walkthrough técnico de SNAKEOIL, 15 capturas del laboratorio, el reporte técnico en PDF y DOCX, y el enlace institucional al video. La página canónica es `proyectos/pr01.html`; la dirección anterior conserva una redirección para evitar enlaces rotos.
 

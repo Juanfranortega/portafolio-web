@@ -24,6 +24,7 @@
 - [x] Apartados Inicio, Notas, Herramientas, Proyectos y Certificados.
 - [x] Página independiente Road to Hall of Fame con estructura tipo ruta y 6 laboratorios.
 - [x] FPT 01 desbloqueado con enlace a la Actividad 07 y reporte PDF de 10 páginas.
+- [x] Actividad 07 con procedimiento visible, fundamentación técnica, explicación del payload, mitigaciones y 13 capturas cronológicas.
 - [x] Presentación del portafolio.
 - [x] Propósito, enfoque e importancia.
 - [x] Perfil e intereses.
