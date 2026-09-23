@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es-MX" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Actividad 08 y laboratorio FPT 02: procedimiento completo de Absolute Path Bypass con Burp Suite, ocho capturas, evidencia Lab Solved, explicación técnica y mitigaciones.">
+    <meta name="author" content="Juan Francisco Ortega Jiménez">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="color-scheme" content="dark light">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <title>Actividad 08 - Absolute Path Bypass | Portafolio JFOJ</title>
+    <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/styles.css?v=20260923-1">
+    <script src="../../assets/js/main.js" defer></script>
+  </head>
+  <body class="evidence-detail-body">
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+    <header class="detail-header">
+      <div class="container">
+        <a class="brand" href="../../roadmap.html" aria-label="Volver al camino Road to Hall of Fame">
+          <span class="brand-mark" aria-hidden="true">JF</span>
+          <span class="brand-copy"><strong>Juan F. Ortega</strong><small>Road to Hall of Fame</small></span>
+        </a>
+        <div class="detail-header-actions">
+          <a class="button button-secondary" href="../../roadmap.html#ruta"><span aria-hidden="true">←</span> Volver al camino</a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema de color" aria-pressed="true"><span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span><span class="theme-icon theme-icon-light" aria-hidden="true">☀</span></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="detail-main" id="contenido">
+      <section class="detail-hero" data-activity="08" aria-labelledby="activity-title">
+        <div class="container reveal">
+          <nav class="detail-breadcrumb" aria-label="Ruta de navegación"><a href="../../index.html">Portafolio</a><span>/</span><a href="../../roadmap.html">Road to Hall of Fame</a><span>/</span><span aria-current="page">FPT 02</span></nav>
+          <p class="eyebrow"><span></span> Actividad 08 · Laboratorio FPT 02</p>
+          <h1 id="activity-title">Bypass de filtro mediante ruta absoluta</h1>
+          <p class="detail-lead">Documentación del laboratorio “File path traversal, traversal sequences blocked with absolute path bypass”: análisis del filtro, manipulación controlada de <code>filename</code> y validación de una lectura arbitraria con <code>/etc/passwd</code>.</p>
+          <ul class="detail-metadata" aria-label="Datos de la actividad"><li>Estado: completado</li><li>Fecha: 21/09/2026</li><li>Nivel: Practitioner</li><li>Evidencias: 8 capturas</li></ul>
+        </div>
+      </section>
+
+      <div class="container detail-content">
+        <div class="detail-layout">
+          <div class="detail-sections">
+            <section class="detail-section reveal" aria-labelledby="objective-title">
+              <p class="section-number">01 / OBJETIVO</p>
+              <h2 id="objective-title">Evadir el bloqueo de secuencias de traversal con una ruta absoluta</h2>
+              <p>La práctica consistió en identificar la solicitud que carga las imágenes de producto y comprobar que el filtro rechazaba el enfoque relativo, pero permitía entregar directamente una ruta absoluta. El objetivo técnico fue recuperar el contenido de <code>/etc/passwd</code> mediante el parámetro <code>filename</code> y confirmar la resolución oficial del laboratorio.</p>
+              <div class="security-note"><strong>Entorno autorizado:</strong> la prueba se realizó exclusivamente dentro del laboratorio interactivo de PortSwigger Web Security Academy. El procedimiento se documenta con fines académicos y defensivos.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="theory-title">
+              <p class="section-number">02 / FUNDAMENTACIÓN TÉCNICA</p>
+              <h2 id="theory-title">El filtro bloquea el patrón, no el destino real</h2>
+              <p>La aplicación espera un nombre de imagen relativo a su directorio de trabajo y filtra secuencias como <code>../</code>. Esa defensa no verifica si la entrada ya representa una ruta absoluta. Al recibir <code>/etc/passwd</code>, el sistema operativo comienza la resolución desde la raíz del sistema de archivos y omite por completo el directorio base de imágenes.</p>
+              <div class="code-doc-grid">
+                <article><h3>Clasificación</h3><p>La falla corresponde a <strong>CWE-22</strong> y se vincula con <strong>OWASP A01: Broken Access Control</strong>, porque permite acceder a un recurso fuera del límite previsto.</p></article>
+                <article><h3>Causa raíz</h3><p>La validación usa una lista de bloqueo para buscar <code>../</code>, pero no canonicaliza la ruta ni comprueba que el destino final permanezca dentro del directorio autorizado.</p></article>
+                <article><h3>Impacto CIA</h3><p>El resultado demostrado afecta la confidencialidad. En funciones equivalentes de escritura o eliminación, el mismo error también podría afectar integridad y disponibilidad.</p></article>
+                <article><h3>Diferencia con FPT 01</h3><p>El primer laboratorio escapó con segmentos relativos. FPT 02 alcanza el mismo archivo sin navegar directorios: entrega la ruta completa desde la raíz.</p></article>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="method-title">
+              <p class="section-number">03 / PROCEDIMIENTO · PREPARACIÓN</p>
+              <h2 id="method-title">Acceso al reto y generación de tráfico</h2>
+              <ol class="implementation-flow">
+                <li><strong>Iniciar el entorno:</strong> se abrió Burp Suite Community Edition con un proyecto temporal y su configuración predeterminada.</li>
+                <li><strong>Abrir el navegador integrado:</strong> desde <em>Proxy</em> se utilizó el navegador de Burp para enrutar automáticamente las solicitudes del laboratorio.</li>
+                <li><strong>Leer la consigna:</strong> PortSwigger indicó que las secuencias de traversal estaban bloqueadas y que la meta era recuperar <code>/etc/passwd</code>.</li>
+                <li><strong>Acceder a la tienda:</strong> se recorrieron los productos para provocar solicitudes de imágenes y registrar tráfico suficiente en <em>HTTP history</em>.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-08/01-laboratorio-estado-inicial.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-08/01-laboratorio-estado-inicial.webp" alt="Descripción oficial del laboratorio Absolute Path Bypass con nivel Practitioner y estado Not solved" loading="lazy"></a><figcaption>01 · Consigna, nivel y estado inicial <em>Not solved</em>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-08/02-tienda-genera-trafico.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-08/02-tienda-genera-trafico.webp" alt="Tienda vulnerable de PortSwigger con varios productos e imágenes cargadas" loading="lazy"></a><figcaption>02 · Navegación por la tienda para generar solicitudes de imágenes.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="capture-title">
+              <p class="section-number">04 / PROCEDIMIENTO · CAPTURA</p>
+              <h2 id="capture-title">Corrección del filtro y selección de <code>filename</code></h2>
+              <ol class="implementation-flow">
+                <li><strong>Detectar el problema:</strong> la configuración inicial de <em>HTTP history</em> ocultaba CSS, imágenes y extensiones específicas, por lo que las peticiones relevantes no aparecían.</li>
+                <li><strong>Corregir el filtro:</strong> se habilitó el tipo MIME de imágenes y se retiraron las extensiones de imagen del campo de exclusión.</li>
+                <li><strong>Localizar la solicitud:</strong> se seleccionó <code>GET /image?filename=1.jpg</code> y se verificó la respuesta JPEG original.</li>
+                <li><strong>Enviar a Repeater:</strong> desde el menú contextual se copió la petición a Repeater para editarla y reenviarla de forma controlada.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-08/03-filtro-oculta-imagenes.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-08/03-filtro-oculta-imagenes.webp" alt="Historial HTTP de Burp Suite con un filtro que oculta el contenido de imágenes" loading="lazy"></a><figcaption>03 · Incidencia: el filtro predeterminado oculta las imágenes.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-08/04-request-original.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-08/04-request-original.webp" alt="Burp Suite mostrando la solicitud GET image filename 1.jpg y la respuesta JPEG" loading="lazy"></a><figcaption>04 · Petición original y parámetro <code>filename=1.jpg</code> identificados.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-08/05-enviar-repeater.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-08/05-enviar-repeater.webp" alt="Menú contextual de Burp Suite con la opción Send to Repeater" loading="lazy"></a><figcaption>05 · Envío de la solicitud seleccionada a Repeater.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="exploit-title">
+              <p class="section-number">05 / PROCEDIMIENTO · EXPLOTACIÓN</p>
+              <h2 id="exploit-title">Sustitución por <code>/etc/passwd</code> y validación</h2>
+              <ol class="implementation-flow">
+                <li><strong>Conservar una línea base:</strong> Repeater recibió la solicitud original <code>GET /image?filename=1.jpg</code>.</li>
+                <li><strong>Modificar únicamente la entrada:</strong> el valor de <code>filename</code> se reemplazó por la ruta absoluta <code>/etc/passwd</code>, sin secuencias <code>../</code>.</li>
+                <li><strong>Enviar la petición:</strong> el servidor devolvió <code>HTTP/2 200 OK</code> y líneas con el formato característico del archivo de cuentas de Linux.</li>
+                <li><strong>Comprobar el resultado:</strong> al actualizar la página oficial, el indicador cambió de <em>Not solved</em> a <em>Solved</em>.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-08/06-repeater-solicitud-original.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-08/06-repeater-solicitud-original.webp" alt="Burp Repeater mostrando la solicitud original filename 1.jpg antes de modificarla" loading="lazy"></a><figcaption>06 · Solicitud original preparada en Repeater.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-08/07-payload-ruta-absoluta.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-08/07-payload-ruta-absoluta.webp" alt="Burp Repeater con filename igual a etc passwd y respuesta HTTP 200 con contenido del archivo" loading="lazy"></a><figcaption>07 · Ruta absoluta, respuesta <code>200 OK</code> y contenido de <code>/etc/passwd</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-08/08-laboratorio-solved.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-08/08-laboratorio-solved.webp" alt="Página oficial de PortSwigger con el laboratorio Absolute Path Bypass marcado como Solved" loading="lazy"></a><figcaption>08 · Confirmación oficial del laboratorio en estado <em>Solved</em>.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="payload-title">
+              <p class="section-number">06 / EXPLICACIÓN DEL PAYLOAD</p>
+              <h2 id="payload-title"><code>/etc/passwd</code>, ruta absoluta desde la raíz</h2>
+              <div class="code-doc-grid">
+                <article><h3><code>/</code></h3><p>La barra inicial indica que la resolución comienza en la raíz del sistema de archivos. Por ello, la ruta ya no depende del directorio de imágenes de la aplicación.</p></article>
+                <article><h3><code>etc</code></h3><p>Es el directorio estándar de configuración en sistemas Linux y Unix. La aplicación vulnerable permite salir de su contexto lógico sin utilizar <code>../</code>.</p></article>
+                <article><h3><code>passwd</code></h3><p>Es un archivo de texto con información de cuentas locales. La presencia de líneas como <code>root:x:0:0:...</code> demuestra que se leyó el recurso solicitado.</p></article>
+                <article><h3>Condición de éxito</h3><p>El código 200, el cuerpo del archivo y el cambio a <em>Solved</em> forman una validación técnica y funcional del bypass.</p></article>
+              </div>
+              <div class="security-note"><strong>Tipo de explotación:</strong> lectura arbitraria de archivos mediante bypass con ruta absoluta. No hubo ejecución de comandos, alteración de datos ni acceso fuera del laboratorio autorizado.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="result-title">
+              <p class="section-number">07 / RESULTADO E INCIDENCIAS</p>
+              <h2 id="result-title">FPT 02 completado con evidencia de extremo a extremo</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Resultado verificable</strong><p>La solicitud modificada recibió <code>HTTP/2 200 OK</code>, expuso el contenido esperado y activó el estado oficial <em>Lab Solved</em>.</p></div></li>
+                <li><span aria-hidden="true">1</span><div><strong>Filtro de contenido reiniciado</strong><p>El nuevo proyecto temporal ocultó otra vez las imágenes. Se repitió el ajuste del tipo MIME y de las extensiones excluidas.</p></div></li>
+                <li><span aria-hidden="true">2</span><div><strong>Estado previo aún visible</strong><p>La captura inicial mostraba <em>Not solved</em>; después de la respuesta vulnerable fue necesario actualizar la página para verificar el cambio.</p></div></li>
+                <li><span aria-hidden="true">3</span><div><strong>Privacidad de la evidencia</strong><p>Antes de publicar se ocultó el valor temporal de la cookie de sesión; los encabezados, el parámetro, el payload y la respuesta permanecen legibles.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="controls-title">
+              <p class="section-number">08 / MITIGACIÓN</p>
+              <h2 id="controls-title">Validar el destino, no solo bloquear cadenas</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">1</span><div><strong>Usar identificadores indirectos</strong><p>Recibir un ID y resolverlo en el servidor evita que el cliente controle nombres o rutas del sistema de archivos.</p></div></li>
+                <li><span aria-hidden="true">2</span><div><strong>Lista permitida estricta</strong><p>Aceptar únicamente nombres y extensiones esperados; rechazar separadores, rutas absolutas y valores fuera del formato definido.</p></div></li>
+                <li><span aria-hidden="true">3</span><div><strong>Canonicalización y confinamiento</strong><p>Obtener la ruta real con una función equivalente a <code>realpath()</code> y comprobar que el resultado esté dentro del directorio autorizado.</p></div></li>
+                <li><span aria-hidden="true">4</span><div><strong>Validación multiplataforma</strong><p>Considerar rutas absolutas Unix que comienzan con <code>/</code>, rutas Windows con letra de unidad y variantes de separadores.</p></div></li>
+                <li><span aria-hidden="true">5</span><div><strong>Mínimo privilegio</strong><p>Ejecutar el servicio con una cuenta restringida y separar los archivos sensibles para reducir el impacto de una validación fallida.</p></div></li>
+                <li><span aria-hidden="true">6</span><div><strong>Pruebas automatizadas</strong><p>Probar rutas relativas, absolutas, codificadas y normalizadas para verificar el confinamiento en cada cambio de la aplicación.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="report-title">
+              <p class="section-number">09 / REPORTE</p>
+              <h2 id="report-title">Evidencia completa de la Actividad 08</h2>
+              <p>El reporte de 10 páginas reúne portada, datos del laboratorio, explicación técnica, procedimiento, ocho capturas cronológicas, análisis del payload, incidencias, mitigaciones, conclusión y referencias.</p>
+              <div class="presentation-frame report-frame"><iframe src="../../assets/evidencias/parcial-1/Actividad08_FilePathTraversal_AbsolutePathBypass.pdf#view=FitH&amp;toolbar=1" title="Vista previa del reporte de la Actividad 08 sobre Absolute Path Bypass" loading="lazy"></iframe></div>
+              <p class="embed-fallback">Si el visor no aparece, <a href="../../assets/evidencias/parcial-1/Actividad08_FilePathTraversal_AbsolutePathBypass.pdf" target="_blank" rel="noopener">abre el reporte PDF en una pestaña nueva</a>.</p>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="downloads-title">
+              <p class="section-number">10 / ARCHIVOS ENTREGABLES</p>
+              <h2 id="downloads-title">Reporte técnico adjunto</h2>
+              <div class="evidence-file-grid" aria-label="Archivos descargables de la actividad">
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/Actividad08_FilePathTraversal_AbsolutePathBypass.pdf" target="_blank" rel="noopener"><span>REPORTE PDF · 10 PÁGINAS</span><strong>Abrir Actividad 08 ↗</strong><small>Versión lista para consultar y entregar.</small></a>
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/Actividad08_FilePathTraversal_AbsolutePathBypass.docx" download><span>DOCUMENTO EDITABLE · DOCX</span><strong>Descargar Word ↓</strong><small>Archivo fuente proporcionado para la actividad.</small></a>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="rubric-title">
+              <p class="section-number">11 / CUMPLIMIENTO DE RÚBRICA</p>
+              <h2 id="rubric-title">Correspondencia entre criterios y evidencias</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Marco teórico y fundamentación</strong><p>Se explican CWE-22, OWASP A01, impacto CIA, causa raíz, diferencia entre rutas relativas y absolutas y controles defensivos.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Documentación técnica</strong><p>Se identifica la consulta afectada, el parámetro <code>filename</code>, la lógica incompleta del filtro y el resultado observable.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Procedimiento visible en la página</strong><p>La preparación, captura, corrección del filtro, envío a Repeater, modificación y validación se describen directamente en el portafolio.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Explicación del payload</strong><p>Se documenta la función de la barra raíz, el directorio <code>etc</code>, el archivo <code>passwd</code> y la condición de éxito.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Evidencias obligatorias</strong><p>Ocho capturas ordenadas muestran consigna, tráfico, incidencia, solicitud original, Repeater, respuesta vulnerable y estado <em>Solved</em>.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Integración y publicación</strong><p>La actividad enlaza el segundo nodo del roadmap independiente y ofrece el reporte en PDF y DOCX sin mezclar el camino dentro del inicio.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="reflection-title">
+              <p class="section-number">12 / CONCLUSIÓN</p>
+              <h2 id="reflection-title">Aprendizaje obtenido</h2>
+              <p>El laboratorio mostró que bloquear una cadena conocida no equivale a controlar el acceso a archivos. La ruta absoluta evitó por completo la secuencia que el filtro buscaba y permitió llegar al mismo recurso sensible. La práctica reforzó que la defensa correcta debe canonicalizar la entrada, comprobar el directorio final y aplicar privilegios mínimos, en lugar de depender únicamente de una lista de patrones prohibidos.</p>
+            </section>
+          </div>
+
+          <aside class="detail-aside reveal" aria-labelledby="technical-record-title">
+            <p class="section-number">FICHA TÉCNICA</p>
+            <h2 id="technical-record-title">Datos de control</h2>
+            <ul>
+              <li><strong>Alumno:</strong> Juan Francisco Ortega Jiménez.</li>
+              <li><strong>Matrícula:</strong> 184918.</li>
+              <li><strong>Materia:</strong> Fundamentos de Ciberseguridad.</li>
+              <li><strong>Docente:</strong> Mtro. Servando López Contreras.</li>
+              <li><strong>Institución:</strong> Universidad Politécnica de San Luis Potosí.</li>
+              <li><strong>Actividad:</strong> 08.</li>
+              <li><strong>Ruta:</strong> FPT 02 de 06.</li>
+              <li><strong>Laboratorio:</strong> Traversal sequences blocked with absolute path bypass.</li>
+              <li><strong>Plataforma:</strong> PortSwigger Web Security Academy.</li>
+              <li><strong>Herramienta:</strong> Burp Suite Community.</li>
+              <li><strong>Payload:</strong> <code>/etc/passwd</code>.</li>
+              <li><strong>Evidencias:</strong> 8 capturas verificables.</li>
+              <li><strong>Resultado:</strong> Lab Solved.</li>
+            </ul>
+            <a class="button button-primary detail-cta" href="#report-title">Ver reporte</a>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer"><div class="container footer-grid"><div><strong>JFOJ // A08-FPT02</strong><p>CNO IV – Seguridad Informática</p></div><nav aria-label="Navegación secundaria"><a href="../../index.html">Inicio</a><a href="../../roadmap.html">Road to Hall of Fame</a></nav><p class="copyright">© <span id="current-year">2026</span> Juan Francisco Ortega Jiménez.</p></div></footer>
+  </body>
+</html>
