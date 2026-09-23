@@ -3,7 +3,7 @@
 | No. | Criterio | Implementación | Evidencia antes de entregar |
 |---:|---|---|---|
 | 1 | Publicación y accesibilidad | Preparado para GitHub Pages, recursos relativos y HTTPS. | Abrir la URL pública en incógnito y confirmar el candado. |
-| 2 | Estructura general | Encabezado, navegación, contenido principal por secciones, tres parciales, fichas individuales y pie de página. | Recorrer Inicio, Notas, Road to Hall of Fame, Proyectos, Herramientas, Certificados, las cuatro actividades del índice, la Actividad 07 desde FPT 01 y PR01. |
+| 2 | Estructura general | Encabezado, navegación, contenido principal por secciones, tres parciales, fichas individuales y pie de página. | Recorrer Inicio, Notas, Road to Hall of Fame, Proyectos, Herramientas, Certificados, las cuatro actividades del índice, las Actividades 07 y 08 desde FPT 01 y FPT 02, y PR01. |
 | 3 | Contenido de Inicio | Presentación, perfil, identidad, estructura por parciales e información técnica completa. | Comparar visualmente contra la consigna. |
 | 4 | Claridad y redacción | Texto académico breve, técnico y organizado mediante títulos semánticos. | Revisión ortográfica final. |
 | 5 | Identidad académica | Nombre, alias, asignatura, institución, periodo y propósito visibles. | Confirmar que los datos personales sean correctos. |
@@ -25,6 +25,8 @@
 - [x] Página independiente Road to Hall of Fame con estructura tipo ruta y 6 laboratorios.
 - [x] FPT 01 desbloqueado con enlace a la Actividad 07 y reporte PDF de 10 páginas.
 - [x] Actividad 07 con procedimiento visible, fundamentación técnica, explicación del payload, mitigaciones y 13 capturas cronológicas.
+- [x] FPT 02 desbloqueado con enlace a la Actividad 08 y progreso general actualizado a 2/6.
+- [x] Actividad 08 con procedimiento visible, fundamentación técnica, explicación de `/etc/passwd`, mitigaciones, ocho capturas cronológicas y reporte en PDF y DOCX.
 - [x] Presentación del portafolio.
 - [x] Propósito, enfoque e importancia.
 - [x] Perfil e intereses.

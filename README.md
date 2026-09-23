@@ -39,7 +39,8 @@ portafolio-web/
 │       ├── actividad-03.html
 │       ├── actividad-04.html
 │       ├── actividad-05.html  # redirección compatible al proyecto PR01
-│       └── actividad-07.html  # laboratorio FPT 01 y reporte técnico
+│       ├── actividad-07.html  # laboratorio FPT 01 y reporte técnico
+│       └── actividad-08.html  # laboratorio FPT 02 y reporte técnico
 ├── proyectos/
 │   └── pr01.html             # página canónica del proyecto PR01
 ├── site.webmanifest
@@ -53,7 +54,10 @@ portafolio-web/
     │   ├── actividad-03/
     │   ├── actividad-04/
     │   ├── actividad-07/    # 13 capturas del procedimiento FPT 01
-    │   └── Actividad07_FilePathTraversal_Juan_Francisco_Ortega.pdf
+    │   ├── actividad-08/    # 8 capturas del procedimiento FPT 02
+    │   ├── Actividad07_FilePathTraversal_Juan_Francisco_Ortega.pdf
+    │   ├── Actividad08_FilePathTraversal_AbsolutePathBypass.pdf
+    │   └── Actividad08_FilePathTraversal_AbsolutePathBypass.docx
     ├── proyectos/
     │   └── pr01/             # capturas, reporte PDF y versión DOCX
     ├── img/favicon.svg
@@ -74,16 +78,18 @@ Las animaciones se implementan con transiciones y `@keyframes` de CSS, junto con
 
 ## Organización de evidencias
 
-- **Primer parcial:** cuatro actividades registradas, el proyecto independiente PR01 y la Actividad 07 correspondiente al primer laboratorio de File Path Traversal.
+- **Primer parcial:** cuatro actividades registradas, el proyecto independiente PR01 y las Actividades 07 y 08 correspondientes a los dos primeros laboratorios de File Path Traversal.
 - **Segundo parcial:** apartado reservado para futuras actividades.
 - **Tercer parcial:** apartado reservado para actividades finales y conclusiones.
-- **Road to Hall of Fame:** página independiente con una ruta futurista de seis laboratorios. Actualmente muestra progreso 1/6; FPT 01 enlaza la Actividad 07 y los cinco laboratorios restantes permanecen bloqueados hasta contar con material verificable.
+- **Road to Hall of Fame:** página independiente con una ruta futurista de seis laboratorios. Actualmente muestra progreso 2/6; FPT 01 y FPT 02 enlazan las Actividades 07 y 08, mientras los cuatro laboratorios restantes permanecen bloqueados hasta contar con material verificable.
 
 Consultar `GUIA_EVIDENCIAS.md` para conocer la ubicación de archivos, el formato recomendado y los pasos de actualización.
 
 La Actividad 04 incluye un informe profesional de 31 páginas, su versión editable, la consigna original, un diagrama técnico y 30 capturas ordenadas. Por seguridad, el sitio publica documentación académica y no componentes funcionales del laboratorio.
 
 La Actividad 07 documenta el primer laboratorio de File Path Traversal con un procedimiento replicable en Burp Suite, 13 capturas ordenadas, explicación técnica del payload, diagnóstico del intento fallido, respuesta vulnerable, validación “Lab Solved”, controles de mitigación y reporte PDF.
+
+La Actividad 08 documenta el bypass de un filtro de secuencias mediante la ruta absoluta `/etc/passwd`. Incluye ocho capturas cronológicas, procedimiento visible en la página, explicación técnica, incidencias, mitigaciones, validación “Lab Solved” y reporte adjunto en PDF y DOCX.
 
 La Actividad 02 integra el caso de estudio del ciberataque a PEMEX en 2019, con reporte, línea de tiempo, análisis técnico, modelo CIA y estimación del impacto. El proyecto **PR01 De la teoría a la práctica** incorpora el walkthrough técnico de SNAKEOIL, 15 capturas del laboratorio, el reporte técnico en PDF y DOCX, y el enlace institucional al video. La página canónica es `proyectos/pr01.html`; la dirección anterior conserva una redirección para evitar enlaces rotos.
 
