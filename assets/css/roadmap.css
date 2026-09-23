@@ -218,7 +218,7 @@
 
 .road-progress-track i {
   display: block;
-  width: 16.6667%;
+  width: 33.3333%;
   height: 100%;
   background: var(--accent);
   box-shadow: 0 0 18px var(--accent);
