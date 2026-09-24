@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es-MX" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Actividad 09 y laboratorio FPT 03: procedimiento completo del bypass por eliminación no recursiva con Burp Suite, ocho capturas, evidencia Lab Solved, explicación técnica y mitigaciones.">
+    <meta name="author" content="Juan Francisco Ortega Jiménez">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="color-scheme" content="dark light">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <title>Actividad 09 - Non-recursive Stripping | Portafolio JFOJ</title>
+    <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/styles.css?v=20260923-1">
+    <script src="../../assets/js/main.js" defer></script>
+  </head>
+  <body class="evidence-detail-body">
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+    <header class="detail-header">
+      <div class="container">
+        <a class="brand" href="../../roadmap.html" aria-label="Volver al camino Road to Hall of Fame">
+          <span class="brand-mark" aria-hidden="true">JF</span>
+          <span class="brand-copy"><strong>Juan F. Ortega</strong><small>Road to Hall of Fame</small></span>
+        </a>
+        <div class="detail-header-actions">
+          <a class="button button-secondary" href="../../roadmap.html#ruta"><span aria-hidden="true">←</span> Volver al camino</a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema de color" aria-pressed="true"><span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span><span class="theme-icon theme-icon-light" aria-hidden="true">☀</span></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="detail-main" id="contenido">
+      <section class="detail-hero" data-activity="09" aria-labelledby="activity-title">
+        <div class="container reveal">
+          <nav class="detail-breadcrumb" aria-label="Ruta de navegación"><a href="../../index.html">Portafolio</a><span>/</span><a href="../../roadmap.html">Road to Hall of Fame</a><span>/</span><span aria-current="page">FPT 03</span></nav>
+          <p class="eyebrow"><span></span> Actividad 09 · Laboratorio FPT 03</p>
+          <h1 id="activity-title">Bypass por eliminación no recursiva</h1>
+          <p class="detail-lead">Documentación del laboratorio “File path traversal, traversal sequences stripped non-recursively”: análisis del saneamiento incompleto, construcción controlada del payload y validación de la lectura de <code>/etc/passwd</code>.</p>
+          <ul class="detail-metadata" aria-label="Datos de la actividad"><li>Estado: completado</li><li>Fecha: 23/09/2026</li><li>Nivel: Practitioner</li><li>Evidencias: 8 capturas</li></ul>
+        </div>
+      </section>
+
+      <div class="container detail-content">
+        <div class="detail-layout">
+          <div class="detail-sections">
+            <section class="detail-section reveal" aria-labelledby="objective-title">
+              <p class="section-number">01 / OBJETIVO</p>
+              <h2 id="objective-title">Evadir un filtro que elimina <code>../</code> una sola vez</h2>
+              <p>La práctica consistió en identificar la solicitud que carga las imágenes de producto y comprobar que el filtro quitaba las secuencias de traversal sin volver a revisar el resultado. El objetivo técnico fue recuperar <code>/etc/passwd</code> mediante el parámetro <code>filename</code> y confirmar la resolución oficial del laboratorio.</p>
+              <div class="security-note"><strong>Entorno autorizado:</strong> la prueba se realizó exclusivamente dentro del laboratorio interactivo de PortSwigger Web Security Academy. El procedimiento se documenta con fines académicos y defensivos.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="theory-title">
+              <p class="section-number">02 / FUNDAMENTACIÓN TÉCNICA</p>
+              <h2 id="theory-title">El filtro transforma la entrada, pero no valida el resultado</h2>
+              <p>La aplicación intenta sanear <code>filename</code> eliminando el patrón <code>../</code>. El problema es que la operación se ejecuta una sola vez. En una cadena como <code>....//</code>, al retirar la coincidencia interna, los caracteres restantes vuelven a formar un <code>../</code> funcional que ya no es analizado.</p>
+              <div class="code-doc-grid">
+                <article><h3>Clasificación</h3><p>La falla corresponde a <strong>CWE-22</strong> y se relaciona con <strong>OWASP A01: Broken Access Control</strong>, porque la entrada termina apuntando fuera del directorio permitido.</p></article>
+                <article><h3>Causa raíz</h3><p>El saneamiento modifica la cadena original, pero no repite la validación ni canonicaliza la ruta final antes de abrir el archivo solicitado.</p></article>
+                <article><h3>Impacto CIA</h3><p>La prueba afecta la confidencialidad al exponer un archivo del sistema. En funciones equivalentes de escritura o eliminación, también podría afectar integridad y disponibilidad.</p></article>
+                <article><h3>Diferencia con FPT 02</h3><p>FPT 02 empleó una ruta absoluta. FPT 03 conserva el enfoque relativo, pero anida caracteres para que el patrón reaparezca después del filtrado.</p></article>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="method-title">
+              <p class="section-number">03 / PROCEDIMIENTO · PREPARACIÓN</p>
+              <h2 id="method-title">Acceso al reto y generación de tráfico</h2>
+              <ol class="implementation-flow">
+                <li><strong>Iniciar el entorno:</strong> se abrió Burp Suite Community Edition con un proyecto temporal y su configuración predeterminada.</li>
+                <li><strong>Abrir el navegador integrado:</strong> desde <em>Proxy</em> se utilizó el navegador de Burp para enrutar automáticamente las solicitudes del laboratorio.</li>
+                <li><strong>Leer la consigna:</strong> PortSwigger indicó que la aplicación elimina las secuencias de traversal antes de usar <code>filename</code> y que la meta era recuperar <code>/etc/passwd</code>.</li>
+                <li><strong>Acceder a la tienda:</strong> se recorrieron los productos para provocar solicitudes de imágenes y registrar tráfico suficiente en <em>HTTP history</em>.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-09/01-laboratorio-estado-inicial.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-09/01-laboratorio-estado-inicial.webp" alt="Descripción oficial del laboratorio de eliminación no recursiva con nivel Practitioner y estado Not solved" loading="lazy"></a><figcaption>01 · Consigna, nivel y estado inicial <em>Not solved</em>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-09/02-tienda-genera-trafico.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-09/02-tienda-genera-trafico.webp" alt="Tienda vulnerable de PortSwigger con varios productos e imágenes cargadas" loading="lazy"></a><figcaption>02 · Navegación por la tienda para generar solicitudes de imágenes.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="capture-title">
+              <p class="section-number">04 / PROCEDIMIENTO · CAPTURA</p>
+              <h2 id="capture-title">Corrección del filtro y selección de <code>filename</code></h2>
+              <ol class="implementation-flow">
+                <li><strong>Detectar el problema:</strong> la configuración inicial de <em>HTTP history</em> ocultaba CSS, imágenes y extensiones específicas, por lo que las peticiones relevantes no aparecían.</li>
+                <li><strong>Corregir el filtro:</strong> se habilitó el tipo MIME de imágenes y se dejó vacío el campo de extensiones ocultas.</li>
+                <li><strong>Localizar la solicitud:</strong> se seleccionó <code>GET /image?filename=46.jpg</code> dentro de las peticiones visibles.</li>
+                <li><strong>Enviar a Repeater:</strong> desde el menú contextual se copió la petición a Repeater para editarla y reenviarla de forma controlada.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-09/03-ajuste-filtro.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-09/03-ajuste-filtro.webp" alt="Diálogo de filtros de Burp Suite con imágenes habilitadas y el campo Hide vacío" loading="lazy"></a><figcaption>03 · Ajuste del filtro para mostrar tráfico de imágenes.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-09/04-request-interceptado.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-09/04-request-interceptado.webp" alt="Historial HTTP de Burp Suite con la solicitud de imagen filename 46.jpg seleccionada" loading="lazy"></a><figcaption>04 · Petición original con <code>filename=46.jpg</code> identificada.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-09/05-enviar-repeater.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-09/05-enviar-repeater.webp" alt="Menú contextual de Burp Suite con la opción Send to Repeater" loading="lazy"></a><figcaption>05 · Envío de la solicitud seleccionada a Repeater.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="exploit-title">
+              <p class="section-number">05 / PROCEDIMIENTO · EXPLOTACIÓN</p>
+              <h2 id="exploit-title">Construcción del payload anidado y validación</h2>
+              <ol class="implementation-flow">
+                <li><strong>Conservar una línea base:</strong> Repeater recibió la solicitud original <code>GET /image?filename=46.jpg</code>.</li>
+                <li><strong>Modificar únicamente la entrada:</strong> el valor de <code>filename</code> se reemplazó por <code>....//....//....//etc/passwd</code>.</li>
+                <li><strong>Enviar la petición:</strong> el servidor devolvió <code>HTTP/2 200 OK</code> y líneas con el formato característico del archivo de cuentas de Linux.</li>
+                <li><strong>Comprobar el resultado:</strong> al actualizar la página oficial, el indicador cambió de <em>Not solved</em> a <em>Solved</em>.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-09/06-payload-no-recursivo.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-09/06-payload-no-recursivo.webp" alt="Burp Repeater con el payload de traversal no recursivo en el parámetro filename" loading="lazy"></a><figcaption>06 · Payload anidado preparado en Repeater.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-09/07-respuesta-etc-passwd.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-09/07-respuesta-etc-passwd.webp" alt="Burp Repeater con respuesta HTTP 200 y contenido del archivo etc passwd" loading="lazy"></a><figcaption>07 · Respuesta <code>200 OK</code> con el contenido de <code>/etc/passwd</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-09/08-laboratorio-solved.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-09/08-laboratorio-solved.webp" alt="Página oficial de PortSwigger con el laboratorio de eliminación no recursiva marcado como Solved" loading="lazy"></a><figcaption>08 · Confirmación oficial del laboratorio en estado <em>Solved</em>.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="payload-title">
+              <p class="section-number">06 / EXPLICACIÓN DEL PAYLOAD</p>
+              <h2 id="payload-title"><code>....//....//....//etc/passwd</code></h2>
+              <div class="code-doc-grid">
+                <article><h3><code>....//</code></h3><p>Cada bloque contiene una coincidencia interna <code>../</code>. Cuando el filtro la elimina, los puntos y barras restantes se recombinan y generan otro <code>../</code>.</p></article>
+                <article><h3>Tres repeticiones</h3><p>Los tres bloques reconstruidos permiten ascender desde el directorio de imágenes hasta la raíz del sistema de archivos.</p></article>
+                <article><h3><code>etc/passwd</code></h3><p>Completa la ruta hacia el archivo objetivo. Las líneas con formato <code>root:x:0:0:...</code> demuestran que se leyó el recurso solicitado.</p></article>
+                <article><h3>Condición de éxito</h3><p>El código 200, el cuerpo del archivo y el cambio a <em>Solved</em> forman una validación técnica y funcional del bypass.</p></article>
+              </div>
+              <div class="security-note"><strong>Tipo de explotación:</strong> lectura arbitraria de archivos mediante bypass de eliminación no recursiva. No hubo ejecución de comandos, alteración de datos ni acceso fuera del laboratorio autorizado.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="result-title">
+              <p class="section-number">07 / RESULTADO E INCIDENCIAS</p>
+              <h2 id="result-title">FPT 03 completado con evidencia de extremo a extremo</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Resultado verificable</strong><p>La solicitud modificada recibió <code>HTTP/2 200 OK</code>, expuso el contenido esperado y activó el estado oficial <em>Lab Solved</em>.</p></div></li>
+                <li><span aria-hidden="true">1</span><div><strong>Filtro de contenido reiniciado</strong><p>El nuevo proyecto temporal ocultó otra vez las imágenes. Se repitió el ajuste del tipo MIME y de las extensiones excluidas.</p></div></li>
+                <li><span aria-hidden="true">2</span><div><strong>Payload exitoso al primer intento</strong><p>La secuencia anidada produjo la respuesta esperada sin requerir variantes adicionales.</p></div></li>
+                <li><span aria-hidden="true">3</span><div><strong>Privacidad de la evidencia</strong><p>Antes de publicar se ocultó el valor temporal de la cookie de sesión; los encabezados, el parámetro, el payload y la respuesta permanecen legibles.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="controls-title">
+              <p class="section-number">08 / MITIGACIÓN</p>
+              <h2 id="controls-title">Canonicalizar y confinar la ruta final</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">1</span><div><strong>Usar identificadores indirectos</strong><p>Recibir un ID y resolverlo en el servidor evita que el cliente controle nombres o rutas del sistema de archivos.</p></div></li>
+                <li><span aria-hidden="true">2</span><div><strong>Lista permitida estricta</strong><p>Aceptar únicamente nombres y extensiones esperados, sin depender de eliminar patrones posiblemente maliciosos.</p></div></li>
+                <li><span aria-hidden="true">3</span><div><strong>Canonicalización y confinamiento</strong><p>Obtener la ruta real con una función equivalente a <code>realpath()</code> y comprobar que el resultado esté dentro del directorio autorizado.</p></div></li>
+                <li><span aria-hidden="true">4</span><div><strong>Saneamiento iterativo</strong><p>Si se transforma la entrada, repetir la validación hasta que no aparezcan nuevas secuencias; aun así, priorizar la comprobación de la ruta canonicalizada.</p></div></li>
+                <li><span aria-hidden="true">5</span><div><strong>Mínimo privilegio</strong><p>Ejecutar el servicio con una cuenta restringida y separar los archivos sensibles para reducir el impacto de una validación fallida.</p></div></li>
+                <li><span aria-hidden="true">6</span><div><strong>Pruebas automatizadas</strong><p>Probar rutas anidadas, codificadas y normalizadas para verificar que ninguna transformación genere una secuencia válida después del filtrado.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="report-title">
+              <p class="section-number">09 / REPORTE</p>
+              <h2 id="report-title">Evidencia completa de la Actividad 09</h2>
+              <p>El reporte de 10 páginas reúne portada, datos del laboratorio, explicación técnica, procedimiento, ocho capturas cronológicas, análisis del payload, incidencias, mitigaciones, conclusión y referencias.</p>
+              <div class="presentation-frame report-frame"><iframe src="../../assets/evidencias/parcial-1/Actividad09_FilePathTraversal_NonRecursive.pdf#view=FitH&amp;toolbar=1" title="Vista previa del reporte de la Actividad 09 sobre eliminación no recursiva" loading="lazy"></iframe></div>
+              <p class="embed-fallback">Si el visor no aparece, <a href="../../assets/evidencias/parcial-1/Actividad09_FilePathTraversal_NonRecursive.pdf" target="_blank" rel="noopener">abre el reporte PDF en una pestaña nueva</a>.</p>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="downloads-title">
+              <p class="section-number">10 / ARCHIVOS ENTREGABLES</p>
+              <h2 id="downloads-title">Reporte técnico adjunto</h2>
+              <div class="evidence-file-grid" aria-label="Archivos descargables de la actividad">
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/Actividad09_FilePathTraversal_NonRecursive.pdf" target="_blank" rel="noopener"><span>REPORTE PDF · 10 PÁGINAS</span><strong>Abrir Actividad 09 ↗</strong><small>Versión lista para consultar y entregar.</small></a>
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/Actividad09_FilePathTraversal_NonRecursive.docx" download><span>DOCUMENTO EDITABLE · DOCX</span><strong>Descargar Word ↓</strong><small>Archivo fuente corregido de la actividad.</small></a>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="rubric-title">
+              <p class="section-number">11 / CUMPLIMIENTO DE RÚBRICA</p>
+              <h2 id="rubric-title">Correspondencia entre criterios y evidencias</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Marco teórico y fundamentación</strong><p>Se explican CWE-22, OWASP A01, impacto CIA, causa raíz y la diferencia entre saneamiento no recursivo y validación de la ruta final.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Documentación técnica</strong><p>Se identifica la consulta afectada, el parámetro <code>filename</code>, la lógica incompleta del filtro y el resultado observable.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Procedimiento visible en la página</strong><p>La preparación, captura, corrección del filtro, envío a Repeater, modificación y validación se describen directamente en el portafolio.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Explicación del payload</strong><p>Se documenta cómo cada bloque <code>....//</code> reconstruye <code>../</code>, por qué se repite tres veces y cómo se alcanza <code>/etc/passwd</code>.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Evidencias obligatorias</strong><p>Ocho capturas ordenadas muestran consigna, tráfico, incidencia, solicitud original, Repeater, respuesta vulnerable y estado <em>Solved</em>.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Integración y publicación</strong><p>La actividad enlaza el tercer nodo del roadmap independiente y ofrece el reporte en PDF y DOCX sin mezclar el camino dentro del inicio.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="reflection-title">
+              <p class="section-number">12 / CONCLUSIÓN</p>
+              <h2 id="reflection-title">Aprendizaje obtenido</h2>
+              <p>El laboratorio mostró que transformar una entrada no garantiza que el resultado sea seguro. Al eliminar <code>../</code> una sola vez, el filtro produjo una nueva secuencia válida y permitió alcanzar un archivo fuera del directorio esperado. La práctica reforzó que la defensa correcta debe canonicalizar la ruta, comprobar su confinamiento y aplicar privilegios mínimos.</p>
+            </section>
+          </div>
+
+          <aside class="detail-aside reveal" aria-labelledby="technical-record-title">
+            <p class="section-number">FICHA TÉCNICA</p>
+            <h2 id="technical-record-title">Datos de control</h2>
+            <ul>
+              <li><strong>Alumno:</strong> Juan Francisco Ortega Jiménez.</li>
+              <li><strong>Matrícula:</strong> 184918.</li>
+              <li><strong>Materia:</strong> Fundamentos de Ciberseguridad.</li>
+              <li><strong>Docente:</strong> Mtro. Servando López Contreras.</li>
+              <li><strong>Institución:</strong> Universidad Politécnica de San Luis Potosí.</li>
+              <li><strong>Actividad:</strong> 09.</li>
+              <li><strong>Ruta:</strong> FPT 03 de 06.</li>
+              <li><strong>Laboratorio:</strong> Traversal sequences stripped non-recursively.</li>
+              <li><strong>Plataforma:</strong> PortSwigger Web Security Academy.</li>
+              <li><strong>Herramienta:</strong> Burp Suite Community.</li>
+              <li><strong>Payload:</strong> <code>....//....//....//etc/passwd</code>.</li>
+              <li><strong>Evidencias:</strong> 8 capturas verificables.</li>
+              <li><strong>Resultado:</strong> Lab Solved.</li>
+            </ul>
+            <a class="button button-primary detail-cta" href="#report-title">Ver reporte</a>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer"><div class="container footer-grid"><div><strong>JFOJ // A09-FPT03</strong><p>CNO IV – Seguridad Informática</p></div><nav aria-label="Navegación secundaria"><a href="../../index.html">Inicio</a><a href="../../roadmap.html">Road to Hall of Fame</a></nav><p class="copyright">© <span id="current-year">2026</span> Juan Francisco Ortega Jiménez.</p></div></footer>
+  </body>
+</html>
