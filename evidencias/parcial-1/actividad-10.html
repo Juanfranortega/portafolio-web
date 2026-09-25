@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es-MX" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Actividad 10 y laboratorio FPT 04: procedimiento completo del bypass por decodificación URL adicional con Burp Suite, ocho capturas, evidencia Lab Solved, explicación técnica y mitigaciones.">
+    <meta name="author" content="Juan Francisco Ortega Jiménez">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="color-scheme" content="dark light">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-src 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <title>Actividad 10 - Superfluous URL Decode | Portafolio JFOJ</title>
+    <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../assets/css/styles.css?v=20260923-1">
+    <script src="../../assets/js/main.js" defer></script>
+  </head>
+  <body class="evidence-detail-body">
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+    <header class="detail-header">
+      <div class="container">
+        <a class="brand" href="../../roadmap.html" aria-label="Volver al camino Road to Hall of Fame">
+          <span class="brand-mark" aria-hidden="true">JF</span>
+          <span class="brand-copy"><strong>Juan F. Ortega</strong><small>Road to Hall of Fame</small></span>
+        </a>
+        <div class="detail-header-actions">
+          <a class="button button-secondary" href="../../roadmap.html#ruta"><span aria-hidden="true">←</span> Volver al camino</a>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema de color" aria-pressed="true"><span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span><span class="theme-icon theme-icon-light" aria-hidden="true">☀</span></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="detail-main" id="contenido">
+      <section class="detail-hero" data-activity="10" aria-labelledby="activity-title">
+        <div class="container reveal">
+          <nav class="detail-breadcrumb" aria-label="Ruta de navegación"><a href="../../index.html">Portafolio</a><span>/</span><a href="../../roadmap.html">Road to Hall of Fame</a><span>/</span><span aria-current="page">FPT 04</span></nav>
+          <p class="eyebrow"><span></span> Actividad 10 · Laboratorio FPT 04</p>
+          <h1 id="activity-title">Bypass por doble decodificación URL</h1>
+          <p class="detail-lead">Documentación del laboratorio “File path traversal, traversal sequences stripped with superfluous URL-decode”: análisis de una segunda decodificación insegura, construcción controlada del payload y validación de la lectura de <code>/etc/passwd</code>.</p>
+          <ul class="detail-metadata" aria-label="Datos de la actividad"><li>Estado: completado</li><li>Fecha: 23/09/2026</li><li>Nivel: Practitioner</li><li>Evidencias: 8 capturas</li></ul>
+        </div>
+      </section>
+
+      <div class="container detail-content">
+        <div class="detail-layout">
+          <div class="detail-sections">
+            <section class="detail-section reveal" aria-labelledby="objective-title">
+              <p class="section-number">01 / OBJETIVO</p>
+              <h2 id="objective-title">Evadir el filtro mediante una segunda decodificación URL</h2>
+              <p>La práctica consistió en identificar la solicitud que carga las imágenes de producto y comprobar que la aplicación filtraba la entrada antes de decodificarla de nuevo. El objetivo técnico fue recuperar <code>/etc/passwd</code> mediante el parámetro <code>filename</code> y confirmar la resolución oficial del laboratorio.</p>
+              <div class="security-note"><strong>Entorno autorizado:</strong> la prueba se realizó exclusivamente dentro del laboratorio interactivo de PortSwigger Web Security Academy. El procedimiento se documenta con fines académicos y defensivos.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="theory-title">
+              <p class="section-number">02 / FUNDAMENTACIÓN TÉCNICA</p>
+              <h2 id="theory-title">El filtro inspecciona una forma y usa otra</h2>
+              <p>La aplicación intenta bloquear <code>../</code> en <code>filename</code>, pero ejecuta una decodificación URL adicional después del filtro. Una secuencia doblemente codificada llega al filtro como <code>..%2f</code> y solo después se convierte en <code>../</code>, cuando ya no se vuelve a validar.</p>
+              <div class="code-doc-grid">
+                <article><h3>Clasificación</h3><p>La falla corresponde a <strong>CWE-22</strong> y se relaciona con <strong>OWASP A01: Broken Access Control</strong>, porque la entrada termina apuntando fuera del directorio permitido.</p></article>
+                <article><h3>Causa raíz</h3><p>El filtro se aplica antes de la normalización final. La segunda decodificación reconstruye caracteres que el control de seguridad nunca evaluó.</p></article>
+                <article><h3>Impacto CIA</h3><p>La prueba afecta la confidencialidad al exponer un archivo del sistema. En funciones equivalentes de escritura o eliminación, también podría afectar integridad y disponibilidad.</p></article>
+                <article><h3>Diferencia con FPT 03</h3><p>FPT 03 reconstruía <code>../</code> después de una eliminación no recursiva. FPT 04 lo reconstruye después de una decodificación URL superflua.</p></article>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="method-title">
+              <p class="section-number">03 / PROCEDIMIENTO · PREPARACIÓN</p>
+              <h2 id="method-title">Acceso al reto y generación de tráfico</h2>
+              <ol class="implementation-flow">
+                <li><strong>Iniciar el entorno:</strong> se abrió Burp Suite Community Edition con un proyecto temporal y su configuración predeterminada.</li>
+                <li><strong>Abrir el navegador integrado:</strong> desde <em>Proxy</em> se utilizó el navegador de Burp para enrutar automáticamente las solicitudes del laboratorio.</li>
+                <li><strong>Leer la consigna:</strong> PortSwigger indicó que la aplicación bloquea las secuencias de traversal y después ejecuta una decodificación URL adicional antes de usar <code>filename</code>.</li>
+                <li><strong>Acceder a la tienda:</strong> se recorrieron los productos para provocar solicitudes de imágenes y registrar tráfico suficiente en <em>HTTP history</em>.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-10/01-laboratorio-estado-inicial.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-10/01-laboratorio-estado-inicial.webp" alt="Descripción oficial del laboratorio de decodificación URL adicional con nivel Practitioner y estado Not solved" loading="lazy"></a><figcaption>01 · Consigna, nivel y estado inicial <em>Not solved</em>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-10/02-tienda-genera-trafico.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-10/02-tienda-genera-trafico.webp" alt="Tienda vulnerable de PortSwigger con varios productos e imágenes cargadas" loading="lazy"></a><figcaption>02 · Navegación por la tienda para generar solicitudes de imágenes.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="capture-title">
+              <p class="section-number">04 / PROCEDIMIENTO · CAPTURA</p>
+              <h2 id="capture-title">Corrección del filtro y selección de <code>filename</code></h2>
+              <ol class="implementation-flow">
+                <li><strong>Detectar el problema:</strong> la configuración inicial de <em>HTTP history</em> ocultaba CSS, imágenes y extensiones específicas, por lo que las peticiones relevantes no aparecían.</li>
+                <li><strong>Corregir el filtro:</strong> se habilitó el tipo MIME de imágenes y se dejó vacío el campo de extensiones ocultas.</li>
+                <li><strong>Localizar la solicitud:</strong> se seleccionó <code>GET /image?filename=60.jpg</code> dentro de las peticiones visibles.</li>
+                <li><strong>Enviar a Repeater:</strong> desde el menú contextual se copió la petición a Repeater para editarla y reenviarla de forma controlada.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-10/03-ajuste-filtro.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-10/03-ajuste-filtro.webp" alt="Diálogo de filtros de Burp Suite con imágenes habilitadas y el campo Hide vacío" loading="lazy"></a><figcaption>03 · Ajuste del filtro para mostrar tráfico de imágenes.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-10/04-request-interceptado.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-10/04-request-interceptado.webp" alt="Historial HTTP de Burp Suite con la solicitud de imagen filename 60.jpg seleccionada" loading="lazy"></a><figcaption>04 · Petición original con <code>filename=60.jpg</code> identificada.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-10/05-enviar-repeater.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-10/05-enviar-repeater.webp" alt="Menú contextual de Burp Suite con la opción Send to Repeater" loading="lazy"></a><figcaption>05 · Envío de la solicitud seleccionada a Repeater.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="exploit-title">
+              <p class="section-number">05 / PROCEDIMIENTO · EXPLOTACIÓN</p>
+              <h2 id="exploit-title">Construcción del payload doblemente codificado</h2>
+              <ol class="implementation-flow">
+                <li><strong>Conservar una línea base:</strong> Repeater recibió la solicitud original <code>GET /image?filename=60.jpg</code>.</li>
+                <li><strong>Modificar únicamente la entrada:</strong> el valor de <code>filename</code> se reemplazó por <code>..%252f..%252f..%252fetc/passwd</code>.</li>
+                <li><strong>Enviar la petición:</strong> el servidor devolvió <code>HTTP/2 200 OK</code> y líneas con el formato característico del archivo de cuentas de Linux.</li>
+                <li><strong>Comprobar el resultado:</strong> al actualizar la página oficial, el indicador cambió de <em>Not solved</em> a <em>Solved</em>.</li>
+              </ol>
+              <div class="evidence-gallery evidence-gallery-contain">
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-10/06-repeater-solicitud-original.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-10/06-repeater-solicitud-original.webp" alt="Burp Repeater con la solicitud original y la cookie temporal protegida" loading="lazy"></a><figcaption>06 · Solicitud original cargada en Repeater.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-10/07-payload-doble-decodificacion.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-10/07-payload-doble-decodificacion.webp" alt="Burp Repeater con payload doblemente codificado y respuesta HTTP 200 con contenido del archivo etc passwd" loading="lazy"></a><figcaption>07 · Payload doblemente codificado y respuesta <code>200 OK</code>.</figcaption></figure>
+                <figure><a href="../../assets/evidencias/parcial-1/actividad-10/08-laboratorio-solved.webp" target="_blank" rel="noopener"><img src="../../assets/evidencias/parcial-1/actividad-10/08-laboratorio-solved.webp" alt="Página oficial de PortSwigger con el laboratorio de decodificación URL adicional marcado como Solved" loading="lazy"></a><figcaption>08 · Confirmación oficial del laboratorio en estado <em>Solved</em>.</figcaption></figure>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="payload-title">
+              <p class="section-number">06 / EXPLICACIÓN DEL PAYLOAD</p>
+              <h2 id="payload-title"><code>..%252f..%252f..%252fetc/passwd</code></h2>
+              <div class="code-doc-grid">
+                <article><h3><code>%252f</code></h3><p>El carácter <code>%</code> se codifica como <code>%25</code>. Por eso <code>%252f</code> sobrevive una primera decodificación como <code>%2f</code>.</p></article>
+                <article><h3>Segunda decodificación</h3><p>Después del filtro, la decodificación adicional transforma <code>..%2f</code> en <code>../</code> y reconstruye una ruta relativa funcional.</p></article>
+                <article><h3><code>etc/passwd</code></h3><p>Completa la ruta hacia el archivo objetivo. Las líneas con formato <code>root:x:0:0:...</code> demuestran que se leyó el recurso solicitado.</p></article>
+                <article><h3>Condición de éxito</h3><p>El código 200, el cuerpo del archivo y el cambio a <em>Solved</em> forman una validación técnica y funcional del bypass.</p></article>
+              </div>
+              <div class="security-note"><strong>Tipo de explotación:</strong> lectura arbitraria de archivos mediante bypass de doble decodificación URL. No hubo ejecución de comandos, alteración de datos ni acceso fuera del laboratorio autorizado.</div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="result-title">
+              <p class="section-number">07 / RESULTADO E INCIDENCIAS</p>
+              <h2 id="result-title">FPT 04 completado con evidencia de extremo a extremo</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Resultado verificable</strong><p>La solicitud modificada recibió <code>HTTP/2 200 OK</code>, expuso el contenido esperado y activó el estado oficial <em>Lab Solved</em>.</p></div></li>
+                <li><span aria-hidden="true">1</span><div><strong>Filtro de contenido reiniciado</strong><p>El nuevo proyecto temporal ocultó otra vez las imágenes. Se repitió el ajuste del tipo MIME y de las extensiones excluidas.</p></div></li>
+                <li><span aria-hidden="true">2</span><div><strong>Payload exitoso al primer intento</strong><p>La secuencia doblemente codificada produjo la respuesta esperada sin requerir variantes adicionales.</p></div></li>
+                <li><span aria-hidden="true">3</span><div><strong>Privacidad de la evidencia</strong><p>Antes de publicar se ocultó el valor temporal de la cookie de sesión; los encabezados, el parámetro, el payload y la respuesta permanecen legibles.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="controls-title">
+              <p class="section-number">08 / MITIGACIÓN</p>
+              <h2 id="controls-title">Canonicalizar y confinar la ruta final</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">1</span><div><strong>Usar identificadores indirectos</strong><p>Recibir un ID y resolverlo en el servidor evita que el cliente controle nombres o rutas del sistema de archivos.</p></div></li>
+                <li><span aria-hidden="true">2</span><div><strong>Lista permitida estricta</strong><p>Aceptar únicamente nombres y extensiones esperados, sin depender de eliminar patrones posiblemente maliciosos.</p></div></li>
+                <li><span aria-hidden="true">3</span><div><strong>Canonicalización y confinamiento</strong><p>Obtener la ruta real con una función equivalente a <code>realpath()</code> y comprobar que el resultado esté dentro del directorio autorizado.</p></div></li>
+                <li><span aria-hidden="true">4</span><div><strong>Decodificación única</strong><p>Decodificar la entrada una sola vez y realizar la validación después de esa normalización, sin transformar la ruta de nuevo antes de usarla.</p></div></li>
+                <li><span aria-hidden="true">5</span><div><strong>Mínimo privilegio</strong><p>Ejecutar el servicio con una cuenta restringida y separar los archivos sensibles para reducir el impacto de una validación fallida.</p></div></li>
+                <li><span aria-hidden="true">6</span><div><strong>Pruebas automatizadas</strong><p>Probar rutas anidadas, codificadas y normalizadas para verificar que ninguna transformación genere una secuencia válida después del filtrado.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="report-title">
+              <p class="section-number">09 / REPORTE</p>
+              <h2 id="report-title">Evidencia completa de la Actividad 10</h2>
+              <p>El reporte de 10 páginas reúne portada, datos del laboratorio, explicación técnica, procedimiento, ocho capturas cronológicas, análisis de la doble decodificación, incidencias, mitigaciones, conclusión y referencias.</p>
+              <div class="presentation-frame report-frame"><iframe src="../../assets/evidencias/parcial-1/Actividad10_FilePathTraversal_SuperfluousURLDecode.pdf#view=FitH&amp;toolbar=1" title="Vista previa del reporte de la Actividad 10 sobre decodificación URL adicional" loading="lazy"></iframe></div>
+              <p class="embed-fallback">Si el visor no aparece, <a href="../../assets/evidencias/parcial-1/Actividad10_FilePathTraversal_SuperfluousURLDecode.pdf" target="_blank" rel="noopener">abre el reporte PDF en una pestaña nueva</a>.</p>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="downloads-title">
+              <p class="section-number">10 / ARCHIVOS ENTREGABLES</p>
+              <h2 id="downloads-title">Reporte técnico adjunto</h2>
+              <div class="evidence-file-grid" aria-label="Archivos descargables de la actividad">
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/Actividad10_FilePathTraversal_SuperfluousURLDecode.pdf" target="_blank" rel="noopener"><span>REPORTE PDF · 10 PÁGINAS</span><strong>Abrir Actividad 10 ↗</strong><small>Versión lista para consultar y entregar.</small></a>
+                <a class="evidence-file" href="../../assets/evidencias/parcial-1/Actividad10_FilePathTraversal_SuperfluousURLDecode.docx" download><span>DOCUMENTO EDITABLE · DOCX</span><strong>Descargar Word ↓</strong><small>Archivo fuente corregido de la actividad.</small></a>
+              </div>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="rubric-title">
+              <p class="section-number">11 / CUMPLIMIENTO DE RÚBRICA</p>
+              <h2 id="rubric-title">Correspondencia entre criterios y evidencias</h2>
+              <ul class="rubric-checklist">
+                <li><span aria-hidden="true">✓</span><div><strong>Marco teórico y fundamentación</strong><p>Se explican CWE-22, OWASP A01, impacto CIA, causa raíz y el riesgo de decodificar la entrada después de filtrarla.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Documentación técnica</strong><p>Se identifica la consulta afectada, el parámetro <code>filename</code>, la doble codificación URL y el resultado observable.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Procedimiento visible en la página</strong><p>La preparación, captura, corrección del filtro, envío a Repeater, modificación y validación se describen directamente en el portafolio.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Explicación del payload</strong><p>Se documenta cómo <code>%252f</code> se convierte en <code>%2f</code> y luego en <code>/</code>, reconstruyendo <code>../</code> después del filtro.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Evidencias obligatorias</strong><p>Ocho capturas ordenadas muestran consigna, tráfico, incidencia, solicitud original, Repeater, respuesta vulnerable y estado <em>Solved</em>.</p></div></li>
+                <li><span aria-hidden="true">✓</span><div><strong>Integración y publicación</strong><p>La actividad enlaza el cuarto nodo del roadmap independiente y ofrece el reporte en PDF y DOCX sin mezclar el camino dentro del inicio.</p></div></li>
+              </ul>
+            </section>
+
+            <section class="detail-section reveal" aria-labelledby="reflection-title">
+              <p class="section-number">12 / CONCLUSIÓN</p>
+              <h2 id="reflection-title">Aprendizaje obtenido</h2>
+              <p>El laboratorio mostró que filtrar una entrada no basta si después se vuelve a transformar. La segunda decodificación URL reconstruyó <code>../</code> después del control y permitió alcanzar un archivo fuera del directorio esperado. La práctica reforzó que la defensa correcta debe decodificar una sola vez, canonicalizar la ruta, comprobar su confinamiento y aplicar privilegios mínimos.</p>
+            </section>
+          </div>
+
+          <aside class="detail-aside reveal" aria-labelledby="technical-record-title">
+            <p class="section-number">FICHA TÉCNICA</p>
+            <h2 id="technical-record-title">Datos de control</h2>
+            <ul>
+              <li><strong>Alumno:</strong> Juan Francisco Ortega Jiménez.</li>
+              <li><strong>Matrícula:</strong> 184918.</li>
+              <li><strong>Materia:</strong> Fundamentos de Ciberseguridad.</li>
+              <li><strong>Docente:</strong> Mtro. Servando López Contreras.</li>
+              <li><strong>Institución:</strong> Universidad Politécnica de San Luis Potosí.</li>
+              <li><strong>Actividad:</strong> 10.</li>
+              <li><strong>Ruta:</strong> FPT 04 de 06.</li>
+              <li><strong>Laboratorio:</strong> Traversal sequences stripped with superfluous URL-decode.</li>
+              <li><strong>Plataforma:</strong> PortSwigger Web Security Academy.</li>
+              <li><strong>Herramienta:</strong> Burp Suite Community.</li>
+              <li><strong>Payload:</strong> <code>..%252f..%252f..%252fetc/passwd</code>.</li>
+              <li><strong>Evidencias:</strong> 8 capturas verificables.</li>
+              <li><strong>Resultado:</strong> Lab Solved.</li>
+            </ul>
+            <a class="button button-primary detail-cta" href="#report-title">Ver reporte</a>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer"><div class="container footer-grid"><div><strong>JFOJ // A10-FPT04</strong><p>CNO IV – Seguridad Informática</p></div><nav aria-label="Navegación secundaria"><a href="../../index.html">Inicio</a><a href="../../roadmap.html">Road to Hall of Fame</a></nav><p class="copyright">© <span id="current-year">2026</span> Juan Francisco Ortega Jiménez.</p></div></footer>
+  </body>
+</html>
